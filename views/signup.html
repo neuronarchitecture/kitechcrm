@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase Server Auth</title>
+    <link rel="stylesheet" href="./mvp.css" />
+  </head>
+  <body>
+    <main>
+      <section>
+        <form id="signup">
+          <div class="wrapper">
+      <section class="login-content">
+         <div class="container h-100">
+            <div class="row justify-content-center align-items-center height-self-center">
+               <div class="col-md-5 col-sm-12 col-12 align-self-center">
+                  <div class="sign-user_card">
+                     <div class="logo-detail">            
+                           <!-- <div class="d-flex align-items-center"><img src="../assets/images/logo.png" class="img-fluid rounded-normal light-logo logo" alt="logo"> <h4 class="logo-title ml-3">NotePlus</h4></div> -->
+                     </div>  
+                     <h3 class="mb-2">Sign Up</h3>
+                     <p>Create your  account.</p>
+                     <form>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                 <input id="firstname" class="floating-input form-control" name="firstname" type="text" placeholder=" ">
+                                 <label>First Name</label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                 <input id="lastname" class="floating-input form-control" name="lastname" type="text" placeholder=" ">
+                                 <label>Last Name</label>
+                              </div>
+                           </div>
+                           <div class="col-lg-12">
+                              <div class="floating-label form-group">
+                                 <input id="email" class="floating-input form-control" name="email" type="email" placeholder=" ">
+                                 <label>Email</label>
+                              </div>
+                           </div>
+                           <div class="col-lg-12">
+                              <div class="floating-label form-group">
+                                 <input id="password" class="floating-input form-control" name="password" type="password" placeholder=" ">
+                                 <label>Password</label>
+                              </div>
+                           </div>
+                           <!-- <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                 <input class="floating-input form-control" type="password" placeholder=" ">
+                                 <label>Confirm Password</label>
+                              </div>
+                           </div> -->
+                           <div class="col-lg-12">
+                              <div class="custom-control custom-checkbox mb-3 text-left">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                 <label class="custom-control-label" for="customCheck1">I agree with the terms of use</label>
+                              </div>
+                           </div>
+                        </div>
+                        <button type="submit" id="register" class="btn btn-primary">Sign Up</button>
+                        <p class="mt-3 mb-0">
+                           Already have an Account <a href="./login" class="text-primary"><b>Sign In</b></a>
+                        </p>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+        </form>
+      </section>
+
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+      
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+      
+
+      <script type="module">
+     const firebaseConfig = {
+    apiKey: "AIzaSyAq2QjImxRXEtRHN-N6u2YEod-wUJMtI1s",
+    authDomain: "projectcrm-f4e5f.firebaseapp.com",
+    databaseURL: "https://projectcrm-f4e5f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "projectcrm-f4e5f",
+    storageBucket: "projectcrm-f4e5f.appspot.com",
+    messagingSenderId: "404890912341",
+    appId: "1:404890912341:web:5b129be76ccdfeba8c76dc",
+    measurementId: "G-TL8J23TNZE"
+  };
+
+       const app = firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+         const db = firebase.firestore();
+         
+
+console.log("im updated!")
+        document
+          .getElementById("signup")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+            
+            const firstname = document.getElementById('firstname').value;
+            
+            const lastname = document.getElementById('lastname').value;
+            const login = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phonenumber = document.getElementById('phonenumber').value;
+            const gender = document.getElementById('gender').value;
+            const title = document.getElementById('title').value;
+            const add1 = document.getElementById('add1').value;
+            const add2 = document.getElementById('add2').value;
+            const companyname = document.getElementById('companyname').value;
+            const uname = document.getElementById('uname').value;
+            firebase
+              .auth()
+              .createUserWithEmailAndPassword(login, password)
+              .then( async  ({ user }) => {
+               db.collection('users').add({
+                  userFirstname: firstname,
+                  userLastname: lastname,
+                  userEmail: user.email,
+                  userPhone: phonenumber,
+                  userGender: gender,
+                  userTitle: title,
+                  userAddone: add1,
+                  userAddtwo: add2,
+                  userCompanyname: companyname,
+                  userUsername: uname,
+                  userID: user.uid
+               })
+              
+               console.log(user.email)
+                return user.getIdToken().then(  (idToken) => {
+                  return fetch("/sessionLogin", {
+                    method: "POST",
+                    headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                      "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                    },
+                    body: JSON.stringify({ idToken }),
+                  });
+                });
+              })
+
+            //   .then(() => {
+            //     return firebase.auth().signOut();
+            //   })
+         
+            return false;
+          });
+
+      </script>
+
+    </main>
+  </body>
+</html>
+
