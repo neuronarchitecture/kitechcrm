@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>CRM Dashboard | Dashboard for managing recyclable products</title>
+      
+      <!-- Favicon -->
+      
+ <link rel="stylesheet" href="./products.css" />
+      <link rel="stylesheet" href="./backend.css" />
+      <link rel="stylesheet" href="./backend-plugin.min.css">
+       <link rel="stylesheet" href="./all.min.css">
+      <link rel="stylesheet" href="./line-awesome.min.css">
+      <link rel="stylesheet" href="./remixicon.css">
+        <!-- <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js"></script>
+   
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js" defer ></script> -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js"></script>
+  
+      </head>
+  <body class="">
+    <!-- loader Start -->
+   
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      
+     <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
+              <a href="../backend/index.html" class="header-logo">
+                  <img src="./logo.png" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">CRM Dashboard</h5>
+              </a>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
+          </div>
+          <div class="data-scrollbar" data-scroll="1">
+              <nav class="iq-sidebar-menu">
+                  <ul id="iq-sidebar-toggle" class="iq-menu">
+                      <li class="">
+                          <a href="./dashboard" class="svg-icon">                        
+                              <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
+                              </svg>
+                              <span class="ml-4">대시보드</span>
+                          </a>
+                      </li>
+                      <li class=" ">
+                          <a href="#product" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                              <svg class="svg-icon" id="p-dash2" width="20" height="20"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                              </svg>
+                              <span class="ml-4">소재 목록 </span>
+                              <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                              </svg>
+                          </a>
+                          <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                              <li class="active">
+                                  <a href="./listofproducts">
+                                      <i class="las la-minus"></i><span>제품 목록</span>
+                                  </a>
+                              </li>
+                              <li class="">
+                                  <a href="#">
+                                      <i class="las la-minus"></i><span>Add Product</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class=" ">
+                          <a href="#category" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                              <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                              </svg>
+                              <span class="ml-4">물질 목록
+</span>
+                              <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                              </svg>
+                          </a>
+                          <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                  <li class="active">
+                                          <a href="./listofusers">
+                                              <i class="las la-minus"></i><span>사용자 목록
+</span>
+                                          </a>
+                                  </li>
+                                  <li class="">
+                                          <a href="./userprofile">
+                                              <i class="las la-minus"></i><span>사용자 계정
+</span>
+                                          </a>
+                                  </li>
+                                    <li class="" >
+                                          <a href="./registration" class="adminelement" style="display: none;">
+                                              <i class="las la-minus"></i><span>신규 사용자 등록
+</span>
+                                          </a>
+                                  </li>
+                          </ul>
+                      </li>
+                      
+                          </ul>
+                      </li>
+                  </ul>
+              </nav>
+         
+              <div class="p-3"></div>
+          </div>
+          </div>      <div class="iq-top-navbar">
+          <div class="iq-navbar-custom">
+              <nav class="navbar navbar-expand-lg navbar-light p-0">
+                  <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                      <i class="ri-menu-line wrapper-menu"></i>
+                      <a href="../backend/index.html" class="header-logo">
+                          <img src="./logo.png" class="img-fluid rounded-normal" alt="logo">
+                          <h5 class="logo-title ml-3">CRM Dashboard</h5>
+      
+                      </a>
+                  </div>
+                  <div class="iq-search-bar device-search">
+                      <form action="#" class="searchbox">
+                          <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                          <input type="text" class="text search-input" placeholder="찾아보기...">
+                      </form>
+                  </div>
+                  <div class="d-flex align-items-center">
+                      <button class="navbar-toggler" type="button" data-toggle="collapse"
+                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                          aria-label="Toggle navigation">
+                          <i class="ri-menu-3-line"></i>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                             
+                              <li class="nav-item nav-icon search-content">
+                                  <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
+                                      aria-haspopup="true" aria-expanded="false">
+                                      <i class="ri-search-line"></i>
+                                  </a>
+                                  <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
+                                      <form action="#" class="searchbox p-2">
+                                          <div class="form-group mb-0 position-relative">
+                                              <input type="text" class="text search-input font-size-12"
+                                                  placeholder="type here to search...">
+                                              <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </li>
+                              <li class="nav-item nav-icon dropdown caption-content">
+                                  <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
+                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <img src="./1.png" class="img-fluid rounded" alt="user">
+                                  </a>
+                                  <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <div class="card shadow-none m-0">
+                                          <div class="card-body p-0 text-center">
+                                              <div class="media-body profile-detail text-center">
+                                                  <img src="./profile-bg.jpg" alt="profile-bg"
+                                                      class="rounded-top img-fluid mb-4">
+                                                  <img src="./1.png" alt="profile-img"
+                                                      class="rounded profile-img img-fluid avatar-70">
+                                              </div>
+                                              <div class="p-3" >
+                                                   <div class="mb-1">
+                                                    <h5 class="mb-1 " id="usertitle" ></h5>
+                                                    <h5 class="mb-1 " id="useremailcard" ></h5>
+                                                </div>
+                                                  
+                                                  <p class="mb-0">계정 생성일: 2022/08/02</p>
+                                                  <div class="d-flex align-items-center justify-content-center mt-3">
+                                                      <a href="./userprofile" class="btn border mr-2">내 계정</a>
+                                                      <a href="/sessionLogout" class="btn border">로그아웃</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+      </div>
+    
+<div class="content-page">
+      <div class="container-fluid">
+         <div class="row">
+       
+            <div class="col-xl-12 col-lg-12">
+                  <div class="card">
+                     <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                           <h4 class="card-title">New User Information</h4>
+                        </div>
+                     </div>
+                     <div class="card-body">
+                        <div class="new-user-info">
+                           <form id="signup">
+                              <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="fname">First Name:</label>
+                                    <input type="text"  class="form-control" id="firstname"  placeholder="First Name">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="lname">Last Name:</label>
+                                    <input type="text" class="form-control" id="lastname" placeholder="Last Name">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="add1">Street Address 1:</label>
+                                    <input type="text" class="form-control" id="add1" placeholder="Street Address 1">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="add2">Street Address 2:</label>
+                                    <input type="text" class="form-control" id="add2" placeholder="Street Address 2">
+                                 </div>
+                                 <div class="form-group col-md-12">
+                                    <label for="cname">Company Name:</label>
+                                    <input type="text" class="form-control" id="companyname" placeholder="Company Name">
+                                 </div>
+                               
+                                 <div class="form-group col-md-6">
+                                    <label for="mobno">Phone Number:</label>
+                                    <input type="number" class="form-control" id="phonenumber" placeholder="Mobile Number">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="altconno">Title</label>
+                                    <input type="text" class="form-control" id="title" placeholder="Alternate Contact">
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Email">
+                                 </div>
+                                   <div class="form-group col-md-6">
+                                    <label for="pass">Password:</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Password">
+                                 </div>
+                              </div>
+                              <hr>
+                              <button type="submit" id="register" class="btn btn-primary col-md-6" style="left: 25%;" >Add New User</button>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+            </div>
+         </div>
+      </div>
+      </div>
+
+                    
+    <!-- Wrapper End-->
+    <footer class="iq-footer">
+            <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item"><a href="../backend/privacy-policy.html">Privacy Policy</a></li>
+                                <li class="list-inline-item"><a href="../backend/terms-of-service.html">Terms of Use</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">CRM Dashbord</a>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+     
+     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+      
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+      
+
+      <script type="module">
+     const firebaseConfig = {
+    apiKey: "AIzaSyAq2QjImxRXEtRHN-N6u2YEod-wUJMtI1s",
+    authDomain: "projectcrm-f4e5f.firebaseapp.com",
+    databaseURL: "https://projectcrm-f4e5f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "projectcrm-f4e5f",
+    storageBucket: "projectcrm-f4e5f.appspot.com",
+    messagingSenderId: "404890912341",
+    appId: "1:404890912341:web:5b129be76ccdfeba8c76dc",
+    measurementId: "G-TL8J23TNZE"
+  };
+
+       const app = firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+         const db = firebase.firestore();
+         
+
+console.log("im updated!")
+        document
+          .getElementById("signup")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+            
+            const firstname = document.getElementById('firstname').value;
+            
+            const lastname = document.getElementById('lastname').value;
+            const login = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phonenumber = document.getElementById('phonenumber').value;
+           
+            const title = document.getElementById('title').value;
+            const add1 = document.getElementById('add1').value;
+            const add2 = document.getElementById('add2').value;
+            const companyname = document.getElementById('companyname').value;
+  
+            firebase
+              .auth()
+              .createUserWithEmailAndPassword(login, password)
+              
+            // .then(function(user) {
+            //  return user.updateProfile({
+            //  displayName: firstname,
+            //  phoneNumber: phonenumber
+            //  })})
+            .then( async  ({ user }) => {
+                user.updateProfile({
+             displayName: firstname + ' ' + lastname ,
+             phoneNumber: phonenumber
+             })
+               db.collection('users').add({
+                  userFirstname: firstname,
+                  userLastname: lastname,
+                  userEmail: user.email,
+                  userPhone: phonenumber,
+                  userTitle: title,
+                  userAddone: add1,
+                  userAddtwo: add2,
+                  userCompanyname: companyname,
+                  userID: user.uid
+               })
+              
+               console.log(user.email)
+                return user.getIdToken().then(  (idToken) => {
+                  return fetch("/sessionLogin", {
+                    method: "POST",
+                    headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                      "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                    },
+                    body: JSON.stringify({ idToken }),
+                  });
+                });
+              })
+
+            //   .then(() => {
+            //     return firebase.auth().signOut();
+            //   })
+         
+            return false;
+          });
+
+
+      </script>
+    <!-- Backend Bundle JavaScript -->
+    <script src="./backend-bundle.min.js"></script>
+    
+    <!-- Table Treeview JavaScript -->
+    <script src="./table-treeview.js"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script src="./customizer.js"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <!-- <script async src="./chart-custom.js"></script> -->
+    
+    <!-- app JavaScript -->
+    <script src="./app.js"></script>
+  </body>
+</html>

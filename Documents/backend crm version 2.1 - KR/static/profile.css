@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+  --primary-color: #955df4;
+  --secondary-color: #ff816c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.5rem auto;
+}
+.tabledata {
+  width: 100%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+header {
+  width: 100%;
+  background: var(--primary-color);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+header h3 {
+  color: #fff;
+  margin-left: 1.5rem;
+}
+
+.table-users {
+  width: 90%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+}
+
+.table-users th, .table-users td {
+  text-align: left;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: .5rem;
+}
+
+.table-users th {
+  background: #fafafa;
+  padding: 1rem auto;
+}
+
+.btn {
+  background: transparent;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: all .5s ease;
+}
+
+.btn-edit {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-edit:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-delete {
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.btn-delete:hover {
+  background: var(--secondary-color);
+  color: #fff;
+}
+
+.table-wrapper {
+  text-align: center;
+}
+
+.btn-add {
+  width: 6rem;
+  height: 2rem;
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+}
+
+/* Modal */
+.modal-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #24232354;
+  display: none;
+}
+
+.modal {
+  position: relative;
+  background: #fff;
+  text-align: center;
+  width: 25rem;
+  margin: 5rem auto;
+  -webkit-box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
+  box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
+  animation-name: animatetop;
+  animation-duration: .4s;
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px; opacity: 0;
+  }
+  to {
+    top: 0; opacity: 1;
+  }
+}
+
+.modal-show {
+  display: block;
+}
+
+.modal-header {
+  margin-bottom: 1rem;
+  background: #f8fafb;
+  padding: 2rem;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  background-color: #ddd;
+  margin-bottom: 2%;
+  padding-right: 7%;
+ 
+}
+
+.profileitems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.menuitem__link {
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.5rem;
+  width: 5.5rem;
+  color: #6a778e;
+  transition: 300ms ease all;
+}
+
+.menuitem__link span {
+  width: max-content;
+  position: absolute;
+  right: 100%;
+  transform: translate(-3rem);
+  margin-left: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  color: #406ff3;
+  background: #fff;
+  padding: 0.75rem;
+  transition: 300ms ease all;
+  border-radius: 17.5px;
+}
+
+.menuitem__link span:hover {
+  opacity: 1;
+  transform: translate(0);
+}
+
+
+.logout {
+  font-weight: 600;
+  color: black;
+  background-color: #f8fafb;
+  border-radius: 17px;
+  padding: 17%;
+  align-items: center;
+ 
+}
+
+
+/* .card {
+  display: inline-block;
+  width: 100%;
+
+  flex-direction: column;
+  justify-content: center;
+} */
+
+
+.modal-body {
+  padding: 2rem;
+}
+
+.btn-modal {
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  width: 9rem;
+}
+
+input {
+  width: 100%;
+  height: 2.2rem;
+  margin-bottom: 1rem;
+  text-indent: .5rem;
+  outline: none;
+}
+
+
+.charts {
+display: flex;
+flex-direction: row;
+}
+
+
+.barchart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+
+.radarchart {
+  max-width: 650px;
+  margin: 35px auto;
+}
