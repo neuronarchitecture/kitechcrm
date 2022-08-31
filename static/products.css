@@ -102,11 +102,43 @@ font-family: 'Lato', sans-serif;
     background-color: transparent;
 }
 
+.btnpr-addParts {
+    border: 0;
+    background-color: transparent;
+}
 
+.btnpr-addSubs  {
+    border: 0;
+    background-color: transparent;
+}
+
+.btnpr-viewpart {
+   border: 0;
+    background-color: transparent;
+}
+
+.btnpr-addsubs {
+   border: 0;
+    background-color: transparent;
+}
+
+.menucolomun {
+  display: flex;
+  flex-direction: column;
+  
+}
 
 .table-wrapper {
+  width: inherit;
   text-align: center;
 }
+
+
+.table-wrappery {
+  width: max-content;
+  text-align: center;
+}
+
 
 .btnpr-add {
   width: fit-content;
@@ -327,6 +359,13 @@ flex-direction: row;
 
 .row .adminelement {
   justify-content: center;
+
+}
+
+.viewbtns {
+   display: flex;
+  
+  align-items: center;
 }
 
 .top-tab-list {
@@ -337,3 +376,255 @@ flex-direction: row;
 .addtoptab {
   width: 35%;
 }
+
+
+/*tree view css*/
+
+
+
+.treeviewy .btn-default {
+  border-color: #e3e5ef;
+}
+.treeviewy .btn-default:hover {
+  background-color: #f7faea;
+  color: #bada55;
+}
+.treeviewy ul {
+  list-style: none;
+  padding-left: 32px;
+}
+.treeviewy ul li {
+  padding: 15% 0px 0px 35px;
+  position: relative;
+}
+.treeviewy ul li:before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: -31px;
+  border-left: 2px dashed #a2a5b5;
+  width: 1px;
+  height: 100%;
+}
+.treeviewy ul li:after {
+  content: "";
+  position: absolute;
+  border-top: 2px dashed #a2a5b5;
+  top: 70px;
+  left: -30px;
+  width: 65px;
+}
+.treeviewy ul li:last-child:before {
+  top: -22px;
+  height: 90px;
+}
+.treeviewy > ul > li:after, .treeviewy > ul > li:last-child:before {
+  content: unset;
+}
+.treeviewy > ul > li:before {
+  top: 90px;
+  left: 36px;
+}
+.treeviewy > ul > li:not(:last-child) > ul > li:before {
+  content: unset;
+}
+.treeviewy > ul > li > .treeviewy__level:before {
+  height: 60px;
+  width: 60px;
+  top: -9.5px;
+  background-color: #54a6d9;
+  border: 7.5px solid #d5e9f6;
+  font-size: 22px;
+}
+.treeviewy > ul > li > ul {
+  padding-left: 34px;
+}
+.treeviewy__level {
+  padding: 7px;
+  padding-left: 42.5px;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+  border-radius: 15px;
+  font-weight: 700;
+  border: 1px solid #e3e5ef;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.treeviewy__level:before {
+  content: attr(data-level);
+  position: absolute;
+  left: -27.5px;
+  top: -6.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  border: 7.5px solid #eef6d5;
+  background-color: #bada55;
+  color: #fff;
+  font-size: 20px;
+}
+.treeviewy__level-btns {
+  margin-left: 15px;
+  display: inline-block;
+  position: relative;
+}
+.treeviewy__level .level-same, .treeviewy__level .level-sub {
+  position: absolute;
+  display: none;
+  transition: opacity 250ms cubic-bezier(0.7, 0, 0.3, 1);
+}
+.treeviewy__level .level-same.in, .treeviewy__level .level-sub.in {
+  display: block;
+}
+.treeviewy__level .level-same.in .btn-default, .treeviewy__level .level-sub.in .btn-default {
+  background-color: #faeaea;
+  color: #da5555;
+}
+.treeviewy__level .level-same {
+  margin-left: 20%;
+  top: -0.5rem;
+  left: 3.5rem;
+}
+.treeviewy__level .level-sub {
+   margin-left: 20%;
+   top: -0.5rem;
+  left: 7rem;
+
+}
+.treeviewy__level .level-remove {
+  display: none;
+}
+.treeviewy__level.selected {
+  background-color: #f9f9fb;
+  box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.1);
+}
+.treeviewy__level.selected .level-remove {
+  display: inline-block;
+}
+.treeviewy__level.selected .level-add {
+  display: none;
+}
+.treeviewy__level.selected .level-same, .treeviewy__level.selected .level-sub {
+  display: none;
+}
+.treeviewy .level-title {
+  cursor: pointer;
+  user-select: none;
+}
+.treeviewy .level-title:hover {
+  text-decoration: underline;
+}
+.treeviewy--mapview ul {
+  justify-content: center;
+  display: flex;
+}
+.treeviewy--mapview ul li:before {
+  content: unset;
+}
+.treeviewy--mapview ul li:after {
+  content: unset;
+}
+
+.materiallisit {
+  margin: 0%;
+  padding: 0%;
+}
+
+
+.content {
+  max-width: calc(100vw - 20px);
+  margin: 0 10px;
+}
+
+.accordion {
+  max-width: 600px;
+  margin: 50px auto;
+  display: grid;
+  grid-gap: 15px;
+}
+
+.accordion__block-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: #424242;
+  text-transform: uppercase;
+}
+
+.accordion__item {
+  display: block;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 150ms ease;
+}
+.accordion__item:not(:last-child) {
+  border-bottom: 1px solid #fafafa;
+}
+
+.accordion__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: all 150ms ease;
+  position: relative;
+  padding-right: 30px;
+}
+.accordion__title::after, .accordion__title::before {
+  content: "";
+  width: 16px;
+  height: 2px;
+  background-color: #666;
+  position: absolute;
+  right: 0;
+  top: 8px;
+  transition: all 150ms ease;
+}
+.accordion__title::after {
+  transform: rotate(90deg);
+}
+
+.accordion__content {
+  transform: translateY(50%);
+  color: #999;
+  font-size: 16px;
+  line-height: 1.5;
+  max-height: 0;
+  opacity: 0;
+  transition: all 150ms ease;
+}
+
+.accordion__item [type=checkbox],
+.accordion__item [type=radio] {
+  display: none;
+}
+.accordion__item [type=radio]:checked + .accordion__title,
+.accordion__item [type=checkbox]:checked + .accordion__title {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.accordion__item [type=radio]:checked + .accordion__title::after,
+.accordion__item [type=checkbox]:checked + .accordion__title::after {
+  transform: rotate(45deg);
+}
+.accordion__item [type=radio]:checked + .accordion__title::before,
+.accordion__item [type=checkbox]:checked + .accordion__title::before {
+  transform: rotate(-45deg);
+}
+.accordion__item [type=radio]:checked + .accordion__title + .accordion__content,
+.accordion__item [type=checkbox]:checked + .accordion__title + .accordion__content {
+  transform: translateY(0);
+  max-height: none;
+  opacity: 1;
+}
+

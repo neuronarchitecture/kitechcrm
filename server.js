@@ -68,7 +68,35 @@ app.get("/signup", function (req, res) {
       res.render("signup.html");
     });
 });
+app.get("/datatree", function (req, res) {
+   const sessionCookie = req.cookies.session || "";
 
+  admin
+    .auth()
+    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+    .then((userData) => {
+      console.log("Logged in:", userData.email)
+      res.render("datatree.html");
+    })
+    .catch((error) => {
+      res.redirect("/login");
+    });
+});
+
+app.get("/parts", function (req, res) {
+   const sessionCookie = req.cookies.session || "";
+
+  admin
+    .auth()
+    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+    .then((userData) => {
+      console.log("Logged in:", userData.email)
+      res.render("parts.html");
+    })
+    .catch((error) => {
+      res.redirect("/login");
+    });
+});
 
 app.get("/dashboard", function (req, res) {
    const sessionCookie = req.cookies.session || "";
@@ -85,7 +113,6 @@ app.get("/dashboard", function (req, res) {
     });
 });
 
-
 app.get("/dataview", function (req, res) {
    const sessionCookie = req.cookies.session || "";
 
@@ -95,6 +122,21 @@ app.get("/dataview", function (req, res) {
     .then((userData) => {
       console.log("Logged in:", userData.email)
       res.render("dataview.html");
+    })
+    .catch((error) => {
+      res.redirect("/login");
+    });
+});
+
+app.get("/substances", function (req, res) {
+   const sessionCookie = req.cookies.session || "";
+
+  admin
+    .auth()
+    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+    .then((userData) => {
+      console.log("Logged in:", userData.email)
+      res.render("substances.html");
     })
     .catch((error) => {
       res.redirect("/login");

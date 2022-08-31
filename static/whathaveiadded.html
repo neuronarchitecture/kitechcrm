@@ -15,7 +15,6 @@ const auth = firebase.auth(app);
 const db = firebase.firestore(app);
 const functions = firebase.functions();
 const modalyWrapper = document.querySelector('.modaly-wrapper');
-const userroledisplay = document.querySelector('.userroledisplay')
 // modaly add
 const addmodaly = document.querySelector('.add-modaly');
 const addmodalyPartsSingle = document.querySelector('.addPartmodaly');
@@ -30,7 +29,7 @@ const editmodaly = document.querySelector('.edit-modaly');
 const editmodalyForm = document.querySelector('.edit-modaly .form');
 const btnprAdd = document.querySelector('.btnpr-add');
 const tableUsers = document.querySelector('.table-users');
-
+const btnpraddParts = document.querySelector('.btnpr-addParts');
 // modaly view
 const viewmodaly = document.querySelector('.view-modaly');
 const viewmodalyForm = document.querySelector('.view-modaly .form');
@@ -38,7 +37,6 @@ const adminElement = document.querySelector('.adminelement')
 const notadminElement = document.querySelectorAll('.notadmin')
 const usertest = document.getElementById("usertest");
 const partsName = document.querySelector('.partsName')
-const editpartsName = document.querySelector('.editpartsName')
 const materiallist = document.querySelector('.materiallist')
 const subslist = document.querySelector('.subslist')
 
@@ -57,20 +55,20 @@ let id;
 const renderUser = doc => {
   const tr = `
     <tr data-id='${doc.id}'>
-     <td><img src="./productimage.png" style="height: 60px;
-    width: 60px;" alt=""></td>
      <td>${doc.data().productCategory}</td>
       <td>${doc.data().productName}</td>
       <td>${doc.data().productClass}</td>
       <td>${doc.data().productSpecs}</td>
       <td>${doc.data().productWeight}</td>
         <td>${doc.data().productNumber}</td>
+   
+       <td>${doc.data().field}</td>
       <td>
 
     <button type="button" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
         <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-      
-         
+         <button class="btnpr-addParts"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
+           <button class="btnpr-addSubs"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
         <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
       </td>
     </tr>
@@ -78,34 +76,59 @@ const renderUser = doc => {
   tableUsers.insertAdjacentHTML('beforeend', tr);
 
 //add parts
-//  const btnpraddSubstances = document.querySelector(`[data-id='${doc.id}'] .btnpr-addSubs`);
-// btnpraddSubstances.addEventListener('click', () => {
-//   addmodalySubssSingle.classList.add('modaly-show');
+ const btnpraddSubstances = document.querySelector(`[data-id='${doc.id}'] .btnpr-addSubs`);
+btnpraddSubstances.addEventListener('click', () => {
+  addmodalySubssSingle.classList.add('modaly-show');
 
-//   addModalySubs.addmaterialName.value = '';
+  addModalySubs.addmaterialName.value = '';
 
-//    addModalyParts.addEventListener('submit', e => {
-//   e.preventDefault();
-//   // console.log(doc.id, " => ", doc.data());
-//   db.collection('recycledproducts').doc(`${doc.id}`).collection('substances').add({
-//     substanceName: addModalySubs.addmaterialName.value,
-//     substanceGroup: addModalySubs.addmaterialGroup.value,
-//     substanceClassId: addModalySubs.addmaterialClassID.value,
-//     substanceRecycleContent: addModalySubs.addmaterialRecycleContent.value,
-//     substanceRecycleType: addModalySubs.addmaterialRecycleType.value,
-//     substanceMassg: addModalySubs.addmaterialMassg.value,
-//     substanceMassPerc: addModalySubs.addmaterialMassPerc.value
+   addModalyParts.addEventListener('submit', e => {
+  e.preventDefault();
+  // console.log(doc.id, " => ", doc.data());
+  db.collection('recycledproducts').doc(`${doc.id}`).collection('substances').add({
+    substanceName: addModalySubs.addmaterialName.value,
+    substanceGroup: addModalySubs.addmaterialGroup.value,
+    substanceClassId: addModalySubs.addmaterialClassID.value,
+    substanceRecycleContent: addModalySubs.addmaterialRecycleContent.value,
+    substanceRecycleType: addModalySubs.addmaterialRecycleType.value,
+    substanceMassg: addModalySubs.addmaterialMassg.value,
+    substanceMassPerc: addModalySubs.addmaterialMassPerc.value
     
   
-//   })})
+  })})
 
  
 
-//   })
+  })
 
 
 
 
+//add materials 
+ const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
+btnpraddParts.addEventListener('click', () => {
+  addmodalyPartsSingle.classList.add('modaly-show');
+
+  addModalyParts.addmaterialName.value = '';
+
+   addModalyParts.addEventListener('submit', e => {
+  e.preventDefault();
+  // console.log(doc.id, " => ", doc.data());
+  db.collection('recycledproducts').doc(`${doc.id}`).collection('materials').add({
+    materialName: addModalyParts.addmaterialName.value,
+    materialGroup: addModalyParts.addmaterialGroup.value,
+    materialClassId: addModalyParts.addmaterialClassID.value,
+    materialRecycleContent: addModalyParts.addmaterialRecycleContent.value,
+    materialRecycleType: addModalyParts.addmaterialRecycleType.value,
+    materialMassg: addModalyParts.addmaterialMassg.value,
+    materialMassPerc: addModalyParts.addmaterialMassPerc.value
+    
+  
+  })})
+
+ 
+
+  })
 
 
 
@@ -125,7 +148,7 @@ const renderUser = doc => {
       const material = doc.data();
       console.log(material)
       const li = `
-       <tr data-id='${doc.id}'>
+       <tr>
       <td>${doc.data().materialGroup}</td>
      <td>${doc.data().materialName}</td>
       <td>${doc.data().materialClassId}</td>
@@ -155,9 +178,44 @@ const renderUser = doc => {
   
    db.collection('recycledproducts').doc(`${doc.id}`).collection('materials').get().then(snapshot => {
     setupMaterialUI(snapshot.docs)
+
+  const setupSubstancesUI = (data) => {
+    let html = '';
+    data.forEach(doc=> {
+      const substance = doc.data();
+      console.log(substance)
+      const li = `
+       <tr>
+      <td>${doc.data().substanceName}</td>
+     <td>${doc.data().substanceGroup}</td>
+      <td>${doc.data().substanceClassId}</td>
+       <td>${doc.data().substanceRecycleContent}</td>
+        <td>${doc.data().substanceRecycleType}</td>
+         <td>${doc.data().substanceMassg}</td>
+     <td>${doc.data().substanceMassPerc}</td>
+      <td>
+        <div class="row">
+      
+      <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
+       
+        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
+        </td>
+        </div>
+      
+
+      
+    
+    </tr>
+      `;
+      html+=li
+    })
+
+    substanceslist.insertAdjacentHTML('beforeend', html)
+  }
+  db.collection('recycledproducts').doc(`${doc.id}`).collection('substances').get().then(snapshot => {
+    setupSubstancesUI(snapshot.docs)
    })
 
-   
       // Get a reference from the dom to the tree elements
      const treeproducttitle = document.querySelector('.treeproducttitle')
       const productCategory = document.querySelector('.productCategory')
@@ -166,10 +224,30 @@ const renderUser = doc => {
      const productSpecs = document.querySelector('.productSpecs')
      const productWeight = document.querySelector('.productWeight')
      const productNumber = document.querySelector('.productNumber')
-     
+     const viewpartName = document.querySelector('.viewpartName')
+      const viewpartNumber = document.querySelector('.viewpartNumber')
+    const viewpartSpecs = document.querySelector('.viewpartSpecs')
+    const viewpartWeight = document.querySelector('.viewpartWeight')
+    const viewpartMassg = document.querySelector('.viewpartMassg')
+    const viewsupplierInfo = document.querySelector('.viewsupplierInfo')
+    const viewpartMassPerc = document.querySelector('.viewpartMassPerc')
+    const viewreusedPart = document.querySelector('.viewreusedPart')
+    const viewmaterialGroup = document.querySelector('.viewmaterialGroup')
+    const viewmaterialName = document.querySelector('.viewmaterialName')
+    const viewmaterialClassID = document.querySelector('.viewmaterialClassID')
+    const viewmaterialRecycleContent = document.querySelector('.viewmaterialRecycleContent')
+    const viewmaterialMassg = document.querySelector('.viewmaterialMassg')
+    const viewmaterialMassPerc = document.querySelector('.viewmaterialMassPerc')
+    const viewmaterialRecycleType = document.querySelector('.viewmaterialRecycleType')
+    const viewsubstanceName = document.querySelector('.viewsubstanceName')
+    const viewcas = document.querySelector('.viewcas')
+    const viewcrm = document.querySelector('.viewcrm')
+    const viewrohs = document.querySelector('.viewrohs')
+    const viewsubstanceMassg = document.querySelector('.viewsubstanceMassg')
+    const viewsubstanceMassPerc = document.querySelector('.viewsubstanceMassPerc')
     // inject data from firebase document to the tree element and display them
      id = doc.id;
-     
+     viewpartWeight
      treeproducttitle.innerHTML = 'View ' + doc.data().productName
       productCategory.value =   doc.data().productCategory;
        productName.value =   doc.data().productName;
@@ -177,7 +255,27 @@ const renderUser = doc => {
       productSpecs.value =  doc.data().productSpecs;
        productWeight.value =  doc.data().productWeight;
      productNumber.value =  doc.data().productNumber;
-    
+     viewpartName.value =  doc.data().PartName;
+     viewpartNumber.value =  doc.data().partNumber;
+     viewpartSpecs.value =  doc.data().partSpecs;
+     viewpartWeight.value =  doc.data().partMassgEA;
+     viewpartMassg.value =  doc.data().partMassg;
+       viewsupplierInfo.value =  doc.data().supplierInfo;
+     viewpartMassPerc.value =  doc.data().partMassPerc;
+     viewreusedPart.value =  doc.data().reusedPart;
+     viewmaterialGroup.value =  doc.data().materialGroup;
+     viewmaterialName.value =  doc.data().materialName;
+     viewmaterialClassID.value =  doc.data().materialClassID;
+     viewmaterialRecycleContent.value =  doc.data().materialRecycleContent;
+      viewmaterialMassg.value =  doc.data().materialMassg;
+     viewmaterialMassPerc.value =  doc.data().materialMassPerc;
+     viewmaterialRecycleType.value =  doc.data().materialRecycleType;
+     viewsubstanceName.value =  doc.data().substanceName;
+     viewcas.value =  doc.data().cas;
+     viewcrm.value =  doc.data().crm;
+      viewrohs.value =  doc.data().rohs;
+     viewsubstanceMassg.value =  doc.data().substanceMassg;
+     viewsubstanceMassPerc.value =  doc.data().substanceMassPerc;
 
      
   })
@@ -185,6 +283,10 @@ const renderUser = doc => {
 
 
 
+  //add to subcollection
+  // const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
+ 
+  
 
   // Click edit user
   const btnprEdit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
@@ -198,7 +300,7 @@ const renderUser = doc => {
     editmodalyForm.productClass.value = doc.data().productClass;
     editmodalyForm.productWeight.value = doc.data().productWeight;
     editmodalyForm.productNumber.value = doc.data().productNumber;
-    
+    editmodalyForm.field.value = doc.data().field;
     editmodalyForm.productCategory.value = doc.data().productCategory;
     
 
@@ -206,7 +308,33 @@ const renderUser = doc => {
     //edit the parts section
     
 
-   
+    editmodalyForm.PartName.value = doc.data().PartName;
+    editmodalyForm.partNumber.value = doc.data().partNumber;
+    editmodalyForm.partSpecs.value = doc.data().partSpecs;
+    editmodalyForm.partMassgEA.value = doc.data().partMassgEA;
+    editmodalyForm.partMassg.value = doc.data().partMassg;
+    editmodalyForm.reusedPart.value = doc.data().reusedPart;
+    editmodalyForm.supplierInfo.value = doc.data().supplierInfo;
+    editmodalyForm.partMassPerc.value = doc.data().partMassPerc;
+    editmodalyForm.reusedPart.value = doc.data().reusedPart;
+
+    //edit the material section
+    editmodalyForm.materialGroup.value = doc.data().materialGroup;
+    editmodalyForm.materialName.value = doc.data().materialName;
+    editmodalyForm.materialClassID.value = doc.data().materialClassID;
+    editmodalyForm.materialRecycleContent.value = doc.data().materialRecycleContent;
+    editmodalyForm.materialRecycleType.value = doc.data().materialRecycleType;
+    editmodalyForm.materialMassg.value = doc.data().materialMassg;
+    editmodalyForm.materialMassPerc.value = doc.data().materialMassPerc; 
+    //edit the substance section
+
+    editmodalyForm.substanceName.value = doc.data().substanceName;
+    editmodalyForm.cas.value = doc.data().cas;
+    editmodalyForm.crm.value = doc.data().crm;
+    editmodalyForm.rohs.value = doc.data().rohs;
+    editmodalyForm.substanceMassg.value = doc.data().substanceMassg;
+    editmodalyForm.substanceMassPerc.value = doc.data().substanceMassPerc;
+
 
   });
 
@@ -221,29 +349,26 @@ const renderUser = doc => {
   });
 
 
-  //  // get subcollection data 
-  // const btnprget = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
-  // btnprget.addEventListener('click', () => {
+   // get subcollection data 
+  const btnprget = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
+  btnprget.addEventListener('click', () => {
 
-  // db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').get()
-  //   .then((querySnapshot) => {
-  //       querySnapshot.forEach((doc) => {
-  //         conso
-  //           // doc.data() is never undefined for query doc snapshots
-  //           console.log(doc.data().partName);
-  //       });
-  //   })
-  //   .catch((error) => {
-  //       console.log("Error getting documents: ", error);
-  //   });
-  // });
+  db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log( doc.data().partName);
+        });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+  });
 
   
 
 
-}
- 
-
+},
 
 
 
@@ -257,12 +382,22 @@ btnprAdd.addEventListener('click', () => {
   addModalyForm.productClass.value = '';
   addModalyForm.productWeight.value = '';
   addModalyForm.productNumber.value = '';
-  
+  addModalyForm.field.value = '';
   addModalyForm.productCategory.value = '';
 
 
+  // addModalyForm.PartName.value = '';
+  //   addModalyForm.partNumber.value = '';
+  //   addModalyForm.partSpecs.value = '';
+  //   addModalyForm.partMassgEA.value ='';
+  //   addModalyForm.partMassg.value = '';
+  //   addModalyForm.reusedPart.value = '';
+  //   addModalyForm.supplierInfo.value = '';
+  //   addModalyForm.partMassgPerc.value = '';
+  //   addModalyForm.reusedPart.value = '';
   
-});
+  
+}));
 
 // User click anyware outside the modaly
 window.addEventListener('click', e => {
@@ -275,7 +410,9 @@ window.addEventListener('click', e => {
   if(e.target === viewmodaly) {
     viewmodaly.classList.remove('modaly-show');
   }
-
+   if(e.target === addmodalyPartsSingle) {
+    addmodalyPartsSingle.classList.remove('modaly-show');
+  }
 });
 
 
@@ -317,11 +454,20 @@ addModalyForm.addEventListener('submit', e => {
     productClass: addModalyForm.productClass.value,
     productWeight: addModalyForm.productWeight.value,
     productNumber: addModalyForm.productNumber.value,
-    
+    field: addModalyForm.field.value,
     productCategory: addModalyForm.productCategory.value,
 
     
 
+    // PartName: addModalyForm.PartName.value,
+    // partNumber: addModalyForm.partNumber.value,
+    // partSpecs:addModalyForm.partSpecs.value,
+    // partMassgEA:addModalyForm.partMassgEA.value,
+    // partMassg:addModalyForm.partMassg.value,
+    // reusedPart:addModalyForm.reusedPart.value,
+    // supplierInfo:addModalyForm.supplierInfo.value,
+    // partMassgPerc:addModalyForm.partMassgPerc.value,
+    // reusedPart:addModalyForm.reusedPart.value,
   });
   modalyWrapper.classList.remove('modaly-show');
 });
@@ -336,8 +482,36 @@ editmodalyForm.addEventListener('submit', e => {
     productClass: editmodalyForm.productClass.value,
     productWeight: editmodalyForm.productWeight.value,
     productNumber: editmodalyForm.productNumber.value,
+    field: editmodalyForm.field.value,
     productCategory: editmodalyForm.productCategory.value,
-   
+    //Parts Section 
+    PartName: editmodalyForm.PartName.value,
+    partNumber: editmodalyForm.partNumber.value,
+    partSpecs:editmodalyForm.partSpecs.value,
+    partMassgEA:editmodalyForm.partMassgEA.value,
+    partMassg:editmodalyForm.partMassg.value,
+    reusedPart:editmodalyForm.reusedPart.value,
+    supplierInfo:editmodalyForm.supplierInfo.value,
+    partMassPerc:editmodalyForm.partMassPerc.value,
+    reusedPart:editmodalyForm.reusedPart.value,
+    // Material Section
+     materialGroup:editmodalyForm.materialGroup.value,
+    materialName:editmodalyForm.materialName.value,
+    materialClassID:editmodalyForm.materialClassID.value,
+    materialRecycleContent:editmodalyForm.materialRecycleContent.value,
+    materialRecycleType:editmodalyForm.materialRecycleType.value,
+    materialMassg:editmodalyForm.materialMassg.value,
+    materialMassPerc:editmodalyForm.materialMassPerc.value,
+
+    // Substance Section 
+
+    
+    substanceName:editmodalyForm.substanceName.value,
+    cas:editmodalyForm.cas.value,
+    crm:editmodalyForm.crm.value,
+    rohs:editmodalyForm.rohs.value,
+    substanceMassg:editmodalyForm.substanceMassg.value,
+    substanceMassPerc:editmodalyForm.substanceMassPerc.value,
      
   });
     
@@ -421,7 +595,6 @@ const editUI = (user) => {
       <option>${doc.data().partName}</option>
   `;
   partsName.insertAdjacentHTML('beforeend', td);
-  editpartsName.insertAdjacentHTML('beforeend', td);
         });
     })
     .catch((error) => {
@@ -432,3 +605,4 @@ const editUI = (user) => {
 
 
 
+  }

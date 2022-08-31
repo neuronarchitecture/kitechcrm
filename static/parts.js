@@ -16,6 +16,7 @@ const db = firebase.firestore(app);
 const functions = firebase.functions();
 const modalyWrapper = document.querySelector('.modaly-wrapper');
 const userroledisplay = document.querySelector('.userroledisplay')
+const materialtitle = document.querySelector('.modal-title')
 // modaly add
 const addmodaly = document.querySelector('.add-modaly');
 const addmodalyPartsSingle = document.querySelector('.addPartmodaly');
@@ -30,7 +31,7 @@ const editmodaly = document.querySelector('.edit-modaly');
 const editmodalyForm = document.querySelector('.edit-modaly .form');
 const btnprAdd = document.querySelector('.btnpr-add');
 const tableUsers = document.querySelector('.table-users');
-
+const btnpraddParts = document.querySelector('.btnpr-addParts');
 // modaly view
 const viewmodaly = document.querySelector('.view-modaly');
 const viewmodalyForm = document.querySelector('.view-modaly .form');
@@ -38,11 +39,12 @@ const adminElement = document.querySelector('.adminelement')
 const notadminElement = document.querySelectorAll('.notadmin')
 const usertest = document.getElementById("usertest");
 const partsName = document.querySelector('.partsName')
-const editpartsName = document.querySelector('.editpartsName')
 const materiallist = document.querySelector('.materiallist')
+const substancelist = document.querySelector('#substancelist')
 const subslist = document.querySelector('.subslist')
 
 let id;
+
 
 
 // const renderTest = doc => {
@@ -57,67 +59,32 @@ let id;
 const renderUser = doc => {
   const tr = `
     <tr data-id='${doc.id}'>
-     <td><img src="./productimage.png" style="height: 60px;
-    width: 60px;" alt=""></td>
-     <td>${doc.data().productCategory}</td>
-      <td>${doc.data().productName}</td>
-      <td>${doc.data().productClass}</td>
-      <td>${doc.data().productSpecs}</td>
-      <td>${doc.data().productWeight}</td>
-        <td>${doc.data().productNumber}</td>
+     <td>${doc.data().partName}</td>
+      <td>${doc.data().partNumber}</td>
+      <td>${doc.data().partSpecs}</td>
+      <td>${doc.data().partMassgEA}</td>
+      <td>${doc.data().partMassg}</td>
+      <td>${doc.data().partMassPerc}</td>
+      <td>${doc.data().reusedPart}</td>
+        <td>${doc.data().supplierInfo}</td>
+         <td>${doc.data().substancelist}</td>
       <td>
 
-    <button type="button" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
+    <button type="button" id="btnprview" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
         <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-      
+         <button class="btnpr-addParts"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
          
         <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
       </td>
     </tr>
   `;
   tableUsers.insertAdjacentHTML('beforeend', tr);
-
-//add parts
-//  const btnpraddSubstances = document.querySelector(`[data-id='${doc.id}'] .btnpr-addSubs`);
-// btnpraddSubstances.addEventListener('click', () => {
-//   addmodalySubssSingle.classList.add('modaly-show');
-
-//   addModalySubs.addmaterialName.value = '';
-
-//    addModalyParts.addEventListener('submit', e => {
-//   e.preventDefault();
-//   // console.log(doc.id, " => ", doc.data());
-//   db.collection('recycledproducts').doc(`${doc.id}`).collection('substances').add({
-//     substanceName: addModalySubs.addmaterialName.value,
-//     substanceGroup: addModalySubs.addmaterialGroup.value,
-//     substanceClassId: addModalySubs.addmaterialClassID.value,
-//     substanceRecycleContent: addModalySubs.addmaterialRecycleContent.value,
-//     substanceRecycleType: addModalySubs.addmaterialRecycleType.value,
-//     substanceMassg: addModalySubs.addmaterialMassg.value,
-//     substanceMassPerc: addModalySubs.addmaterialMassPerc.value
-    
   
-//   })})
-
- 
-
-//   })
-
-
-
-
-
-
-
-   closebtn.addEventListener('click', () =>{
-    addmodalyPartsSingle.classList.remove('modaly-show');
-   })
-
-// Click on view product button
-
-  const viewbtn = document.querySelector(`[data-id='${doc.id}'] .viewbtn`);
+ const viewbtn = document.querySelector(`[data-id='${doc.id}'] .viewbtn`);
   viewbtn.addEventListener('click', ()=> {
-
+  materialtitle.innerHTML = `${doc.data().partName}`
+ const materiallist = document.querySelector('.materiallist')
+ materiallist.innerHTML = " ";
     //click add parts button
  const setupMaterialUI = (data) => {
     let html = '';
@@ -125,27 +92,35 @@ const renderUser = doc => {
       const material = doc.data();
       console.log(material)
       const li = `
-       <tr data-id='${doc.id}'>
-      <td>${doc.data().materialGroup}</td>
-     <td>${doc.data().materialName}</td>
-      <td>${doc.data().materialClassId}</td>
-       <td>${doc.data().materialRecycleContent}</td>
-        <td>${doc.data().materialRecycleType}</td>
-         <td>${doc.data().materialMassg}</td>
-     <td>${doc.data().materialMassPerc}</td>
-      <td>
-        <div class="row">
-      
-      <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-       
-        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
-        </td>
-        </div>
-      
+       <section class="content">
+  <div class="accordion">
+    <label class="accordion__item">
+      <input type="checkbox" name="accordion">
+      <div class="accordion__title">${doc.data().materialName}</div>
+      <div class="accordion__content">
 
+      <br/> <br/>
+      <button type="button" id="btnprview" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
+        <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
+         <button class="btnpr-addParts"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
+         
+        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
+           <br/> <br/>
+      Material Group: ${doc.data().materialGroup} <br/> <br/>
+      Material Class ID: ${doc.data().materialClassId} <br/> <br/>
+      Material Recycle Content: ${doc.data().materialRecycleContent} <br/> <br/>
+      Material Recycle Type: ${doc.data().materialRecycleType} <br/> <br/>
+      Material Mass (g): ${doc.data().materialMassg} <br/> <br/>
+      Material Mass (%): ${doc.data().materialMassPerc} <br/> <br/>
       
     
-    </tr>
+      
+    </label>
+    
+  </div>
+</section>
+
+      
       `;
       html+=li
     })
@@ -153,38 +128,56 @@ const renderUser = doc => {
     materiallist.insertAdjacentHTML('beforeend', html)
   }
   
-   db.collection('recycledproducts').doc(`${doc.id}`).collection('materials').get().then(snapshot => {
+   db.collection('recycledparts').doc(`${doc.id}`).collection('materials').get().then(snapshot => {
     setupMaterialUI(snapshot.docs)
-   })
+   })})
 
-   
-      // Get a reference from the dom to the tree elements
-     const treeproducttitle = document.querySelector('.treeproducttitle')
-      const productCategory = document.querySelector('.productCategory')
-       const productName = document.querySelector('.productName')
-     const productClass = document.querySelector('.productClass')
-     const productSpecs = document.querySelector('.productSpecs')
-     const productWeight = document.querySelector('.productWeight')
-     const productNumber = document.querySelector('.productNumber')
-     
-    // inject data from firebase document to the tree element and display them
-     id = doc.id;
-     
-     treeproducttitle.innerHTML = 'View ' + doc.data().productName
-      productCategory.value =   doc.data().productCategory;
-       productName.value =   doc.data().productName;
-     productClass.value =   doc.data().productClass;
-      productSpecs.value =  doc.data().productSpecs;
-       productWeight.value =  doc.data().productWeight;
-     productNumber.value =  doc.data().productNumber;
+//add parts
+
+
+
+
+//add materials 
+ const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
+btnpraddParts.addEventListener('click', () => {
+  addmodalyPartsSingle.classList.add('modaly-show');
+
+  addModalyParts.addmaterialName.value = '';
+
+   addModalyParts.addEventListener('submit', e => {
+  e.preventDefault();
+  // console.log(doc.id, " => ", doc.data());
+  db.collection('recycledparts').doc(`${doc.id}`).collection('materials').add({
+    materialName: addModalyParts.addmaterialName.value,
+    materialGroup: addModalyParts.addmaterialGroup.value,
+    materialClassId: addModalyParts.addmaterialClassID.value,
+    materialRecycleContent: addModalyParts.addmaterialRecycleContent.value,
+    materialRecycleType: addModalyParts.addmaterialRecycleType.value,
+    materialMassg: addModalyParts.addmaterialMassg.value,
+    materialMassPerc: addModalyParts.addmaterialMassPerc.value,
     
+  })})
 
-     
+ 
+
   })
 
 
 
+   closebtn.addEventListener('click', () =>{
+    addmodalyPartsSingle.classList.remove('modaly-show');
+   })
 
+
+
+
+
+
+
+  //add to subcollection
+  // const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
+ 
+  
 
   // Click edit user
   const btnprEdit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
@@ -192,28 +185,29 @@ const renderUser = doc => {
     editmodaly.classList.add('modaly-show');
     const editHeader = document.querySelector('.editheader')
     id = doc.id;
-    editHeader.innerHTML = 'Edit ' + doc.data().productName
-    editmodalyForm.productName.value = doc.data().productName;
-    editmodalyForm.productSpecs.value = doc.data().productSpecs;
-    editmodalyForm.productClass.value = doc.data().productClass;
-    editmodalyForm.productWeight.value = doc.data().productWeight;
-    editmodalyForm.productNumber.value = doc.data().productNumber;
-    
-    editmodalyForm.productCategory.value = doc.data().productCategory;
+    editHeader.innerHTML = 'Edit ' + doc.data().partName
+      editmodalyForm.editpartName.value = doc.data().partName;
+    editmodalyForm.editpartNumber.value = doc.data().partNumber;
+    editmodalyForm.editpartSpecs.value = doc.data().partSpecs;
+    editmodalyForm.editpartMassgEA.value = doc.data().partMassgEA;
+    editmodalyForm.editpartMassg.value = doc.data().partMassg;
+     editmodalyForm.editpartMassPerc.value = doc.data().partMassPerc;
+    editmodalyForm.editreusedPart.value = doc.data().reusedPart;
+    editmodalyForm.editsupplierInfo.value = doc.data().supplierInfo;
+     editmodalyForm.editsubstancelist.value = doc.data().substancelist;
     
 
     
     //edit the parts section
     
 
-   
 
   });
 
   // Click delete user
   const btnprDelete = document.querySelector(`[data-id='${doc.id}'] .btnpr-delete`);
   btnprDelete.addEventListener('click', () => {
-    db.collection('recycledproducts').doc(`${doc.id}`).delete().then(() => {
+    db.collection('recycledparts').doc(`${doc.id}`).delete().then(() => {
       console.log('Document succesfully deleted!');
     }).catch(err => {
       console.log('Error removing document', err);
@@ -221,16 +215,15 @@ const renderUser = doc => {
   });
 
 
-  //  // get subcollection data 
+   // get subcollection data 
   // const btnprget = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
   // btnprget.addEventListener('click', () => {
 
-  // db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').get()
+  // db.collection('recycledparts').doc(`${doc.id}`).collection('parts').get()
   //   .then((querySnapshot) => {
   //       querySnapshot.forEach((doc) => {
-  //         conso
   //           // doc.data() is never undefined for query doc snapshots
-  //           console.log(doc.data().partName);
+  //           console.log( doc.data().partName);
   //       });
   //   })
   //   .catch((error) => {
@@ -239,7 +232,31 @@ const renderUser = doc => {
   // });
 
   
+// const btnpraddSubs = document.querySelector(`[data-id='${doc.id}'] .btnpr-addSubs`);
+// btnpraddSubs.addEventListener('click', () => {
+//   addmodalySubssSingle.classList.add('modaly-show');
 
+//   addModalySubs.addsubstanceName.value = '';
+
+//    addModalySubs.addEventListener('submit', e => {
+//   e.preventDefault();
+//   // console.log(doc.id, " => ", doc.data());
+  
+//   db.collection('recycledparts').doc(`${doc.id}`).collection('materials').doc(`${doc.id}`).collection('substances').add({
+//     substanceName: addModalySubs.addsubstanceName.value,
+//     cas: addModalySubs.addcas.value,
+//     crm: addModalySubs.addcrm.value,
+//     rohs: addModalySubs.addrohs.value,
+//     substanceMassg: addModalySubs.addsubstanceMassg.value,
+//     substanceMassPerc: addModalySubs.addsubstanceMassPerc.value,
+//     materialMassPerc: addModalySubs.addmaterialMassPerc.value
+
+//   })})
+
+//   })
+//    closebtn.addEventListener('click', () =>{
+//     addmodalySubssSingle.classList.remove('modaly-show');
+//    })
 
 }
  
@@ -252,15 +269,18 @@ const renderUser = doc => {
 btnprAdd.addEventListener('click', () => {
   addmodaly.classList.add('modaly-show');
 
-  addModalyForm.productName.value = '';
-  addModalyForm.productSpecs.value = '';
-  addModalyForm.productClass.value = '';
-  addModalyForm.productWeight.value = '';
-  addModalyForm.productNumber.value = '';
+  addModalyForm.addpartName.value = '';
+  addModalyForm.addpartNumber.value = '';
+  addModalyForm.addpartSpecs.value = '';
+  addModalyForm.addpartMassgEA.value = '';
+  addModalyForm.addpartMassg.value = '';
+  addModalyForm.addpartMassPerc.value = '';
+  addModalyForm.addreusedPart.value = '';
+  addModalyForm.addsupplierInfo.value = '';
+    addModalyForm.substancelist.value = '';
+
+
   
-  addModalyForm.productCategory.value = '';
-
-
   
 });
 
@@ -275,19 +295,17 @@ window.addEventListener('click', e => {
   if(e.target === viewmodaly) {
     viewmodaly.classList.remove('modaly-show');
   }
-
+   if(e.target === addmodalyPartsSingle) {
+    addmodalyPartsSingle.classList.remove('modaly-show');
+  }
 });
 
 
-// // Get all users
-// db.collection('users').get().then(querySnapshot => {
-//   querySnapshot.forEach(doc => {
-//   console.log(doc.data());
-//   })
-// });
+// Get all users
+
 
 // Real time listener
-db.collection('recycledproducts').onSnapshot(snapshot => {
+db.collection('recycledparts').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     if(change.type === 'added') {
       renderUser(change.doc);
@@ -311,17 +329,16 @@ db.collection('recycledproducts').onSnapshot(snapshot => {
 // Click submit in add modaly
 addModalyForm.addEventListener('submit', e => {
   e.preventDefault();
-  db.collection('recycledproducts').add({
-    productName: addModalyForm.productName.value,
-    productSpecs: addModalyForm.productSpecs.value,
-    productClass: addModalyForm.productClass.value,
-    productWeight: addModalyForm.productWeight.value,
-    productNumber: addModalyForm.productNumber.value,
-    
-    productCategory: addModalyForm.productCategory.value,
-
-    
-
+  db.collection('recycledparts').add({
+   partName: addModalyForm.addpartName.value,
+    partNumber: addModalyForm.addpartNumber.value,
+    partSpecs: addModalyForm.addpartSpecs.value,
+    partMassgEA: addModalyForm.addpartMassgEA.value,
+    partMassg: addModalyForm.addpartMassg.value,
+    partMassPerc: addModalyForm.addpartMassPerc.value,
+    reusedPart: addModalyForm.addreusedPart.value,
+    supplierInfo: addModalyForm.addsupplierInfo.value,
+    substancelist: addModalyForm.substancelist.value,
   });
   modalyWrapper.classList.remove('modaly-show');
 });
@@ -330,20 +347,29 @@ addModalyForm.addEventListener('submit', e => {
 // Click submit in edit modaly
 editmodalyForm.addEventListener('submit', e => {
   e.preventDefault();
-  db.collection('recycledproducts').doc(id).update({
-    productName: editmodalyForm.productName.value,
-    productSpecs: editmodalyForm.productSpecs.value,
-    productClass: editmodalyForm.productClass.value,
-    productWeight: editmodalyForm.productWeight.value,
-    productNumber: editmodalyForm.productNumber.value,
-    productCategory: editmodalyForm.productCategory.value,
-   
-     
+  db.collection('recycledparts').doc(id).update({
+ partName: editmodalyForm.editpartName.value,
+    partNumber: editmodalyForm.editpartNumber.value,
+    partSpecs: editmodalyForm.editpartSpecs.value,
+    partMassgEA: editmodalyForm.editpartMassgEA.value,
+    partMassg: editmodalyForm.editpartMassg.value,
+    partMassPerc: editmodalyForm.editpartMassPerc.value,
+    reusedPart: editmodalyForm.editreusedPart.value,
+    supplierInfo: editmodalyForm.editsupplierInfo.value,
+    substancelist: editmodalyForm.editsubstancelist.value,
   });
-    
   editmodaly.classList.remove('modaly-show');
   });
 
+
+
+  
+    //click add subsctance button
+   
+ 
+
+
+ 
 
 firebase.auth().onAuthStateChanged(user => {
   const userEmailCard = document.getElementById('useremailcard')
@@ -388,6 +414,10 @@ const editUI = (user) => {
     console.log(firebase.auth().currentUser.displayName)
     firstcreation.innerHTML = "Since "  + firstcreationtime;
     userDisplay.innerHTML = userDisplayName;
+
+
+   
+   
     } else {
        const userTitleCard = document.getElementById('usertitle')
        
@@ -396,6 +426,7 @@ const editUI = (user) => {
         const notadminElement = document.querySelectorAll('.notadmin')
     adminElement.forEach(item => item.style.display = 'none');
     notadminElement.forEach(item => item.style.display = 'flex');
+    userTitleCard.innerHTML = 'Part Supplier'
     lastsignindata = firebase.auth().currentUser.metadata.lastSignInTime
     console.log(lastsignindata)
     // notadminElement.style.display = 'flex'
@@ -411,24 +442,24 @@ const editUI = (user) => {
 }
 
 
- db.collection("recycledparts")
+
+
+
+
+ db.collection("substances")
     .get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-           const td = `
-      <option>${doc.data().partName}</option>
+           const tm = `
+      <option>${doc.data().subtanceName}</option>
   `;
-  partsName.insertAdjacentHTML('beforeend', td);
-  editpartsName.insertAdjacentHTML('beforeend', td);
+  addModalyForm.substancelist.insertAdjacentHTML('beforeend', tm);
+  editmodalyForm.editsubstancelist.insertAdjacentHTML('beforeend', tm);
+ 
         });
     })
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
-
-
-
-
-
