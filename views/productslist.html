@@ -316,13 +316,6 @@
                                     </div>
                                 </div>
                                
-                                  <div class="col-md-6">
-                                    <div class="form-group">
-                                     <label>Company</label>
-                                        <input type="text" class="form-control" id='field'placeholder="Enter Code" data-errors="Please Enter Company Name." name="field" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
                               </div>
                            </div>
                            <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
@@ -385,47 +378,52 @@
         <div class="modaly-header"><h3 class="editheader"></h3></div>
         <div class="modaly-body">
              <div class="card-body">
-                     <div class="">
+                <!-- here starts the edit product data form -->
+                   <div class="card">
+               
+                  <div class="card-body">
+                   
+                     <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab-1" role="tablist">
+                        <li class="nav-item">
+                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#pills-home-fill" role="tab" aria-controls="pills-home" aria-selected="true">Edit Product Details</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#pills-profile-fill" role="tab" aria-controls="pills-profile" aria-selected="false">Add New part to the product</a>
+                        </li>
+                         <li class="nav-item">
+                           <a class="nav-link" id="pills-contact-tab-fill" data-toggle="pill" href="#pills-contact-fill" role="tab" aria-controls="pills-contact" aria-selected="false">View Parts</a>
+                        </li>
+                     </ul>
+                     <div class="tab-content" id="pills-tabContent-1">
+                        <!--here start the products entry form-->
+                        <div class="tab-pane fade show active" id="pills-home-fill" role="tabpanel" aria-labelledby="pills-home-tab-fill">
+                           <div class="">
                                  <form class="form"  autocomplete="off"  data-toggle="validator" id='form-wizard1'>
                       
                                      <ul id="top-tab-list" class="p-0">
                            <li class="active" id="account" >
                               <a href="javascript:void();">
-                              <i class="ri-lock-unlock-line"></i><span>Product</span>
+                              <i class="ri-lock-unlock-line"></i><span>Product Details</span>
                               </a>
                            </li>
-                           <li id="payment" >
-                              <a href="javascript:void();">
-                              <i class="ri-camera-fill"></i><span>Parts</span>
-                              </a>
-                           </li>
-                                <li id="personal" >
-                              <a href="javascript:void();">
-                              <i class="ri-user-fill"></i><span>Material</span>
-                              </a>
-                           </li>
-                       
-                         
                         </ul>
                         <!-- fieldsets -->
+                        
                         <fieldset >
                            <div class="form-card text-left">
-                            <div class="row error notadmin" style="display: none;"> 
-                                 <h3>
-                                    해당 데이터를 확인할 권한이 없습니다
-                                </h3>
-                              </div>
-                              <div class="row" class="row adminelement" style="display: none;">
+                       
+                              <!-- class="row adminelement" style="display: none;" -->
+                              <div class="row" class="row">
                                  <div class="col-7">
                                     <h3 class="mb-4">Product Details:</h3>
                                  </div>
-                                 <div class="col-5">
+                                 <!-- <div class="col-5">
                                     <h2 class="steps">Step 1 - 4</h2>
-                                 </div>
+                                 </div> -->
                               </div>
                               <div class="row">
                                  
-                          <div class="row adminelement" style="display: none;">
+                          <div class="row">
                             
                                
                                    <div class="col-md-12">                      
@@ -468,20 +466,14 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
-                                   <div class="col-md-6">
+                                   <div class="col-md-12">
                                     <div class="form-group">
                                      <label>Product Class</label>
                                         <input type="text" class="form-control" id='editproductClass'placeholder="Enter Code" data-errors="Please Enter Code." name="productClass" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                     <label>Company Name</label>
-                                        <input type="text" class="form-control" id='field'placeholder="Enter Code" data-errors="Please Enter Code." name="field" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
+                               
                                 <!-- <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Image</label>
@@ -492,69 +484,124 @@
 
                               </div>
                            </div>
-                           <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
+                               <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Edit Product</button>
                         </fieldset>
-                      
-                        <fieldset>
-                           <div class="form-card text-left">
-                             <div class="row adminelement" style="display: none;"> 
-                             <div class="row error adminelement" style="display: none;"> 
-                                <h3>
-                                    해당 데이터를 확인할 권한이 없습니다
-                                </h3>
-                              </div>
-                            </div>
-                         
-                            <div class="row notadmin" style="display: none;">
+                   </form>
+                 </div>
+                        </div>
+                         <!--here ends the products entry form-->
+                           <!--here start the adding parts entry form for the specific product-->
+                        <div class="tab-pane fade" id="pills-profile-fill" role="tabpanel" aria-labelledby="pills-profile-tab-fill">
                            
-                                <div class="col-md-12">
-                                </div>  
-                                <div class="col-md-7">                      
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12 col-lg-12">
+               <div class="iq-card">
+                
+                  <div class="iq-card-body">
+                     <form id="form-wizard1" class="text-center mt-4">
+                        <ul id="top-tab-list" class="p-0">
+                           <li class="active" id="account">
+                              <a href="javascript:void();">
+                              <i class="ri-lock-unlock-line"></i><span>Part Identification</span>
+                              </a>
+                           </li>
+                           <li id="personal">
+                              <a href="javascript:void();">
+                              <i class="ri-user-fill"></i><span>Part Details</span>
+                              </a>
+                           </li>
+                          
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                            
+                            <div class="row">
+                           
+                             
+                                        <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Part Name *</label>
-                                        <input type="text" class="form-control" id='editpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="PartName" required>
+                                     <label>Supplier Info</label>
+                               
+                                      <select  class="supplierinfo  form-control" name="supplierinfo" id="supplierinfo"  data-style="py-0">
+                                      
+                                     
+                                    </select>
+                                        
                                         <div class="help-block with-errors"></div>
                                     </div>
-                                </div>    
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>Part Number</label>
-                                        <input type="text" class="form-control"  id='partNumber'placeholder="Enter Part Number" data-errors="Please Part number." name="partNumber" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-12"> 
-                                    <div class="form-group">
-                                        <label>Part Specs</label>
-                                        <input type="text" class="form-control" id='editpartSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="partSpecs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-3"> 
-                                    <div class="form-group">
-                                        <label>Part Mass (g/EA) *</label>
-                                        <input type="number" class="form-control" id='editpartMassgEA'placeholder="Please part mass" data-errors="Please part mass." name="partMassgEA" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-3"> 
-                                    <div class="form-group">
-                                        <label>Part Mass (g) *</label>
-                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="partMassg" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Part Mass (%) *</label>
-                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="partMassPerc" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
+                                </div>
+
                                    <div class="col-md-6">
                                     <div class="form-group">
+                                     <label>Part Name</label>
+                               
+                                      <select  class="partname  form-control" name="supplierinfo" id="partname"  data-style="py-0">
+                                      
+                                     
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                </div>  
+                               
+  
+                             
+
+                           
+                        <!-- <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Add Part</button> -->
+                                     
+                       
+                        
+                           <button type="button" name="next" class="btn checkpartdata btn-primary next action-button float-right" value="Next" >Next</button>
+                        </fieldset>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Part Number</label>
+                                        <input type="text" class="form-control"  id='partNumber' placeholder="Enter Part Number" data-errors="Please Part number." name="addpartNumber" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Part Specs</label>
+                                        <input type="text" class="form-control" id='partSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="addpartSpecs" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                            </div>
+                           
+                                <div class="row">
+                                    <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (g/EA) *</label>
+                                        <input type="number" class="form-control" id='partMassgEA' placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (g) *</label>
+                                        <input type="number" class="form-control" id='partMassg'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (%) *</label>
+                                        <input type="number" class="form-control" id='partMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                </div>
+                               <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                      <label>Reused Part</label>
-                                      <select name="reusedPart" id="editpartClass" class="selectpicker form-control" data-style="py-0">
+                                      <select name="addreusedPart" id="partClass" class="form-control" data-style="py-0">
                                        <option>Select Option</option>
                                        <option>Yes</option>
                                        <option>No</option>
@@ -566,261 +613,77 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                     <label>Supplier Information</label>
-                                        <input type="text" class="form-control" id='editcompanyName'placeholder="Enter Code" data-errors="Please Enter Code." name="supplierInfo" required>
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='companyName' placeholder="Enter Code" data-errors="Please Enter Code." name="addsupplierInfo" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
-                                    </div>
-                                </div> -->
-                            </div> 
-                           </div>
-                           <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
-                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+                               </div>
+                              
+                                 <button  id="edit" class="btn addPart btn-primary btn-light action-button-previous float-right mr-3" value="Previous" >Add Part</button>
+                                <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+                              
                         </fieldset>
-                          <fieldset>
-                           <div class="form-card text-left">
-                            <div class="row adminelement" style="display: none;"> 
-                             <div class="row error adminelement" style="display: none;"> 
-                                <h3>
-                                    해당 데이터를 확인할 권한이 없습니다
-                                </h3>
-                              </div>
-                            </div>
-                               <div class="row notadmin" style="display: none;">
-                            
-                                          <div class="col-md-6">                      
-                                    <div class="form-group">
-                                        <label>Material Group *</label>
-                                         <select class="form-control" id="editmaterialGroup" name="materialGroup" data-errors="Please Enter Material Category."  required>
-                                             <option>Steels and ferrous materials</option>
-                                             <option>Non-ferrous metals and alloys</option>
-                                             <option>Precious metals</option>
-                                             <option>Non-metallic inorganic materials</option>
-                                               <option>Other inorganics</option>
-                                             <option>Unfilled thermoplastics resin</option>
-                                             <option>Filled thermoplastics resin</option>
-                                             <option>Duromers</option>
-                                               <option>Elastomers</option>
-                                             <option>Natural materials</option>
-                                             <option>Other organics</option>
-                                             <option>Materials for product operation</option>
-                                             
-                                           </select>
-                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>  
-                                <div class="col-md-6">                
-                                            <div class="form-group">
-                                        <label>Material Name *</label>
-                                         <select class="form-control" id="editmaterialName" name="materialName" data-errors="Please Enter Product Name."  required>
-                                          <option>Stainless steel </option>
-<option>Cast and sintered irons</option>
-<option>Other ferrous alloys, non-stainless steels</option>
-<option>Aluminium and its alloys</option>
-<option>Copper and its alloys</option>
-<option>Magnesium and its alloys</option>
-<option>Nickel and its alloys</option>
-<option>Zinc and its alloys</option>
-<option>Lead and its alloys (including Pb solders)</option>
-<option>Tin and its alloys (including Pb-free solders)</option>
-<option>Other non-ferrous metals and alloys</option>
-<option>Gold</option>
-<option>Platinum</option>
-<option>Other precious metals</option>
-<option>Ceramics</option>
-<option>Glass</option>
-<option>Other inorganic materials </option>
-<option>PolyVinylChloride (PVC)</option>
-<option>PolyEthylene (PE)</option>
-<option>PolyPropylene (PP)</option>
-<option>PolyStyrene (PS)</option>
-<option>PolyCarbonate (PC)</option>
-<option>PolyOxyMethylene (POM)</option>
-<option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
-<option>Styrene Acrylonitrile (SAN)</option>
-<option>PolyAmide (PA)</option>
-<option>PolyEthyleneTerephthalate (PET)</option>
-<option>PolyPhenyleneEther (PPE)</option>
-<option>PolyButyleneTerephthalate (PBT)</option>
-<option>PC-PBT</option>
-<option>PC-ABS</option>
-<option>PPE-PS</option>
-<option>Other unfilled thermoplastics</option>
-<option>PolyVinylChloride (PVC)</option>
-<option>PolyEthylene (PE)</option>
-<option>PolyPropylene (PP)</option>
-<option>PolyStyrene (PS)</option>
-<option>PolyCarbonate (PC)</option>
-<option>PolyOxyMethylene (POM)</option>
-<option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
-<option>Styrene Acrylonitrile (SAN)</option>
-<option>PolyAmide (PA)</option>
-<option>PolyEthyleneTerephthalate (PET)</option>
-<option>PolyPhenyleneEther (PPE)</option>
-<option>PolyButyleneTerephthalate (PBT)</option>
-<option>PC-PBT</option>
-<option>PC-ABS</option>
-<option>PPE-PS</option>
-<option>Other filled thermoplastics</option>
-<option>Polyurethane (PUR)</option>
-<option>Unsaturated polyester (UP)</option>
-<option>Epoxy resin (EP)</option>
-<option>Other duromers</option>
-<option>NBR</option>
-<option>Silicone</option>
-<option>Other elastomers</option>
-<option>Wood</option>
-<option>Paper</option>
-<option>Fiber</option>
-<option>Leather</option>
-<option>Other organic materials </option>
-<option>Refrigerant gases and cryogens and other greenhouse gases</option>
-<option>Other gases</option>
-<option>Oils and greases</option>
-<option>Fuels </option>
-<option>Other liquids</option>
-<option>Other substances or mixtures for product operation </option>
-                                             
-                                           </select>
-                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-
-                                </div>    
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Class ID</label>
-                                        <input type="text" class="form-control"  id='materialClassID'placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="materialClassID" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-4"> 
-                                    <div class="form-group">
-                                        <label>Recycle Content (%)</label>
-                                        <input type="number" class="form-control" id='materialRecycleContent' placeholder="Enter Material Recycle Content" data-errors="Please part specs." name="materialRecycleContent" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-7"> 
-                                    <div class="form-group">
-                                        <label>Recycle Type *</label>
-                                         <select name="materialRecycleType" id="editMaterialRecycleType" class="selectpicker form-control" data-style="py-0">
-                                       <option>Select Option</option>
-                                       <option>Option 1</option>
-                                       <option>Option 2</option>
-                                       <option >Option 3</option>
-                                       <option>Option 4</option>
-                                    
-                                    </select>
-                                        
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Material Mass (g) *</label>
-                                        <input type="number" class="form-control" id='editMaterialMassg'placeholder="Please enter Material mass" data-errors="Please part mass." name="materialMassg" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Material Mass (%) *</label>
-                                        <input type="number" class="form-control" id='editMaterialMassPerc'placeholder="Please enter Material mass" data-errors="Please part mass." name="materialMassPerc" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 
-                                </div>
-                           </div>
-                            <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
-                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
-                        </fieldset>
-                        <fieldset>
-                           <div class="form-card text-left">
-                               <div class="row adminelement" style="display: none;"> 
-                             <div class="row error adminelement" style="display: none;"> 
-                                <h3>
-                                    해당 데이터를 확인할 권한이 없습니다
-                                </h3>
-                              </div>
-                            </div>
-                                <div class="row notadmin" style="display: none;">
-                                
-                    
-                                     
-                                <div class="col-md-12">
-                                </div>  
-                                <div class="col-md-7">                      
-                                    <div class="form-group">
-                                        <label>Substance Name *</label>
-                                        <input type="text" class="form-control" id='editpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="substanceName" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>    
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>CAS Number</label>
-                                        <input type="number" class="form-control"  id='cas'placeholder="Enter Part Number" data-errors="Please CAS number." name="cas" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-12"> 
-                                    <div class="form-group">
-                                        <label>CRM</label>
-                                         <input type="text" class="form-control"  id='crm'placeholder="Enter Yes or No" data-errors="Please CAS number." name="crm" required>
-                                      
-                                  
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-3"> 
-                                    <div class="form-group">
-                                        <label>ROHS</label>
-                                       <input type="text" class="form-control"  id='rohs'placeholder="Enter Yes or No" data-errors="Please CAS number." name="rohs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-3"> 
-                                    <div class="form-group">
-                                        <label>Substance Mass (g) *</label>
-                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="substanceMassg" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Substance Mass (%) *</label>
-                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="substanceMassPerc" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                
-                                <!-- <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
-                                    </div>
-                                </div> -->
-                            </div>   
+                        
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+                        </div>
+                          <div class="tab-pane fade" id="pills-contact-fill" role="tabpanel" aria-labelledby="pills-contact-tab-fill">
                        
-                           </div>
-                             
-                              <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Edit Product</button>
-                           <button type="button"  name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
-                      
-                          
-                        </fieldset>
-                      
+                        <div  class="table-wrapper"> 
+                               <table class="table-parts">
+                            
+                                <tr>
+                                <th>Part Image</th>
+                                <th>Part Category</th>
+                                <th>Part Name</th>
+                                <th>Part Class</th>
+                                <th>Part Specs</th>
+                                <th>Part Weight</th>
+                                <th>Part Number</th>
+                                 <th>Part Specs</th>
+                                <th>Action</th>
+                                </tr>
+                        
+                            <tbody class="partslist">
 
-                   </form>
-                 </div>
+                            </tbody>
+                           </table>
+                        </div>
+                                   
+ <!-- <div class="tabledata">
+   
+    <div class="table-wrapper">
+      <table class="table-users ">
+        <tr>
+            <th>Product Image</th>
+             <th>Product Category</th>
+          <th>Product Name</th>
+          <th>Product Class</th>
+          <th>Product Specs</th>
+          <th>Product Weight</th>
+          <th>Product Number</th>
+          <th>Action</th>
+        </tr>
+        <tr class="partslist">
+
+        </tr>
+      </table>
+    
+    </div>
+    </div> -->
+
+                        </div>
+                          <!--here ends the adding parts entry form for the specific product-->
+                     </div>
+                  </div>
+               </div>
+                  <!-- here ends the edit product data form -->
             <!-- Modal -->
              </div>
         </div>
