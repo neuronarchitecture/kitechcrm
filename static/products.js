@@ -24,6 +24,7 @@ const addModalyForm = document.querySelector('.add-modaly .form');
 const addModalyParts = document.querySelector('.addPartmodaly .form');
 const addModalySubs = document.querySelector('.addSubsmodaly .form');
 const closebtn = document.querySelector('.action-button-close')
+const addPPmodaly = document.querySelector('.addPPmodaly')
 
 // modaly edit
 const editmodaly = document.querySelector('.edit-modaly');
@@ -45,6 +46,8 @@ const subslist = document.querySelector('.subslist')
 const supplierinfo = document.querySelector('#supplierinfo')
 const partname = document.querySelector("#partname")
 const checkpartdata = document.querySelector('.checkpartdata')
+const addPart = document.querySelector('.addPart')
+const partsTab = document.querySelector('#pills-contact-tab-fill')
 
 let id;
 
@@ -78,6 +81,7 @@ const renderUser = doc => {
         <a class="button toggle"></a>
         <ul class="dropdown">
           <li><a href="#" class="dropdown-link btnpr-edit">Edit</a></li>
+          <li><a href="#" class="dropdown-link btnpr-addPP">Add New parts</a></li>
           <li><a href="#" class="dropdown-link btnpr-delete">Delete</a></li>
           <li><a href="#" class="dropdown-link">Download</a></li>
         </ul>
@@ -213,12 +217,39 @@ const renderUser = doc => {
 
 //add parts 
  const btnpredit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
-const addPart = document.querySelector('.addPart')
-btnpredit.addEventListener('click', () => {
-    console.log(doc.id, " => ", doc.data());
+// const addPart = document.querySelector('.addPart')
+// btnpredit.addEventListener('click', () => {
+//     console.log(doc.id, " => ", doc.data());
+//    addPart.addEventListener('click', e => {
+//   e.preventDefault();
+
+//   db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').add({
+//     partNumber: partNumber.value,
+//     partSpecs: partSpecs.value,
+//     partMassgEA: partMassgEA.value,
+//     partMassg: partMassg.value,
+//     partMassPerc: partMassPerc.value,
+//     reusedPart: partClass.value,
+//     companyName: companyName.value,
+    
+//   })
+//   // materialtitle.innerHTML = `${doc.data().partName}`
+
+//     //view parts list for a single product
+ 
+
+// })
+// })
+
+ const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addPP`);
+btnpraddParts.addEventListener('click', () => {
+  addPPmodaly.classList.add('modaly-show');
+
+ 
+
    addPart.addEventListener('click', e => {
   e.preventDefault();
-
+  // console.log(doc.id, " => ", doc.data());
   db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').add({
     partNumber: partNumber.value,
     partSpecs: partSpecs.value,
@@ -229,16 +260,18 @@ btnpredit.addEventListener('click', () => {
     companyName: companyName.value,
     
   })
-  // materialtitle.innerHTML = `${doc.data().partName}`
+  const addPPForm = document.querySelector('.addPPForm')
+setTimeout(resetForm, 5000);
+ function resetForm() {
+addPPForm.reset();
+}
 
-    //view parts list for a single product
- 
 
 })
-})
+  })
 
-
-   btnpredit.addEventListener('click', () => {
+ const viewbtn = document.querySelector(`[data-id='${doc.id}'] .viewbtn`);
+   viewbtn.addEventListener('click', () => {
      const partslist = document.querySelector('.partslist')
  partslist.innerHTML = "";
  const setupPartsUI = (data) => {
@@ -247,7 +280,7 @@ btnpredit.addEventListener('click', () => {
       const parts = doc.data();
       console.log(parts)
       const pl = `
-    <tr data-id='${doc.id}'>
+    <tr id='${doc.id}' data-id='${doc.id}'>
      <td><img src="./productimage.png" style="height: 60px;
     width: 60px;" alt=""></td>
      <td>${doc.data().companyName}</td>
@@ -258,20 +291,17 @@ btnpredit.addEventListener('click', () => {
         <td>${doc.data().partSpecs}</td>
          <td>${doc.data().reusedPart}</td>
 
+  <td>
 
-    <td>
-    <div class="btngroup">
-     <span href="#" class="button btn-large viewbtn" data-toggle="modal" data-target="#exampleModalScrollable">View </span>
-     <div class="button-dropdown">
-        <a class="button toggle"></a>
-        <ul class="dropdown">
-          <li><a href="#" class="dropdown-link btnpr-edit">Edit</a></li>
-          <li><a href="#" class="dropdown-link btnpr-delete">Delete</a></li>
-          <li><a href="#" class="dropdown-link">Download</a></li>
-        </ul>
-      </div>
+   <div class="btngroup">
+     <span href="#" class="button btn-medium btnppdelete" style="
+    background: #e73131; 
+    padding: 12px;
+    border-radius: 50px;
+    border-color: transparent;" 
+    data-id='${doc.id}' >Delete </span>
+    
     </div>
-   
       </td>
     </tr>
       `;
@@ -283,7 +313,32 @@ btnpredit.addEventListener('click', () => {
   
    db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').get().then(snapshot => {
     setupPartsUI(snapshot.docs)
+    
+    let btnppDelete = document.querySelectorAll(".btnppdelete");
+    for (let i = 0; i < btnppDelete.length; i++) {
+      let deleteData = btnppDelete[i].getAttribute("data-id");
+ btnppDelete[i].addEventListener('click', () => {
+
+   let tr = document.getElementById(deleteData);
+ 
+    
+      tr.remove(tr);
+   db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').doc(deleteData).delete().then(() => {
+      console.log('Document succesfully deleted!');
+    })
+ 
+    .catch(err => {
+      console.log('Error removing document', err);
+    });
+  })
+}
+
+
+
+ 
    })
+   
+
     })
 
 
@@ -317,6 +372,18 @@ btnpredit.addEventListener('click', () => {
   });
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+  
+//     // db.collection('recycledproducts').doc(`${doc.id}`).delete().then(() => {
+//     //   console.log('Document succesfully deleted!');
+//     // }).catch(err => {
+//     //   console.log('Error removing document', err);
+//     // });
+//   });
+// })
+
+  
+
   //  // get subcollection data 
   // const btnprget = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
   // btnprget.addEventListener('click', () => {
@@ -335,6 +402,11 @@ btnpredit.addEventListener('click', () => {
   // });
 
   
+
+
+
+
+
 
 
 }
@@ -372,6 +444,10 @@ window.addEventListener('click', e => {
     viewmodaly.classList.remove('modaly-show');
   }
 
+   if(e.target === addPPmodaly) {
+    addPPmodaly.classList.remove('modaly-show');
+  }
+
 });
 
 
@@ -404,8 +480,18 @@ db.collection('recycledproducts').onSnapshot(snapshot => {
   })
 })
 
+
+  // btnpDelete.addEventListener('click', () => {
+    
+  //   console.log("hello world!")
+  
+  
+  // });
+
+const addProduct = document.querySelector('.addProduct')
+
 // Click submit in add modaly
-addModalyForm.addEventListener('submit', e => {
+addProduct.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledproducts').add({
     productName: addModalyForm.productName.value,
@@ -419,7 +505,13 @@ addModalyForm.addEventListener('submit', e => {
     
 
   });
-  modalyWrapper.classList.remove('modaly-show');
+
+  setTimeout(closeForm, 3500);
+ function closeForm() {
+ modalyWrapper.classList.remove('modaly-show');
+}
+
+ 
 });
 
 

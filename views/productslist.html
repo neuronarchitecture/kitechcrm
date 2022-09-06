@@ -8,6 +8,7 @@
       <!-- Favicon -->
       
  <link rel="stylesheet" href="./products.css" />
+  <link rel="stylesheet" href="./addbtn.css" />
       <link rel="stylesheet" href="./backend.css" />
       <link rel="stylesheet" href="./backend-plugin.min.css">
        <link rel="stylesheet" href="./all.min.css">
@@ -254,7 +255,7 @@
         <div class="modaly-body">
           <div class="card-body">
                      <div class="">
-                        <form class="form"  autocomplete="off"  data-toggle="validator" id="form-wizard1">
+                        <form class="form"   autocomplete="off"  data-toggle="validator" id="form-wizard1">
                              <ul id="top-tab-list" class="p-0">
                            
                            <li id="personal">
@@ -319,7 +320,6 @@
                               </div>
                            </div>
                            <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
-                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
                         </fieldset>
                         <fieldset>
                            <div class="form-card text-left">
@@ -359,9 +359,20 @@
                                   
                                </div>
                            </div>
+                               <button type="button" id="edit" class="buttony addProduct float-right" >
+                                    <ul>
+                                        <li>Add Product</li>
+                                        <li>Adding Product...</li>
+                                        <li>Success!</li>
+                                    </ul>
+                                    <div>
+                                        <svg viewBox="0 0 24 24"></svg>
+                                    </div>
+                                </button>
+                               
                     
-                        <button  id="edit"  class="btn btn-primary btn-light previous action-button-previous float-right mr-3" value="Previous" >Add Product</button>
-                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+               
+                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-left mr-3" value="Previous" >Previous</button>
                         </fieldset>
                       
                    </form>
@@ -375,7 +386,7 @@
     <!-- Edit modaly -->
     <div class="edit-modaly modaly-wrapper">
       <div class="modaly">
-        <div class="modaly-header"><h3 class="editheader"></h3></div>
+        <div class="modaly-header"></div>
         <div class="modaly-body">
              <div class="card-body">
                 <!-- here starts the edit product data form -->
@@ -385,28 +396,16 @@
                    
                      <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab-1" role="tablist">
                         <li class="nav-item">
-                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#pills-home-fill" role="tab" aria-controls="pills-home" aria-selected="true">Edit Product Details</a>
+                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#pills-home-fill" role="tab" aria-controls="pills-home" aria-selected="true">  <span class="editheader"></span></a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#pills-profile-fill" role="tab" aria-controls="pills-profile" aria-selected="false">Add New part to the product</a>
-                        </li>
-                         <li class="nav-item">
-                           <a class="nav-link" id="pills-contact-tab-fill" data-toggle="pill" href="#pills-contact-fill" role="tab" aria-controls="pills-contact" aria-selected="false">View Parts</a>
-                        </li>
+                      
                      </ul>
                      <div class="tab-content" id="pills-tabContent-1">
                         <!--here start the products entry form-->
                         <div class="tab-pane fade show active" id="pills-home-fill" role="tabpanel" aria-labelledby="pills-home-tab-fill">
                            <div class="">
                                  <form class="form"  autocomplete="off"  data-toggle="validator" id='form-wizard1'>
-                      
-                                     <ul id="top-tab-list" class="p-0">
-                           <li class="active" id="account" >
-                              <a href="javascript:void();">
-                              <i class="ri-lock-unlock-line"></i><span>Product Details</span>
-                              </a>
-                           </li>
-                        </ul>
+                    
                         <!-- fieldsets -->
                         
                         <fieldset >
@@ -414,9 +413,7 @@
                        
                               <!-- class="row adminelement" style="display: none;" -->
                               <div class="row" class="row">
-                                 <div class="col-7">
-                                    <h3 class="mb-4">Product Details:</h3>
-                                 </div>
+                              
                                  <!-- <div class="col-5">
                                     <h2 class="steps">Step 1 - 4</h2>
                                  </div> -->
@@ -491,15 +488,30 @@
                         </div>
                          <!--here ends the products entry form-->
                            <!--here start the adding parts entry form for the specific product-->
-                        <div class="tab-pane fade" id="pills-profile-fill" role="tabpanel" aria-labelledby="pills-profile-tab-fill">
-                           
-      <div class="container-fluid">
+                    
+                          <!--here ends the adding parts entry form for the specific product-->
+                     </div>
+                  </div>
+               </div>
+                  <!-- here ends the edit product data form -->
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+     <div class="addPPmodaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"><h3>Add New Material</h3></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="container-fluid">
          <div class="row">
             <div class="col-sm-12 col-lg-12">
                <div class="iq-card">
                 
                   <div class="iq-card-body">
-                     <form id="form-wizard1" class="text-center mt-4">
+                     <form id="form-wizard1" class="addPPForm text-center mt-4">
                         <ul id="top-tab-list" class="p-0">
                            <li class="active" id="account">
                               <a href="javascript:void();">
@@ -618,11 +630,21 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                               </div>
-                              
-                                 <button  id="edit" class="btn addPart btn-primary btn-light action-button-previous float-right mr-3" value="Previous" >Add Part</button>
-                                <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
-                              
+                            </div>
+
+                         
+                          <button type="button"  id="edit" class="buttony inline-block-child addPart float-right" >
+                                    <ul>
+                                        <li>Add Part</li>
+                                        <li>Adding Part...</li>
+                                        <li>Success!</li>
+                                    </ul>
+                                    <div>
+                                        <svg viewBox="0 0 24 24"></svg>
+                                    </div>
+                                </button>
+                               
+                                             <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-left mr-3" value="Previous" style="margin:0;">Previous</button>
                         </fieldset>
                         
                      </form>
@@ -631,59 +653,6 @@
             </div>
          </div>
       </div>
-      
-                        </div>
-                          <div class="tab-pane fade" id="pills-contact-fill" role="tabpanel" aria-labelledby="pills-contact-tab-fill">
-                       
-                        <div  class="table-wrapper"> 
-                               <table class="table-parts">
-                            
-                                <tr>
-                                <th>Part Image</th>
-                                <th>Part Category</th>
-                                <th>Part Name</th>
-                                <th>Part Class</th>
-                                <th>Part Specs</th>
-                                <th>Part Weight</th>
-                                <th>Part Number</th>
-                                 <th>Part Specs</th>
-                                <th>Action</th>
-                                </tr>
-                        
-                            <tbody class="partslist">
-
-                            </tbody>
-                           </table>
-                        </div>
-                                   
- <!-- <div class="tabledata">
-   
-    <div class="table-wrapper">
-      <table class="table-users ">
-        <tr>
-            <th>Product Image</th>
-             <th>Product Category</th>
-          <th>Product Name</th>
-          <th>Product Class</th>
-          <th>Product Specs</th>
-          <th>Product Weight</th>
-          <th>Product Number</th>
-          <th>Action</th>
-        </tr>
-        <tr class="partslist">
-
-        </tr>
-      </table>
-    
-    </div>
-    </div> -->
-
-                        </div>
-                          <!--here ends the adding parts entry form for the specific product-->
-                     </div>
-                  </div>
-               </div>
-                  <!-- here ends the edit product data form -->
             <!-- Modal -->
              </div>
         </div>
@@ -908,8 +877,127 @@
 </div>
 
     <!--View Data table tree-->
-
      <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title " id="exampleModalScrollableTitle">View <span class="treeproducttitle"></span></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                          
+      <div class="container-fluid">
+
+                  
+        
+                     <ul class="nav nav-tabs" id="myTab-1" role="tablist">
+                        <li class="nav-item">
+                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                        </li>
+                     
+                     </ul>
+                     <div class="tab-content" id="myTabContent-2">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                             <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Category</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productCategory form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Name</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productName form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Class</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productClass form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                              <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Weight</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0px;" data-column="name" class="productWeight form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                                <tr data-id="2" data-parent="1" data-level="2">
+                                  <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Specs</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productSpecs form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                             
+                                <tr data-id="2" data-parent="1" data-level="2">
+
+                                 <td class="" data-column="name">
+                                                <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Number</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productNumber form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        
+                        <div  class="table-wrapper"> 
+                               <table class="table-parts ">
+                            
+                                <tr>
+                                <th>Part Image</th>
+                                <th>Part Category</th>
+                                <th>Part Name</th>
+                                <th>Part Class</th>
+                                <th>Part Specs</th>
+                                <th>Part Weight</th>
+                                <th>Part Number</th>
+                                 <th>Part Specs</th>
+                                <th>Action</th>
+                                </tr>
+                        
+                            <tbody class="partslist">
+
+                            </tbody>
+                           </table>
+                        </div>
+                        </div>
+                       
+                     </div>
+                  </div>
+               </div>            
+            </div>
+         </div>    
+        </div>
+
+     <!-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                            <div class="modal-content">
                               
@@ -931,15 +1019,15 @@
                         <li class="nav-item">
                            <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#pills-home-fill" role="tab" aria-controls="pills-home" aria-selected="true">Product Details</a>
                         </li>
-                        <li class="nav-item">
-                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#pills-profile-fill" role="tab" aria-controls="pills-profile" aria-selected="false">Parts Details</a>
-                      
-                        <!-- <li class="nav-item">
+                       <li class="nav-item">
+                           <a class="nav-link" id="pills-contact-tab-fill" data-toggle="pill" href="#pills-contact-fill" role="tab" aria-controls="pills-contact" aria-selected="false">View Parts</a>
+                        </li>
+                         <li class="nav-item">
                            <a class="nav-link" id="pills-contact-tab-fill" data-toggle="pill" href="#pills-contact-fill" role="tab" aria-controls="pills-contact" aria-selected="false">Material</a>
                         </li>
                          <li class="nav-item">
                            <a class="nav-link" id="pills-Substance-tab-fill" data-toggle="pill" href="#pills-Substance-fill" role="tab" aria-controls="pills-Substance" aria-selected="false">Substance</a>
-                        </li> -->
+                        </li>
                      </ul>
 
                     <div class="table-responsive">
@@ -1012,98 +1100,8 @@
                               </tr>
                         </div>
                         <div class="tab-pane fade " id="pills-profile-fill" role="tabpanel" aria-labelledby="pills-profile-tab-fill">
-                                   <section class="content">
-                                <div class="accordion">
-                                    <label class="accordion__item">
-                                    <input type="checkbox" name="accordion">
-                                    <div class="accordion__title">노즐</div>
-                                    <div class="accordion__content">
-
-                                    <br/> <br/>
-                                    <div class="row viewbtns">
-                                        <button type="button" id="btnprview" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
-                                        <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-                                        <button class="btnpr-addParts"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
-                                        
-                                        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
-                                    </div>
-                                        <br/> <br/>
-                                    Part Name: 노즐 <br/> <br/>
-                                    Part Number: D-123 <br/> <br/>
-                                    Part Specs: 15 <br/> <br/>
-                                    Part Mass (g/EA): 12 <br/> <br/>
-                                    Part Mass (g): 36 <br/> <br/>
-                                    Part Mass (%): 4 <br/> <br/>
-                                    Reused Parts (%): 예 <br/> <br/>
-                                    Memo: 미림산업<br/> <br/>
-                                    
-                                    
-                                    </label>
-                                
-                                </div>
-                                </section>
-                                <section class="content">
-                                <div class="accordion">
-                                
-                                    <label class="accordion__item">
-                                    <input type="checkbox" name="accordion">
-                                    <div class="accordion__title">Cable</div>
-                                    <div class="accordion__content">
-
-                                    <br/> <br/>
-                                    <div class="row">
-                                        <button type="button" id="btnprview" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
-                                        <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-                                        <button class="btnpr-addParts"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
-                                        
-                                        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
-                                    </div>
-                                        <br/> <br/>
-                                    Part Name: Cable <br/> <br/>
-                                    Part Number: C-6452 <br/> <br/>
-                                    Part Specs: GDA <br/> <br/>
-                                    Part Mass (g/EA): 423 <br/> <br/>
-                                    Part Mass (g): 432 <br/> <br/>
-                                    Part Mass (%): 21 <br/> <br/>
-                                    Reused Parts (%): 예 <br/> <br/>
-                                    Memo: 일성기계	<br/> <br/>
-                                    
-                                    
-                                    </label>
-                                
-                                </div>
-                                </section>
-                                <section class="content">
-                                <div class="accordion">
-                                
-                                    <label class="accordion__item">
-                                    <input type="checkbox" name="accordion">
-                                    <div class="accordion__title">Keys</div>
-                                    <div class="accordion__content">
-
-                                    <br/> <br/>
-                                    <div class="row">
-                                        <button type="button" id="btnprview" class="viewbtn btn btn-primary mr-2 " data-toggle="modal" data-target="#exampleModalScrollable">view</button>
-                                        <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-                                        <button class="btnpr-addParts"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-add-circle-line"></i></a></button>
-                                        
-                                        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
-                                    </div>
-                                        <br/> <br/>
-                                    Part Name: Keys <br/> <br/>
-                                    Part Number: K-54234 <br/> <br/>
-                                    Part Specs: MTL <br/> <br/>
-                                    Part Mass (g/EA): 34 <br/> <br/>
-                                    Part Mass (g): 124 <br/> <br/>
-                                    Part Mass (%): 11 <br/> <br/>
-                                    Reused Parts (%): No <br/> <br/>
-                                    Memo: Apple	<br/> <br/>
-                                    
-                                    
-                                    </label>
-                                </div>
-                                </section>
-                            <!-- <div class="tabledata">
+                                 
+                             <div class="tabledata">
    
     <div class="table-wrappery">
       <table class="table-users materiallist">
@@ -1120,156 +1118,8 @@
                     </tr>
                 </table>
                 </div>
-                </div>   -->
+                </div>  
              </div>
-                      
-                        <!-- <div class="tab-pane fade" id="pills-contact-fill" role="tabpanel" aria-labelledby="pills-contact-tab-fill">
-                        
-                                 <tr data-id="11" data-parent="10" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Group</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialGroup form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                              <tr data-id="11" data-parent="10" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Name</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialName form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                              <tr data-id="11" data-parent="10" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Class ID</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialClassID form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                              <tr data-id="11" data-parent="10" data-level="2">
-                                <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Recycle Content</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialRecycleContent form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                                 <tr data-id="11" data-parent="10" data-level="2">
-                                <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Recycle Type</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialRecycleType form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                              <tr data-id="11" data-parent="10" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Mass</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialMassg form-control" id="basic-url" aria-describedby="basic-addon3">
-                                                <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">g</span>
-                                                    </div>
-                                             </div>
-                                 </td>
-                              </tr>
-                              <tr data-id="11" data-parent="10" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Material Name</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewmaterialMassPerc form-control" id="basic-url" aria-describedby="basic-addon3">  <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">%</span>
-                                                    </div>
-                                             </div>
-                                            
-                                 </td>
-                              </tr>
-                               
-                        </div>
-                        <div class="tab-pane fade" id="pills-Substance-fill" role="tabpanel" aria-labelledby="pills-Substance-tab-fill">
-                          
-                              <tr data-id="15" data-parent="14" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Substance Name</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewsubstanceName form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                               <tr data-id="15" data-parent="14" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">CAS</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewcas form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                               <tr data-id="15" data-parent="14" data-level="2">
-                                 <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">CRM</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewcrm form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                               <tr data-id="15" data-parent="14" data-level="2">
-                                   <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">ROHS</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewrohs form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
-                               <tr data-id="15" data-parent="14" data-level="2">
-                                  <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Substance Mass</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewsubstanceMassg form-control" id="basic-url" aria-describedby="basic-addon3"><div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">g</span>
-                                                    </div>
-                                             </div>
-                                 </td>
-                              </tr>
-                               <tr data-id="15" data-parent="14" data-level="2">
-                                 <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Substance Mass</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="viewsubstanceMassPerc form-control" id="basic-url" aria-describedby="basic-addon3"><div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">%</span>
-                                                    </div>
-                                             </div>
-                                 </td>
-                              </tr>
-                        </div> -->
                      </div>
                    </tbody>
                  
@@ -1280,11 +1130,11 @@
                               </div>
                               <div class="modal-footer">
                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                  <button type="button" class="btn btn-primary">Save changes</button> 
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div> -->
 
       
 
@@ -1313,8 +1163,7 @@
 
     
     
-               </div>
-
+           
      
  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
   <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
@@ -1353,7 +1202,6 @@ const firebaseConfig = {
     <!-- Table Treeview JavaScript -->
     <script src="./table-treeview.js"></script>
  <script  type="module" src="./products.js" ></script>
-
     
     <!-- Chart Custom JavaScript -->
     <script src="./customizer.js"></script>
