@@ -83,15 +83,15 @@ let id;
 // Create element and render users
 const renderUser = doc => {
   const tr = `
-    <tr data-id='${doc.id}'>
-     <td>${doc.data().partName}</td>
+     <tr data-id='${doc.id}'>
       <td>${doc.data().partNumber}</td>
+     <td>${doc.data().partName}</td>
+    
       <td>${doc.data().partSpecs}</td>
+        <td>${doc.data().partMassg}</td>
+         <td>${doc.data().reusedPart}</td>
       <td>${doc.data().partMassgEA}</td>
-      <td>${doc.data().partMassg}</td>
-      <td>${doc.data().partMassPerc}</td>
-      <td>${doc.data().reusedPart}</td>
-        <td>${doc.data().supplierInfo}</td>
+    
         
 
 
