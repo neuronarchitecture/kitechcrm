@@ -8,6 +8,7 @@
       <!-- Favicon -->
       
  <link rel="stylesheet" href="./products.css" />
+ <link rel="stylesheet" href="./addbtn.css" />
       <link rel="stylesheet" href="./backend.css" />
       <link rel="stylesheet" href="./backend-plugin.min.css">
        <link rel="stylesheet" href="./all.min.css">
@@ -238,10 +239,10 @@
             <th>Product Image</th>
              <th>Product Category</th>
           <th>Product Name</th>
-          <th>Product Class</th>
+          <th>Model Class</th>
           <th>Product Specs</th>
           <th>Product Weight</th>
-          <th>Product Number</th>
+          <th>Registration Data</th>
           <th>Registration Status</th>
           <th>Action</th>
         </tr>
@@ -256,7 +257,7 @@
     <!-- Add modaly -->
     <div class="add-modaly modaly-wrapper">
       <div class="modaly">
-        <div class="modaly-header"><h3>Add New Product</h3></div>
+        <div class="modaly-header"></div>
         <div class="modaly-body">
           <div class="card-body">
                      <div class="">
@@ -268,11 +269,7 @@
                               <i class="ri-user-fill"></i><span>Product Identification</span>
                               </a>
                            </li>
-                           <li id="payment">
-                              <a href="#payment">
-                              <i class="ri-lock-unlock-line"></i><span>Product Details</span>
-                              </a>
-                           </li>
+                       
                         
                         </ul>
                         <!-- fieldsets -->
@@ -284,7 +281,7 @@
                                     <h3 class="mb-4">Enter Product Identification:</h3>
                                  </div>
                                  <div class="col-5">
-                                    <h2 class="steps">Step 1 - 2</h2>
+                                 
                                  </div>
                               </div>
                                      <div class="col-md-12">                      
@@ -314,7 +311,7 @@
                                 </div> -->
                             </div>  
                               <div class="row">
-                                  <div class="col-md-6">
+                                  <div class="col-md-12">
                                     <div class="form-group">
                                      <label>Product Class</label>
                                         <input type="text" class="form-control" id='editproductClass'placeholder="Enter Code" data-errors="Please Enter Code." name="productClass" required>
@@ -324,18 +321,11 @@
                                
                               </div>
                            </div>
-                           <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
-                        </fieldset>
-                        <fieldset>
+                      
+                        
+                        
                            <div class="form-card text-left">
-                              <div class="row">
-                                 <div class="col-7">
-                                    <h3 class="mb-4">Enter Product Details:</h3>
-                                 </div>
-                                 <div class="col-5">
-                                    <h2 class="steps">Step 2 - 2</h2>
-                                 </div>
-                              </div>
+                          
                               <div class="col-md-12">                      
                                     <div class="form-group">
                                         <label>Product Category *</label>
@@ -365,7 +355,7 @@
 
                                        <div class="row">  
                                 <div class="col-md-12"> 
-                                       >  
+                                    
                                   <div class="form-group">
                                         <label>Product Registration Status</label>
                                          <select class="productStatus form-control" id="editproductStatus" name="productStatus" data-errors="Please Enter Product Registration Status."  required>
@@ -398,7 +388,7 @@
                                
                     
                
-                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-left mr-3" value="Previous" >Previous</button>
+                         
                         </fieldset>
                       
                    </form>
@@ -638,21 +628,21 @@
                                     <div class="col-md-4"> 
                                     <div class="form-group">
                                         <label>Part Mass (g/EA) *</label>
-                                        <input type="number" class="form-control" id='partMassgEA' placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
+                                        <input readonly type="number" class="form-control" id='partMassgEA' placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-4"> 
                                     <div class="form-group">
                                         <label>Part Mass (g) *</label>
-                                        <input type="number" class="form-control" id='partMassg'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
+                                        <input readonly type="number" class="form-control" id='partMassg'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-4"> 
                                     <div class="form-group">
                                         <label>Part Mass (%) *</label>
-                                        <input type="number" class="form-control" id='partMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
+                                        <input readonly type="number" class="form-control" id='partMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -925,7 +915,7 @@
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                            <div class="modal-content">
                               <div class="modal-header">
-                                 <h5 class="modal-title " id="exampleModalScrollableTitle">View <span class="treeproducttitle"></span></h5>
+                                 <h5 class="modal-title " id="exampleModalScrollableTitle"><span class="treeproducttitle"></span></h5>
                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                  <span aria-hidden="true">&times;</span>
                                  </button>
@@ -1016,16 +1006,17 @@
                                <table class="table-parts ">
                             
                                 <tr>
-                                <th>Part Image</th>
+                           
                                    <th>Part Name</th>
                                 <th>Model Name</th>
                                 <th>Part Mass (E/A)</th>
+                                   <th>Quantity (E/A)</th>
                                  <th>Total Mass (g)</th>
                         
                                      <th>Reused Parts</th>
                                    <th>Memo</th>
                                
-                                <th>Action</th>
+                              
                                 </tr>
                         
                             <tbody class="partslist">

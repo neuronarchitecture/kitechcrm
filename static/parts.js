@@ -92,7 +92,7 @@ const renderUser = doc => {
       <td>${doc.data().partSpecs}</td>
         <td>${doc.data().partMassg}</td>
          <td>${doc.data().reusedPart}</td>
-      <td>${doc.data().partMassgEA}</td>
+   
     
         
 
@@ -128,9 +128,7 @@ const renderUser = doc => {
       const material = doc.data();
       console.log(material)
       const li = `
-      <tr id='${doc.id}' data-id='${doc.id}'>
-     <td><img src="./productimage.png" style="height: 60px;
-    width: 60px;" alt=""></td>
+    
     <td>${doc.data().materialGroup}</td>
        <td>${doc.data().materialName}</td>
       <td>${doc.data().materialClassId}</td>
@@ -494,7 +492,7 @@ btnprAdd.addEventListener('click', () => {
   addModalyForm.addpartMassPerc.value = '';
   addModalyForm.addreusedPart.value = '';
   addModalyForm.addsupplierInfo.value = '';
-    addModalyForm.substancelist.value = '';
+
 
 
   
@@ -563,7 +561,7 @@ addModalyForm.addEventListener('submit', e => {
     partMassPerc: addModalyForm.addpartMassPerc.value,
     reusedPart: addModalyForm.addreusedPart.value,
     supplierInfo: addModalyForm.addsupplierInfo.value,
-    substancelist: addModalyForm.substancelist.value,
+    
   });
   modalyWrapper.classList.remove('modaly-show');
 });
@@ -670,26 +668,3 @@ const editUI = (user) => {
 
 
 
-
- db.collection("substances")
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-           const tm = `
-      <option>${doc.data().subtanceName}</option>
-  `;
-  addModalyForm.substancelist.insertAdjacentHTML('beforeend', tm);
-  editmodalyForm.editsubstancelist.insertAdjacentHTML('beforeend', tm);
- 
-        });
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
-
-
-    closebtn.addEventListener('click', ()=> {
-      editMatmodaly.classList.remove('modaly-show');
-    })

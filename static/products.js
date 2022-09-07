@@ -297,31 +297,19 @@ addPPForm.reset();
       const parts = doc.data();
       console.log(parts)
       const pl = `
-    <tr id='${doc.id}' data-id='${doc.id}'>
-     <td><img src="./productimage.png" style="height: 60px;
-    width: 60px;" alt=""></td>
+    
     
      <td>${doc.data().partname}</td>
       <td>${doc.data().partSpecs}</td>
          <td>${doc.data().partMassgEA}</td>
+           <td>${doc.data().quantity}</td>
      <td>${doc.data().partMassg}</td>
    
          <td>${doc.data().reusedPart}</td>
           <td>${doc.data().companyName}</td>
          
 
-  <td>
-
-   <div class="btngroup">
-     <span href="#" class="button btn-medium btnppdelete" style="
-    background: #e73131; 
-    padding: 12px;
-    border-radius: 50px;
-    border-color: transparent;" 
-    data-id='${doc.id}' >Delete </span>
-    
-    </div>
-      </td>
+ 
     </tr>
       `;
       html+=pl
