@@ -213,7 +213,6 @@
       </div>
     
     
-    
 <div class="content-page">
      <div class="container-fluid">
         <div class="row">
@@ -944,18 +943,7 @@
                                  </div>
                               </div>
                               <div class="row">
-                                     <div class="col-md-6">
-                                    <div class="form-group">
-                                       <label>Substance Type: *</label>
-                                        <select  class="getsubstancetype form-control" id="sel1" name="getsubstancetype">
-                                            <option value="">Select Option</option>
-                                            <option value="crm">CRM</option>
-                                            <option value="rohs">ROHS</option>
-                                          
-                                        </select>
-                                    </div>
-                                 </div>
-                                 <div class="col-md-6">
+                                 <div class="col-md-12">
                                     <div class="form-group">
                                        <label>Substance Name: *</label>
                                         <select  class="getsubstancelist form-control" id="sel1" name="getsubstancelist">
@@ -964,7 +952,7 @@
                                         </select>
                                     </div>
                                  </div>
-                              
+                                 
                               </div>
                            </div>
                            <button type="button" name="next" id="getSubsname" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
@@ -983,7 +971,7 @@
                                  <div class="col-md-6">
                                     <div class="form-group">
                                        <label>CAS Number: *</label>
-                                       <input type="text" class="addcas form-control" name="addcas" value="" placeholder=""  />
+                                       <input type="text" class="addcas form-control" name="addcas" value="123" placeholder=""  />
                                     </div>
                                  </div>
                                  <div class="col-md-6">
@@ -1015,7 +1003,7 @@
                               </div>
                            </div>
                               <button type="button" id="addSubs" class="btn btn-primary action-button float-right" value="Submit" >Submit</button>
-                           <button type="button" id="delSubs" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
                         </fieldset>
                      </form>
                   </div>
@@ -1104,7 +1092,7 @@
                               <div class="modal-body">
                                 <div class="table-responsive">
                     <div  class="table-wrapper"> 
-                               <table class="table-parts">
+                               <table class="table-parts ">
                             
                                 <tr>
                            
@@ -1115,7 +1103,7 @@
                                         <th>Substance Mass (g)</th>
                                       
                                             <th>Substance Mass (%)</th>
-                           
+                                <th>Action</th>
                                 </tr>
                         
                             <tbody class="substancelisttable">
@@ -1198,7 +1186,7 @@ const firebaseConfig = {
     
     <!-- Table Treeview JavaScript -->
     <script src="./table-treeview.js"></script>
- <script  type="module" src="./parts.js" ></script>
+ <script  type="module" src="./pp.js" ></script>
  
 
     

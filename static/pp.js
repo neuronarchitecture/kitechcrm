@@ -59,14 +59,12 @@ let PMmaterialMassg = document.getElementById('PMmaterialMassg')
  let addSubs = document.getElementById('addSubs')
  let getSubsname = document.getElementById('getSubsname')
  let getsubstancelist = document.querySelector('.getsubstancelist')
-  let getsubstancetype = document.querySelector('.getsubstancetype')
   let addcas = document.querySelector('.addcas')
   let addcrm = document.querySelector('.addcrm')
   let addrohs = document.querySelector('.addrohs')
   let addsubstanceMassg = document.querySelector('.addsubstanceMassg')
   let addsubstanceMassPerc = document.querySelector('.addsubstanceMassPerc')
  let substancelisttable = document.querySelector('.substancelisttable')
- let delSubs = document.getElementById('delSubs')
   
   
   
@@ -100,15 +98,7 @@ const renderUser = doc => {
          <td>
     <div class="btngroup">
      <span href="#" id="btnprview" class="button btn-large viewbtn" data-toggle="modal" data-target="#exampleModalScrollable">View Materials</span>
-     <div class="button-dropdown">
-        <a class="button toggle"></a>
-        <ul class="dropdown">
-          <li><a href="#" class="dropdown-link btnpr-edit">Edit</a></li>
-          <li><a href="#" class="dropdown-link btnpr-addParts">Add New Material</a></li>
-          <li><a href="#" class="dropdown-link btnpr-delete">Delete</a></li>
-          <li><a href="#" class="dropdown-link btnpr-delete">Download</a></li>
-        </ul>
-      </div>
+  
     </div>
    
       </td>
@@ -143,16 +133,7 @@ const renderUser = doc => {
   <td>
 <div class="btngroup">
      <span href="#" id="btnpmview" class="button btn-large btnpmviewSubs" data-id='${doc.id}' data-toggle="modal" data-target="#exampleModalScrollableSubstances" >View Substances</span>
-     <div class="button-dropdown" >
-        <a class="button toggle" style="padding: 1.5em 0.3em;"></a>
-        <ul class="dropdown">
-          <li><a href="#" class="dropdown-link btnpmedit" data-id='${doc.id}'>Edit</a></li>
-          <li><a href="#" class="dropdown-link btnpmSubs" data-id='${doc.id}'>Add New Substance</a></li>
-    <li><a href="#" class="dropdown-link btnpmdelete" data-id='${doc.id}'>Delete</a></li>
-          
-                <li><a href="#" class="dropdown-link btnpr-delete">Download</a></li>
-        </ul>
-      </div>
+ 
     </div>
       </td>
     </tr>
@@ -243,7 +224,7 @@ db.collection("substances")
     });
 
  getSubsname.addEventListener('click', ()=> {
- db.collection("substances").where("subtanceName", "==", getsubstancelist.value).where(`${getsubstancetype.value}`, "==", "Y").get()
+ db.collection("substances").where("subtanceName", "==", getsubstancelist.value).get()
       .then((querySnapshot)=> {
            querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
@@ -255,13 +236,6 @@ db.collection("substances")
         });
       })
       })
-
-      delSubs.addEventListener('click',()=> {
-            addcas.value = "",
-          addrohs.value = "",
-          addcrm.value = ""
-      })
-  
 addSubs.addEventListener('click', (e)=> {
   e.preventDefault();
  db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').add({
@@ -347,37 +321,6 @@ substancelisttable.innerHTML = "";
 
 
 
-//add materials 
- const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
-btnpraddParts.addEventListener('click', () => {
-  addmodalyPartsSingle.classList.add('modaly-show');
-
-  addModalyParts.addmaterialName.value = '';
-
-   addModalyParts.addEventListener('submit', e => {
-  e.preventDefault();
-  // console.log(doc.id, " => ", doc.data());
-  db.collection('recycledparts').doc(`${doc.id}`).collection('materials').add({
-    materialName: addModalyParts.addmaterialName.value,
-    materialGroup: addModalyParts.addmaterialGroup.value,
-    materialClassId: addModalyParts.addmaterialClassID.value,
-    materialRecycleContent: addModalyParts.addmaterialRecycleContent.value,
-    materialRecycleType: addModalyParts.addmaterialRecycleType.value,
-    materialMassg: addModalyParts.addmaterialMassg.value,
-    materialMassPerc: addModalyParts.addmaterialMassPerc.value,
-    
-  })
-setTimeout(resetForm, 5000);
- function resetForm() {
-addModalyParts.reset();
-}
-
-})
-
- 
-
-  })
-
 
 
    closebtn.addEventListener('click', () =>{
@@ -396,40 +339,8 @@ addModalyParts.reset();
   
 
   // Click edit user
-  const btnprEdit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
-  btnprEdit.addEventListener('click', () => {
-    
-    editmodaly.classList.add('modaly-show');
-    const editHeader = document.querySelector('.editheader')
-    id = doc.id;
-    editHeader.innerHTML = 'Edit ' + doc.data().partName
-    editmodalyForm.editpartName.value = doc.data().partName;
-    editmodalyForm.editpartNumber.value = doc.data().partNumber;
-    editmodalyForm.editpartSpecs.value = doc.data().partSpecs;
-    editmodalyForm.editpartMassgEA.value = doc.data().partMassgEA;
-    editmodalyForm.editpartMassg.value = doc.data().partMassg;
-    editmodalyForm.editpartMassPerc.value = doc.data().partMassPerc;
-    editmodalyForm.editreusedPart.value = doc.data().reusedPart;
-    editmodalyForm.editsupplierInfo.value = doc.data().supplierInfo;
-    editmodalyForm.editsubstancelist.value = doc.data().substancelist;
-    
-
-    
-    //edit the parts section
-    
-
-
-  });
 
   // Click delete user
-  const btnprDelete = document.querySelector(`[data-id='${doc.id}'] .btnpr-delete`);
-  btnprDelete.addEventListener('click', () => {
-    db.collection('recycledparts').doc(`${doc.id}`).delete().then(() => {
-      console.log('Document succesfully deleted!');
-    }).catch(err => {
-      console.log('Error removing document', err);
-    });
-  });
 
 
    // get subcollection data 

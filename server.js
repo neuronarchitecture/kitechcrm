@@ -143,6 +143,21 @@ app.get("/substances", function (req, res) {
     });
 });
 
+app.get("/partslist", function (req, res) {
+   const sessionCookie = req.cookies.session || "";
+
+  admin
+    .auth()
+    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+    .then((userData) => {
+      console.log("Logged in:", userData.email)
+      res.render("pp.html");
+    })
+    .catch((error) => {
+      res.redirect("/login");
+    });
+});
+
 app.get("/form", function (req, res) {
    const sessionCookie = req.cookies.session || "";
 

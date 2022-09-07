@@ -48,6 +48,18 @@ const checkpartdata = document.querySelector('.checkpartdata')
 const addPart = document.querySelector('.addPart')
 const partsTab = document.querySelector('#pills-contact-tab-fill')
 
+//parts references 
+    const supplierinfo = document.querySelector('#supplierinfo')
+const partname = document.querySelector('#partname')
+const quantity = document.querySelector('#quantity')
+const partNumber = document.querySelector('#partNumber')
+const partSpecs = document.querySelector('#partSpecs')
+const partMassgEA = document.querySelector('#partMassgEA')
+const partMassg = document.querySelector('#partMassg')
+const partMassPerc = document.querySelector('#partMassPerc')
+const partClass = document.querySelector('#partClass')
+const companyName = document.querySelector('#companyName')
+
 let id;
 
 
@@ -290,16 +302,13 @@ addPPForm.reset();
     width: 60px;" alt=""></td>
     
      <td>${doc.data().partname}</td>
-
-     <td>${doc.data().companyName}</td>
-      <td>${doc.data().partMassPerc}</td>
-      <td>${doc.data().partMassg}</td>
-      <td>${doc.data().partMassgEA}</td>
-      <td>${doc.data().partNumber}</td>
-        <td>${doc.data().partSpecs}</td>
+      <td>${doc.data().partSpecs}</td>
+         <td>${doc.data().partMassgEA}</td>
+     <td>${doc.data().partMassg}</td>
+   
          <td>${doc.data().reusedPart}</td>
           <td>${doc.data().companyName}</td>
-            <td>${doc.data().quantity}</td>
+         
 
   <td>
 
@@ -666,16 +675,7 @@ const editUI = (user) => {
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
-    const supplierinfo = document.querySelector('#supplierinfo')
-const partname = document.querySelector('#partname')
-const quantity = document.querySelector('#quantity')
-const partNumber = document.querySelector('#partNumber')
-const partSpecs = document.querySelector('#partSpecs')
-const partMassgEA = document.querySelector('#partMassgEA')
-const partMassg = document.querySelector('#partMassg')
-const partMassPerc = document.querySelector('#partMassPerc')
-const partClass = document.querySelector('#partClass')
-const companyName = document.querySelector('#companyName')
+
 
 checkpartdata.addEventListener('click', () => {
  
