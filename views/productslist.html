@@ -238,6 +238,7 @@
           <th>Product Specs</th>
           <th>Product Weight</th>
           <th>Product Number</th>
+          <th>Registration Status</th>
           <th>Action</th>
         </tr>
       </table>
@@ -333,7 +334,7 @@
                               </div>
                               <div class="col-md-12">                      
                                     <div class="form-group">
-                                        <label>Product Parts *</label>
+                                        <label>Product Category *</label>
                                          <select class="partsName form-control" id="editproductCategory" name="productCategory" data-errors="Please Enter Product Category."  required>
                               
                                            
@@ -341,7 +342,8 @@
                                         <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
                                         <div class="help-block with-errors"></div>
                                     </div>
-                               <div class="row">  <div class="col-md-6"> 
+                               <div class="row">  
+                                <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>Product Specs</label>
                                         <input type="text" class="form-control" id='editproductSpecs' placeholder="Enter Product Specs" data-errors="Please Product specs." name="productSpecs" required>
@@ -356,6 +358,26 @@
                                     </div>
                                 </div>
                                  </div>
+
+                                       <div class="row">  
+                                <div class="col-md-12"> 
+                                       >  
+                                  <div class="form-group">
+                                        <label>Product Registration Status</label>
+                                         <select class="productStatus form-control" id="editproductStatus" name="productStatus" data-errors="Please Enter Product Registration Status."  required>
+                                            <option value="Complete">Complete</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Ready">Ready</option>
+                                           
+                                           </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                       
+                                </div> 
+                          
+                                 </div>
+
+
                                   
                                </div>
                            </div>
@@ -469,6 +491,21 @@
                                         <input type="text" class="form-control" id='editproductClass'placeholder="Enter Code" data-errors="Please Enter Code." name="productClass" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
+                                </div>
+
+                                  <div class="col-md-12"> 
+                                        
+                                  <div class="form-group">
+                                        <label>Product Registration Status</label>
+                                         <select class="productStatus form-control" id="editproductStatus" name="productStatus" data-errors="Please Enter Product Registration Status."  required>
+                                            <option value="Complete">Complete</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Ready">Ready</option>
+                                           
+                                           </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                       
                                 </div>
                                
                                 <!-- <div class="col-md-12">
@@ -1202,7 +1239,8 @@ const firebaseConfig = {
     <!-- Table Treeview JavaScript -->
     <script src="./table-treeview.js"></script>
  <script  type="module" src="./products.js" ></script>
-    
+     <script  type="module" src="./addbtn.js" ></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <!-- Chart Custom JavaScript -->
     <script src="./customizer.js"></script>
     

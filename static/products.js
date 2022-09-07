@@ -72,6 +72,7 @@ const renderUser = doc => {
       <td>${doc.data().productSpecs}</td>
       <td>${doc.data().productWeight}</td>
         <td>${doc.data().productNumber}</td>
+           <td>${doc.data().productStatus}</td>
 
 
     <td>
@@ -193,6 +194,7 @@ const renderUser = doc => {
       // Get a reference from the dom to the tree elements
      const treeproducttitle = document.querySelector('.treeproducttitle')
       const productCategory = document.querySelector('.productCategory')
+       const productStatus = document.querySelector('.productStatus')
        const productName = document.querySelector('.productName')
      const productClass = document.querySelector('.productClass')
      const productSpecs = document.querySelector('.productSpecs')
@@ -209,6 +211,7 @@ const renderUser = doc => {
       productSpecs.value =  doc.data().productSpecs;
        productWeight.value =  doc.data().productWeight;
      productNumber.value =  doc.data().productNumber;
+     productStatus.value =  doc.data().productStatus;
     
 
      
@@ -355,6 +358,7 @@ addPPForm.reset();
     editmodalyForm.productWeight.value = doc.data().productWeight;
     editmodalyForm.productNumber.value = doc.data().productNumber;
     editmodalyForm.productCategory.value = doc.data().productCategory;
+      editmodalyForm.productStatus.value = doc.data().productStatus;
   });
 
 
@@ -425,8 +429,8 @@ btnprAdd.addEventListener('click', () => {
   addModalyForm.productClass.value = '';
   addModalyForm.productWeight.value = '';
   addModalyForm.productNumber.value = '';
-  
   addModalyForm.productCategory.value = '';
+  addModalyForm.productStatus.value = '';
 
 
   
@@ -499,8 +503,9 @@ addProduct.addEventListener('click', e => {
     productClass: addModalyForm.productClass.value,
     productWeight: addModalyForm.productWeight.value,
     productNumber: addModalyForm.productNumber.value,
-    
     productCategory: addModalyForm.productCategory.value,
+    productStatus: addModalyForm.productStatus.value,
+    
 
     
 
@@ -525,11 +530,9 @@ editmodalyForm.addEventListener('submit', e => {
     productWeight: editmodalyForm.productWeight.value,
     productNumber: editmodalyForm.productNumber.value,
     productCategory: editmodalyForm.productCategory.value,
-   
+   productStatus: editmodalyForm.productStatus.value
      
   });
-    
-  editmodaly.classList.remove('modaly-show');
   });
 
 

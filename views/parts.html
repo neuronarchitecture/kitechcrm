@@ -65,6 +65,7 @@
                               <span class="ml-4">부품목록</span>
                           </a>
                       </li>
+                     
                         <li  class="adminelement" style="display: none;">
                           <a href="#" class="svg-icon">                        
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z"/></svg>
@@ -143,6 +144,7 @@
                       <button type="button" class="btn mb-1 bg-success-light">
                       Part Supplier 
                       </button>
+                      
                       <!-- <button type="button" class="btn mb-1 bg-danger-light">
                       Notifications <span class="badge badge-danger ml-2">4</span>
                       </button> -->
@@ -240,7 +242,7 @@
           <th>Part Mass (%)</th>
           <th>Reused Parts </th>
           <th>Memo </th>
-            <th>Substances </th>
+      
           <th>Action</th>
         </tr>
       </table>
@@ -286,7 +288,7 @@
                               </div>
                             </div>
                          
-                            <div class="row">
+                            <div class="row" style="    justify-content: flex-end;">
                            
                                 <div class="col-md-12">
                                 </div>  
@@ -364,9 +366,9 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-
+                         
                            
-                        <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Add Part</button>
+                        <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-left mr-3" value="Previous" >Add Part</button>
                                      
                                 </fieldset>
                                 
@@ -900,103 +902,114 @@
       </div>
     </div>
 
-
-    <div class="addSubsmodaly modaly-wrapper" id="exampleModalScrollableSUBS">
+ <!-- Edit Substance for specific Material -->
+    <div class="addSubsmodaly modaly-wrapper" id="exampleModalScrollableSUBS" >
       <div class="modaly">
         <div class="modaly-header"><h3>Add New Substance</h3></div>
         <div class="modaly-body">
           <div class="card-body">
-                     <div class="">
-                        <form class="form"  autocomplete="off"  data-toggle="validator" id="form-wizard1">
-                             <ul id="top-tab-list" class="p-0">
-                           
-                           <li id="personal">
-                              <a href="#personal">
-                              <i class="ri-user-fill"></i><span>Substance Details </span>
+                    <div class="content-page" style="margin-left: 0;">
+      <div class="container-fluid">
+         <div class="row" >
+            <div class="col-sm-12 col-lg-12">
+               <div class="iq-card">
+                
+                  <div class="iq-card-body">
+                     <form id="form-wizard1" class="text-center mt-4" name="formwizard" >
+                        <ul id="top-tab-list" class="p-0">
+                           <li class="active" id="account">
+                              <a href="javascript:void();">
+                              <i class="ri-lock-unlock-line"></i><span>Choose your Substance</span>
                               </a>
                            </li>
-                        
+                           <li id="personal">
+                              <a href="javascript:void();">
+                              <i class="ri-user-fill"></i><span>Substance Details</span>
+                              </a>
+                           </li>
+                          
                         </ul>
                         <!-- fieldsets -->
                         <fieldset>
                            <div class="form-card text-left">
-                               <div class="row"> 
-                             <div class="row"> 
-                                <!-- <h3>
-                                    해당 데이터를 확인할 권한이 없습니다
-                                </h3> -->
+                              <div class="row">
+                                 <div class="col-7">
+                                    <h3 class="mb-4">Choose your Substance:</h3>
+                                 </div>
+                                 <div class="col-5">
+                                    <h2 class="steps">Step 1 - 2</h2>
+                                 </div>
                               </div>
-                            </div>
-                                <div class="row">
-                                
-                    
-                                     
-                                <div class="col-md-12">
-                                </div>  
-                                <div class="col-md-7">                      
+                              <div class="row">
+                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Substance Name *</label>
-                                        <input type="text" class="form-control" id='editpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="addsubstanceName" required>
-                                        <div class="help-block with-errors"></div>
+                                       <label>Substance Name: *</label>
+                                        <select  class="getsubstancelist form-control" id="sel1" name="getsubstancelist">
+                                            
+                                          
+                                        </select>
                                     </div>
-                                </div>    
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>CAS Number</label>
-                                        <input type="number" class="form-control"  id='cas'placeholder="Enter Part Number" data-errors="Please CAS number." name="addcas" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-12"> 
-                                    <div class="form-group">
-                                        <label>CRM</label>
-                                         <input type="text" class="form-control"  id='crm'placeholder="Enter Yes or No" data-errors="Please CAS number." name="addcrm" required>
-                                      
-                                  
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-3"> 
-                                    <div class="form-group">
-                                        <label>ROHS</label>
-                                       <input type="text" class="form-control"  id='rohs'placeholder="Enter Yes or No" data-errors="Please CAS number." name="addrohs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-3"> 
-                                    <div class="form-group">
-                                        <label>Substance Mass (g) *</label>
-                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="addsubstanceMassg" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                 <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Substance Mass (%) *</label>
-                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="addsubstanceMassPerc" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                
-                                <!-- <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
-                                    </div>
-                                </div> -->
-                            </div>   
-                       
+                                 </div>
+                                 
+                              </div>
                            </div>
-                             
-                             <button  id="edit"  class="btn btn-primary btn-light  action-button-previous float-right mr-3" >Add New Substance</button>
-                             <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modal" >Close</button>
+                           <button type="button" name="next" id="getSubsname" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
                         </fieldset>
-                      
-                          
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-7">
+                                    <!-- <h3 class="mb-4">Personal Information:</h3> -->
+                                 </div>
+                                 <div class="col-5">
+                                    <h2 class="steps">Step 2 - 2</h2>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>CAS Number: *</label>
+                                       <input type="text" class="addcas form-control" name="addcas" value="123" placeholder=""  />
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>CRM: *</label>
+                                       <input type="text" class="addcrm form-control" name="addcrm" />
+                                    </div>
+                                 </div>
+                               
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>ROHS: *</label>
+                                        <input type="text" class="addrohs form-control" name="addrohs" />
+                                      
+                                    </div>
+                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Substance Mass (g): *</label>
+                                       <input type="number" class="addsubstanceMassg form-control" name="addsubstanceMassg"  />
+                                    </div>
+                                 </div>
+                                   <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Substance Mass (%) : *</label>
+                                       <input type="number" class="addsubstanceMassPerc form-control" name="addsubstanceMassPerc"  />
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                              <button type="button" id="addSubs" class="btn btn-primary action-button float-right" value="Submit" >Submit</button>
+                           <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
                         </fieldset>
-                      
-                   </form>
-                 </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
             <!-- Modal -->
              </div>
         </div>
@@ -1018,7 +1031,7 @@
  </div>
 </div>
 
-    <!--View Data table tree-->
+    <!--View Data table tree Material-->
 
       <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -1035,7 +1048,7 @@
                                <table class="table-parts ">
                             
                                 <tr>
-                                    <th>Part Image</th>
+                                    <th>Material Image</th>
                                 <th>Material Category</th>
                                     <th>Material Name</th>
                                     <th>Material Class ID</th>
@@ -1063,6 +1076,49 @@
                      </div>
 
       
+    <!--View Data table tree Substance-->
+
+      <div class="modal fade" id="exampleModalScrollableSubstances" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title materialtitle" id="exampleModalScrollableTitle"></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="table-responsive">
+                    <div  class="table-wrapper"> 
+                               <table class="table-parts ">
+                            
+                                <tr>
+                           
+                                <th>Substance Name</th>
+                                    <th>CAS</th>
+                                    <th>CRM</th>
+                                        <th>ROHS</th>
+                                        <th>Substance Mass (g)</th>
+                                      
+                                            <th>Substance Mass (%)</th>
+                                <th>Action</th>
+                                </tr>
+                        
+                            <tbody class="substancelisttable">
+
+                            </tbody>
+                           </table>
+                        </div>
+                         <div class="modal-footer" style="margin-top: 30%;">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                              </div>
+                     </div>
+                              </div>
+                              
+                           </div>
+                        </div>
+                     </div>
 
                     
     <!-- Wrapper End-->
