@@ -43,8 +43,7 @@ const editpartsName = document.querySelector('.editpartsName')
 const materiallist = document.querySelector('.materiallist')
 const partslist = document.querySelector('.partslist')
 const subslist = document.querySelector('.subslist')
-const supplierinfo = document.querySelector('#supplierinfo')
-const partname = document.querySelector("#partname")
+
 const checkpartdata = document.querySelector('.checkpartdata')
 const addPart = document.querySelector('.addPart')
 const partsTab = document.querySelector('#pills-contact-tab-fill')
@@ -254,6 +253,9 @@ btnpraddParts.addEventListener('click', () => {
   e.preventDefault();
   // console.log(doc.id, " => ", doc.data());
   db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').add({
+    partname: partname.value,
+    supplierinfo: supplierinfo.value,
+    quantity: quantity.value,
     partNumber: partNumber.value,
     partSpecs: partSpecs.value,
     partMassgEA: partMassgEA.value,
@@ -286,6 +288,9 @@ addPPForm.reset();
     <tr id='${doc.id}' data-id='${doc.id}'>
      <td><img src="./productimage.png" style="height: 60px;
     width: 60px;" alt=""></td>
+    
+     <td>${doc.data().partname}</td>
+
      <td>${doc.data().companyName}</td>
       <td>${doc.data().partMassPerc}</td>
       <td>${doc.data().partMassg}</td>
@@ -293,6 +298,8 @@ addPPForm.reset();
       <td>${doc.data().partNumber}</td>
         <td>${doc.data().partSpecs}</td>
          <td>${doc.data().reusedPart}</td>
+          <td>${doc.data().companyName}</td>
+            <td>${doc.data().quantity}</td>
 
   <td>
 
@@ -659,7 +666,9 @@ const editUI = (user) => {
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
-
+    const supplierinfo = document.querySelector('#supplierinfo')
+const partname = document.querySelector('#partname')
+const quantity = document.querySelector('#quantity')
 const partNumber = document.querySelector('#partNumber')
 const partSpecs = document.querySelector('#partSpecs')
 const partMassgEA = document.querySelector('#partMassgEA')
@@ -677,6 +686,9 @@ checkpartdata.addEventListener('click', () => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
+             partname.value = doc.data().partname
+          supplierinfo.value = doc.data().supplierinfo
+            quantity.value = doc.data().quantity
           partNumber.value = doc.data().partNumber
           partSpecs.value = doc.data().partSpecs
           partMassgEA.value = doc.data().partMassgEA

@@ -539,7 +539,7 @@
 
      <div class="addPPmodaly modaly-wrapper">
       <div class="modaly">
-        <div class="modaly-header"><h3>Add New Material</h3></div>
+     
         <div class="modaly-body">
           <div class="card-body">
                      <div class="container-fluid">
@@ -568,7 +568,7 @@
                             <div class="row">
                            
                              
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                     <div class="form-group">
                                      <label>Supplier Info</label>
                                
@@ -581,11 +581,11 @@
                                     </div>
                                 </div>
 
-                                   <div class="col-md-6">
+                                   <div class="col-md-5">
                                     <div class="form-group">
                                      <label>Part Name</label>
                                
-                                      <select  class="partname  form-control" name="supplierinfo" id="partname"  data-style="py-0">
+                                      <select  class="partname  form-control" name="partname" id="partname"  data-style="py-0">
                                       
                                      
                                     </select>
@@ -593,6 +593,13 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control"  id='quantity' placeholder="Enter Part Quantity" data-errors="Please Part Quantity." name="addpartQuantity" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
                                 </div>  
                                
   
@@ -610,14 +617,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Part Number</label>
-                                        <input type="text" class="form-control"  id='partNumber' placeholder="Enter Part Number" data-errors="Please Part number." name="addpartNumber" required>
+                                        <input readonly type="text" class="form-control"  id='partNumber' placeholder="Enter Part Number" data-errors="Please Part number." name="addpartNumber" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>Part Specs</label>
-                                        <input type="text" class="form-control" id='partSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="addpartSpecs" required>
+                                        <input readonly type="text" class="form-control" id='partSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="addpartSpecs" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -650,12 +657,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Reused Part</label>
-                                      <select name="addreusedPart" id="partClass" class="form-control" data-style="py-0">
-                                       <option>Select Option</option>
-                                       <option>Yes</option>
-                                       <option>No</option>
-                                     
-                                    </select>
+                                      <input readonly type="text" class="form-control" id='partClass'   name="addreusedPart" required>
+                                 
                                         
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -663,7 +666,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Memo</label>
-                                        <input type="text" class="form-control" id='companyName' placeholder="Enter Code" data-errors="Please Enter Code." name="addsupplierInfo" required>
+                                        <input readonly type="text" class="form-control" id='companyName' placeholder="Enter Code" data-errors="Please Enter Code." name="addsupplierInfo" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -931,10 +934,10 @@
         
                      <ul class="nav nav-tabs" id="myTab-1" role="tablist">
                         <li class="nav-item">
-                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#home" role="tab" aria-controls="home" aria-selected="true">Product Details</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Parts List</a>
                         </li>
                      
                      </ul>
@@ -1012,11 +1015,14 @@
                                 <th>Part Image</th>
                                 <th>Part Category</th>
                                 <th>Part Name</th>
-                                <th>Part Class</th>
-                                <th>Part Specs</th>
-                                <th>Part Weight</th>
+                                 <th>Part Mass (%)</th>
+                                 <th>Part Mass (g)</th>
+                                <th>Part Mass (E/A)</th>
                                 <th>Part Number</th>
                                  <th>Part Specs</th>
+                                  <th>Reused Part</th>
+                                   <th>Memo</th>
+                                   <th>Quantity</th>
                                 <th>Action</th>
                                 </tr>
                         
