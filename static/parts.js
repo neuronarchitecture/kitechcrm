@@ -270,7 +270,7 @@ addSubs.addEventListener('click', (e)=> {
     substanceMassg: addsubstanceMassg.value,
     substanceMassPerc: addsubstanceMassPerc.value,
  }).then(()=> {
-  console.log('Substance added Successfully')
+  console.log('Substance added Successfully');
   addmodalySubssSingle.classList.remove('modaly-show');
  })
 }) 
