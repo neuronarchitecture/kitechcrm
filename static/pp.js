@@ -118,9 +118,7 @@ const renderUser = doc => {
       const material = doc.data();
       console.log(material)
       const li = `
-      <tr id='${doc.id}' data-id='${doc.id}'>
-     <td><img src="./productimage.png" style="height: 60px;
-    width: 60px;" alt=""></td>
+  
     <td>${doc.data().materialGroup}</td>
        <td>${doc.data().materialName}</td>
       <td>${doc.data().materialClassId}</td>

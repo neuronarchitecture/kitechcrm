@@ -608,22 +608,22 @@ const editUI = (user) => {
 
 
 
- db.collection("recycledparts")
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-           const td = `
-      <option>${doc.data().partName}</option>
-  `;
-  partsName.insertAdjacentHTML('beforeend', td);
-  editpartsName.insertAdjacentHTML('beforeend', td);
-        });
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
+//  db.collection("recycledparts")
+//     .get()
+//     .then((querySnapshot) => {
+//         querySnapshot.forEach((doc) => {
+//             // doc.data() is never undefined for query doc snapshots
+//             console.log(doc.id, " => ", doc.data());
+//            const td = `
+//       <option>${doc.data().partName}</option>
+//   `;
+//   partsName.insertAdjacentHTML('beforeend', td);
+//   editpartsName.insertAdjacentHTML('beforeend', td);
+//         });
+//     })
+//     .catch((error) => {
+//         console.log("Error getting documents: ", error);
+//     });
 
 
 
