@@ -228,13 +228,22 @@
             </div>
 
 
-            
+               <div class="form-group" id="formfloat">
+                     <div class="input-group">
+                        <input type="text" class="form-control" id="myInputProd" style="margin: 0;" onkeyup='productSearch()' placeholder="Search Product Name" aria-label="Search Product Name"
+                           aria-describedby="basic-addon5">
+                        <div class="input-group-append">
+                           <span class="input-group-text" id="basic-addon5"><i class="las la-search font-size-20"></i></span>
+                        </div>
+                     </div>
+                       
+                     </div>
         <!--Here starts the form-->
         
  <div class="tabledata">
    
     <div class="table-wrapper">
-      <table class="table-users">
+      <table class="table-users" id="myTableProd"> 
         <tr>
             <th>Product Image</th>
              <th>Product Category</th>
@@ -1329,5 +1338,6 @@ const firebaseConfig = {
     <script src="./app.js"></script>
      <!-- <script   type="module" src="./auth.js" ></script> -->
      <script>feather.replace()</script>
+     <script src="./search.js" ></script>
   </body>
 </html>
