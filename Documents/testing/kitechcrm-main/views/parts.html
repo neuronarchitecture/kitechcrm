@@ -226,15 +226,26 @@
                     <button class="btnpr btnpr-add"><div class="addnewproductbtnpr">새 부품 등록</div></button>
                 </div>
             </div>
+ <div class="div" style="width: 100%;">
+        <div class="form-group" id="formfloat">
+                     <div class="input-group">
+                        <input type="text" class="form-control" id="myInputMat" style="margin: 0;" onkeyup='materialSearch()' placeholder="Search Part Name" aria-label="Search Material Name"
+                           aria-describedby="basic-addon5">
+                        <div class="input-group-append">
+                           <span class="input-group-text" id="basic-addon5"><i class="las la-search font-size-20"></i></span>
+                        </div>
+                     </div>
+                       
+                     </div>
 
-
+ </div>
             
         <!--Here starts the form-->
         
  <div class="tabledata">
    
     <div class="table-wrapper">
-      <table class="table-users">
+      <table class="table-users" id="myTableMat">
         <tr>
  <th>Part Number</th>
              <th>Part Name</th>
@@ -1036,22 +1047,35 @@
                                  </button>
                               </div>
                               <div class="modal-body">
+                                <div class="form-group" id="formfloat">
+                     <div class="input-group">
+                        <input type="text" class="form-control" id="myInput" style="margin: 0;" onkeyup='tableSearch()' placeholder="Search Material Name" aria-label="Search Material Name"
+                           aria-describedby="basic-addon5">
+                        <div class="input-group-append">
+                           <span class="input-group-text" id="basic-addon5"><i class="las la-search font-size-20"></i></span>
+                        </div>
+                     </div>
+                       
+                     </div>
                                 <div class="table-responsive">
                     <div  class="table-wrapper"> 
-                               <table class="table-parts ">
-                            
+                               <table class="table-parts" id="myTable">
+                            <thead>
+                                
                                 <tr>
 
-                                <th>Material Category</th>
-                                    <th>Material Name</th>
-                                    <th>Material Class ID</th>
-                                        <th>Recycle Content</th>
-                                        <th>Recycle Type</th>
-                                        <th>Mass (g)</th>
-                                            <th>Mass (%)</th>
+                                <th >  Material Category</th>
+                                  <th>  Material Name</th>
+                                    <th>  MaterialClass ID</th>
+                                      <th>  Recycle Content</th>
+                                        <th>  Recycle Type</th>
+                                          <th>  Mass (g)</th>
+                                            <th>  Mass (%)</th>
+                                 
                                 <th>Action</th>
                                 </tr>
                         
+                            </thead>
                             <tbody class="materiallist">
 
                             </tbody>
@@ -1177,7 +1201,8 @@ const firebaseConfig = {
     
     <!-- Table Treeview JavaScript -->
     <script src="./table-treeview.js"></script>
- <script  type="module" src="./parts.js" ></script>
+ <script  type="module" src="./parts.js" defer></script>
+ 
  
 
     
@@ -1191,7 +1216,7 @@ const firebaseConfig = {
     <script src="./app.js"></script>
      <!-- <script   type="module" src="./auth.js" ></script> -->
      <script>feather.replace()</script>
-
+<script src="./search.js" ></script>
   </body>
 </html>
 

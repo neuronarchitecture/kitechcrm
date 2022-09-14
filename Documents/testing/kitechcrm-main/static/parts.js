@@ -69,7 +69,7 @@ let PMmaterialMassg = document.getElementById('PMmaterialMassg')
  let delSubs = document.getElementById('delSubs')
   
   
-  
+// order and filtering 
 let id;
 
 
@@ -128,7 +128,7 @@ const renderUser = doc => {
       const material = doc.data();
       console.log(material)
       const li = `
-    
+     <tr id='${doc.id}' data-id='${doc.id}'>
     <td>${doc.data().materialGroup}</td>
        <td>${doc.data().materialName}</td>
       <td>${doc.data().materialClassId}</td>
@@ -667,7 +667,6 @@ const editUI = (user) => {
     console.log("not an admin")
   }
 }
-
 
 
 

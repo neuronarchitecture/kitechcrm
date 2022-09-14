@@ -110,6 +110,73 @@ font-family: 'Lato', sans-serif;
   border-radius: 1rem;
 }
 
+.search-input {
+  border: none;
+  outline: none;
+  font-family: "Fira Sans", sans-serif;
+    padding: 0.6em 1em;
+    background-color: transparent;
+    text-align: center;
+      padding: 0.6em 1em;
+      font-weight: 600;
+    color: #141414;
+}
+
+.field_multiselect_help {
+  position: absolute;
+  max-width: 100%;
+  background-color: #fff;
+  top: -48px;
+  left: 0;
+  opacity: 0;
+}
+
+.field_select {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  width: 100%;
+
+  border: 2px solid #cdd6f3;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  box-sizing: border-box;
+  outline-color: #cdd6f3;
+  z-index: 6;
+}
+
+.field_select[multiple] {
+  overflow-y: auto;
+}
+.field_select option {
+  display: block;
+  padding: 8px 16px;
+  width: calc(370px - 32px);
+  cursor: pointer;
+  &:checked {
+    background-color: #eceff3;
+  }
+  &:hover {
+    background-color: #d5e8fb;
+  }
+}
+
+
+.field_select {
+  display: none; 
+}
+
+.field_select {
+  display: block;
+}
+
+
+#formfloat {
+  display: flex;
+    float: right;
+    width: 25%;
+    justify-content: flex-end;
+}
 
 .btnpr {
   background: transparent;
