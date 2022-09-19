@@ -43,6 +43,7 @@ const partsName = document.querySelector('.partsName')
 const materiallist = document.querySelector('.materiallist')
 
 const subslist = document.querySelector('.subslist')
+const addPartsForm = document.querySelector('#addPartsForm')
 
 // materials edit references
 
@@ -86,15 +87,14 @@ let id;
 const renderUser = doc => {
   const tr = `
     <tr data-id='${doc.id}'>
-      <td>${doc.data().partNumber}</td>
      <td>${doc.data().partName}</td>
-    
-      <td>${doc.data().partSpecs}</td>
-        <td>${doc.data().partMassg}</td>
-         <td>${doc.data().reusedPart}</td>
-   
-    
-        
+      <td>${doc.data().partMN}</td>
+      <td>${doc.data().partClass}</td>
+        <td>${doc.data().partWeight}</td>
+         <td>${doc.data().partSize}</td>
+           <td>${doc.data().reusedPart}</td>
+     <td>${doc.data().partRegisteredDate}</td>
+           <td>${doc.data().partMemo}</td>
 
 
          <td>
@@ -140,7 +140,7 @@ const renderUser = doc => {
 
   <td>
 <div class="btngroup">
-     <span href="#" id="btnpmview" class="button btn-large btnpmviewSubs" data-id='${doc.id}' data-toggle="modaly" data-target="#exampleModalScrollableSubstances" >View Substances</span>
+     <span href="#" id="btnpmviewSubs" class="button btn-large btnpmviewSubs" data-id='${doc.id}' data-toggle="modal" data-target="#exampleModalScrollableSubstances" >View Substances</span>
      <div class="button-dropdown" >
         <a class="button toggle" style="padding: 1.5em 0.3em;"></a>
         <ul class="dropdown">
@@ -165,7 +165,7 @@ const renderUser = doc => {
     materiallist.insertAdjacentHTML('beforeend', html)
   }
   
-   db.collection('recycledparts').doc(`${doc.id}`).collection('materials').get().then(snapshot => {
+   db.collection('recycledparts').doc(`${doc.id}`).collection('materials').onSnapshot(snapshot => {
     setupMaterialUI(snapshot.docs)
     let partId = doc.id
     console.log(partId)
@@ -304,7 +304,7 @@ substancelisttable.innerHTML = "";
 
     substancelisttable.insertAdjacentHTML('beforeend', html)
   }
- db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').get().then(snapshot => {
+ db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').onSnapshot(snapshot => {
   setupSubstanceUI(snapshot.docs)
  })
   })
@@ -402,18 +402,15 @@ addModalyParts.reset();
     id = doc.id;
     editHeader.innerHTML = 'Edit ' + doc.data().partName
     editmodalyForm.editpartName.value = doc.data().partName;
-    editmodalyForm.editpartNumber.value = doc.data().partNumber;
-    editmodalyForm.editpartSpecs.value = doc.data().partSpecs;
-    editmodalyForm.editpartMassgEA.value = doc.data().partMassgEA;
-    editmodalyForm.editpartMassg.value = doc.data().partMassg;
-    editmodalyForm.editpartMassPerc.value = doc.data().partMassPerc;
+    editmodalyForm.editpartMN.value = doc.data().partMN;
+    editmodalyForm.editpartClass.value = doc.data().partClass;
+    editmodalyForm.editpartWeight.value = doc.data().partWeight;
+    editmodalyForm.editpartSize.value = doc.data().partSize;
     editmodalyForm.editreusedPart.value = doc.data().reusedPart;
-    editmodalyForm.editsupplierInfo.value = doc.data().supplierInfo;
-    editmodalyForm.editsubstancelist.value = doc.data().substancelist;
+     editmodalyForm.editpartregisteredDate.value = doc.data().partRegisteredDate;
+    editmodalyForm.editMemo.value = doc.data().partMemo;
     
 
-    
-    //edit the parts section
     
 
 
@@ -485,13 +482,13 @@ btnprAdd.addEventListener('click', () => {
   addmodaly.classList.add('modaly-show');
 
   addModalyForm.addpartName.value = '';
-  addModalyForm.addpartNumber.value = '';
-  addModalyForm.addpartSpecs.value = '';
-  addModalyForm.addpartMassgEA.value = '';
-  addModalyForm.addpartMassg.value = '';
-  addModalyForm.addpartMassPerc.value = '';
+  addModalyForm.addpartMN.value = '';
+  addModalyForm.addpartClass.value = '';
+  addModalyForm.addpartWeight.value = '';
+  addModalyForm.addpartSize.value = '';
   addModalyForm.addreusedPart.value = '';
-  addModalyForm.addsupplierInfo.value = '';
+    addModalyForm.addpartregisteredDate.value = '';
+  addModalyForm.addMemo.value = '';
 
 
 
@@ -516,6 +513,9 @@ window.addEventListener('click', e => {
   }
    if(e.target === addmodalySubssSingle) {
     addmodalySubssSingle.classList.remove('modaly-show');
+  }
+     if(e.target === addmodalyPartsSingle) {
+    addmodalyPartsSingle.classList.remove('modaly-show');
   }
  
 });
@@ -554,38 +554,35 @@ db.collection('recycledparts').onSnapshot(snapshot => {
 
 
 // Click submit in add modaly
-addModalyForm.addEventListener('submit', e => {
+addPartsForm.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledparts').add({
    partName: addModalyForm.addpartName.value,
-    partNumber: addModalyForm.addpartNumber.value,
-    partSpecs: addModalyForm.addpartSpecs.value,
-    partMassgEA: addModalyForm.addpartMassgEA.value,
-    partMassg: addModalyForm.addpartMassg.value,
-    partMassPerc: addModalyForm.addpartMassPerc.value,
+    partMN: addModalyForm.addpartMN.value,
+    partClass: addModalyForm.addpartClass.value,
+    partWeight: addModalyForm.addpartWeight.value,
+    partSize: addModalyForm.addpartSize.value,
     reusedPart: addModalyForm.addreusedPart.value,
-    supplierInfo: addModalyForm.addsupplierInfo.value,
+    partRegisteredDate: addModalyForm.addpartregisteredDate.value,
+    partMemo: addModalyForm.addMemo.value
     
   });
-  modalyWrapper.classList.remove('modaly-show');
 });
 
 
 // Click submit in edit modaly
-editmodalyForm.addEventListener('submit', e => {
+editmodalyForm.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledparts').doc(id).update({
  partName: editmodalyForm.editpartName.value,
-    partNumber: editmodalyForm.editpartNumber.value,
-    partSpecs: editmodalyForm.editpartSpecs.value,
-    partMassgEA: editmodalyForm.editpartMassgEA.value,
-    partMassg: editmodalyForm.editpartMassg.value,
-    partMassPerc: editmodalyForm.editpartMassPerc.value,
+    partNumber: editmodalyForm.editpartMN.value,
+    partClass: editmodalyForm.editpartClass.value,
+    partWeight: editmodalyForm.editpartWeight.value,
+    partSize: editmodalyForm.editpartSize.value,
     reusedPart: editmodalyForm.editreusedPart.value,
-    supplierInfo: editmodalyForm.editsupplierInfo.value,
-    substancelist: editmodalyForm.editsubstancelist.value,
+    partRegisteredDate: editmodalyForm.editpartregisteredDate.value,
+    partMemo: editmodalyForm.editMemo.value
   });
-  editmodaly.classList.remove('modaly-show');
   });
 
 

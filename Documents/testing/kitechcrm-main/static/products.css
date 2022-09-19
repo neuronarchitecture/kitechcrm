@@ -145,13 +145,13 @@ font-family: 'Lato', sans-serif;
   z-index: 6;
 }
 
-.field_select[multiple] {
+/* .field_select[multiple] {
   overflow-y: auto;
 }
 .field_select option {
   display: block;
   padding: 8px 16px;
-  width: calc(370px - 32px);
+
   cursor: pointer;
   &:checked {
     background-color: #eceff3;
@@ -168,8 +168,14 @@ font-family: 'Lato', sans-serif;
 
 .field_select {
   display: block;
-}
+} */
 
+
+option {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
 
 #formfloat {
   display: flex;

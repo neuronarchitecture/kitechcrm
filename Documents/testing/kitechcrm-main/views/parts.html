@@ -247,12 +247,15 @@
     <div class="table-wrapper">
       <table class="table-users" id="myTableMat">
         <tr>
- <th>Part Number</th>
+
              <th>Part Name</th>
-         
           <th>Model Name</th>
-            <th>Part Mass (g)</th>
-             <th>Reusable Parts </th>
+            <th>Part Class</th>
+            <th>Part Weight (g)</th>
+              <th>Part Size</th>
+                <th>Reused Parts</th>
+                  <th>Registred Date</th>
+             <th>Memo </th>
      
         
         
@@ -288,9 +291,8 @@
                         <!-- fieldsets -->
                      
                         <fieldset >
-                     
                            <div class="form-card text-left">
-                             <div class="row "> 
+                             <div class="row"> 
                              <div class="row error"> 
                                 <!-- <h3>
                                     해당 데이터를 확인할 권한이 없습니다
@@ -298,56 +300,50 @@
                               </div>
                             </div>
                          
-                            <div class="row" style="    justify-content: flex-end;">
+                            <div class="row">
                            
                                 <div class="col-md-12">
                                 </div>  
                                 <div class="col-md-7">                      
                                     <div class="form-group">
                                         <label>Part Name *</label>
-                                        <input type="text" class="form-control" id='editpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="addpartName" required>
+                                        <input type="text" class="form-control" id='addpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="addpartName" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>    
-                                <div class="col-md-5">
+                                  <div class="col-md-5"> 
                                     <div class="form-group">
-                                        <label>Part Number</label>
-                                        <input type="text" class="form-control"  id='partNumber'placeholder="Enter Part Number" data-errors="Please Part number." name="addpartNumber" required>
+                                        <label>Part Model Name *</label>
+                                        <input type="text" class="form-control" id='addpartMN' placeholder="Enter part Model Name" data-errors="Please Model Name." name="addpartMN" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
-                                <div class="col-md-12"> 
-                                    <div class="form-group">
-                                        <label>Part Specs</label>
-                                        <input type="text" class="form-control" id='editpartSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="addpartSpecs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
+                             
                                 <div class="col-md-3"> 
                                     <div class="form-group">
-                                        <label>Part Mass (g/EA) *</label>
-                                        <input type="number" class="form-control" id='editpartMassgEA'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
+                                        <label>Part Class *</label>
+                                        <input type="text" class="form-control" id='addpartClass'placeholder="Please part class" data-errors="Please part class." name="addpartClass" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-3"> 
                                     <div class="form-group">
-                                        <label>Part Mass (g) *</label>
-                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
+                                        <label>Part Weight (g) *</label>
+                                        <input type="number" class="form-control" id='addpartWeight'placeholder="Please part weight" data-errors="Please part weight." name="addpartWeight" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-6"> 
                                     <div class="form-group">
-                                        <label>Part Mass (%) *</label>
-                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
+                                        <label>Part Size (mm x mm x mm) *</label>
+                                        <input type="text" class="form-control" id='addpartSize' placeholder="Please part size (mm x mm x mm)" data-errors="Please part size." name="addpartSize" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                    <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Reused Part</label>
-                                      <select name="addreusedPart" id="editpartClass" class="selectpicker form-control" data-style="py-0">
+                                      <select name="addreusedPart" id="addpartClass" class="selectpicker form-control" data-style="py-0">
                                        <option>Select Option</option>
                                        <option>Yes</option>
                                        <option>No</option>
@@ -357,17 +353,26 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
                                     <div class="form-group">
-                                     <label>Supplier Info</label>
-                                        <input type="text" class="form-control" id='editcompanyName'placeholder="Enter name" data-errors="Please Enter name." name="addsupplierInfo" required>
+                                     <label>Registration Date</label>
+                                        <input type="datetime-local" class="form-control" id='addpartregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="addpartregisteredDate" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                            
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='addMemo'placeholder="Enter Memo" data-errors="Please Enter Memo." name="addMemo" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                             
+                                
+                                
                          
                            
-                        <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-left mr-3" value="Previous" >Add Part</button>
+                        <button  id="addPartsForm" class="btn btn-primary btn-light  previous action-button-previous float-left mr-3" value="Previous" >Add Part</button>
                                      
                                 </fieldset>
                                 
@@ -420,45 +425,39 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>    
-                                <div class="col-md-5">
+                                  <div class="col-md-5"> 
                                     <div class="form-group">
-                                        <label>Part Number</label>
-                                        <input type="text" class="form-control"  id='partNumber'placeholder="Enter Part Number" data-errors="Please Part number." name="editpartNumber" required>
+                                        <label>Part Model Name *</label>
+                                        <input type="text" class="form-control" id='editpartMN' placeholder="Enter part Model Name" data-errors="Please Model Name." name="editpartMN" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
-                                <div class="col-md-12"> 
-                                    <div class="form-group">
-                                        <label>Part Specs</label>
-                                        <input type="text" class="form-control" id='editpartSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="editpartSpecs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
+                             
                                 <div class="col-md-3"> 
                                     <div class="form-group">
-                                        <label>Part Mass (g/EA) *</label>
-                                        <input type="number" class="form-control" id='editpartMassgEA'placeholder="Please part mass" data-errors="Please part mass." name="editpartMassgEA" required>
+                                        <label>Part Class *</label>
+                                        <input type="text" class="form-control" id='editpartClass'placeholder="Please part class" data-errors="Please part class." name="editpartClass" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-3"> 
                                     <div class="form-group">
-                                        <label>Part Mass (g) *</label>
-                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="editpartMassg" required>
+                                        <label>Part Weight (g) *</label>
+                                        <input type="number" class="form-control" id='editpartWeight'placeholder="Please part weight" data-errors="Please part weight." name="editpartWeight" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-6"> 
                                     <div class="form-group">
-                                        <label>Part Mass (%) *</label>
-                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="editpartMassPerc" required>
+                                        <label>Part Size (%) *</label>
+                                        <input type="text" class="form-control" id='editpartSize' placeholder="Please part size (mm x mm x mm)" data-errors="Please part size." name="editpartSize" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                    <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Reused Part</label>
-                                      <select name="editreusedPart" id="editpartClass" class="selectpicker form-control" data-style="py-0">
+                                      <select name="editreusedPart" id="editreusedPart" class="selectpicker form-control" data-style="py-0">
                                        <option>Select Option</option>
                                        <option>Yes</option>
                                        <option>No</option>
@@ -468,10 +467,17 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                  <div class="col-md-6">
                                     <div class="form-group">
-                                     <label>Supplier Info</label>
-                                        <input type="text" class="form-control" id='editcompanyName'placeholder="Enter name" data-errors="Please Enter name." name="editsupplierInfo" required>
+                                     <label>Registration Date</label>
+                                        <input type="datetime-local" class="form-control" id='editpartregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editpartregisteredDate" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='editMemo'placeholder="Enter Memo" data-errors="Please Enter Memo." name="editMemo" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -1095,7 +1101,7 @@
       
     <!--View Data table tree Substance-->
 
-      <div class="modal fade" id="exampleModalScrollableSubstances" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal fade" id="exampleModalScrollableSubstances" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableSubstances" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                            <div class="modal-content">
                               <div class="modal-header">

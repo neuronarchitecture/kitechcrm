@@ -31,6 +31,7 @@ const editmodaly = document.querySelector('.edit-modaly');
 const editmodalyForm = document.querySelector('.edit-modaly .form');
 const btnprAdd = document.querySelector('.btnpr-add');
 const tableUsers = document.querySelector('.table-users');
+const editForm = document.querySelector('#editForm');
 
 // modaly view
 const viewmodaly = document.querySelector('.view-modaly');
@@ -75,15 +76,14 @@ let id;
 const renderUser = doc => {
   const tr = `
     <tr data-id='${doc.id}'>
-     <td><img src="./productimage.png" style="height: 60px;
-    width: 60px;" alt=""></td>
      <td>${doc.data().productCategory}</td>
       <td>${doc.data().productName}</td>
-      <td>${doc.data().productClass}</td>
-      <td>${doc.data().productSpecs}</td>
+      <td>${doc.data().productMN}</td>
       <td>${doc.data().productWeight}</td>
-        <td>${doc.data().productNumber}</td>
+      <td>${doc.data().productSize}</td>
+        <td>${doc.data().registeredDate}</td>
            <td>${doc.data().productStatus}</td>
+             <td>${doc.data().memo}</td>
 
 
     <td>
@@ -106,48 +106,6 @@ const renderUser = doc => {
   tableUsers.insertAdjacentHTML('beforeend', tr);
 
 
-// var productsRef = db.collection("recycledproducts");
-// productsRef.where("productName", "==", "testparts")
-// .get()
-// .then((querySnapshot) => {
-//         querySnapshot.forEach((doc) => {
-//             // doc.data() is never undefined for query doc snapshots
-//             console.log(doc.id, " => ", doc.data());
-//         });
-//     })
-//     .catch((error) => {
-//         console.log("Error getting documents: ", error);
-//     });
-
-//add parts
-//  const btnpraddSubstances = document.querySelector(`[data-id='${doc.id}'] .btnpr-addSubs`);
-// btnpraddSubstances.addEventListener('click', () => {
-//   addmodalySubssSingle.classList.add('modaly-show');
-
-//   addModalySubs.addmaterialName.value = '';
-
-//    addModalyParts.addEventListener('submit', e => {
-//   e.preventDefault();
-//   // console.log(doc.id, " => ", doc.data());
-//   db.collection('recycledproducts').doc(`${doc.id}`).collection('substances').add({
-//     substanceName: addModalySubs.addmaterialName.value,
-//     substanceGroup: addModalySubs.addmaterialGroup.value,
-//     substanceClassId: addModalySubs.addmaterialClassID.value,
-//     substanceRecycleContent: addModalySubs.addmaterialRecycleContent.value,
-//     substanceRecycleType: addModalySubs.addmaterialRecycleType.value,
-//     substanceMassg: addModalySubs.addmaterialMassg.value,
-//     substanceMassPerc: addModalySubs.addmaterialMassPerc.value
-    
-  
-//   })})
-
- 
-
-//   })
-
-
-
-
 
 
 
@@ -160,47 +118,7 @@ const renderUser = doc => {
   const viewpartspr = document.querySelector(`[data-id='${doc.id}'] .viewbtn`);
   viewpartspr.addEventListener('click', ()=> {
 
-    //click add parts button
-//  const setupPartsUI = (data) => {
-//     let html = '';
-//     data.forEach(doc=> {
-//       const material = doc.data();
-//       console.log(material)
-//       const li = `
-//        <tr data-id='${doc.id}'>
-//       <td>${doc.data().materialGroup}</td>
-//      <td>${doc.data().materialName}</td>
-//       <td>${doc.data().materialClassId}</td>
-//        <td>${doc.data().materialRecycleContent}</td>
-//         <td>${doc.data().materialRecycleType}</td>
-//          <td>${doc.data().materialMassg}</td>
-//      <td>${doc.data().materialMassPerc}</td>
-//       <td>
-//         <div class="row">
-      
-//       <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-       
-//         <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
-//         </td>
-//         </div>
-      
-
-      
-    
-//     </tr>
-//       `;
-//       html+=li
-//     })
-
-//     partslist.insertAdjacentHTML('beforeend', html)
-  // }
   
-  //  db.collection('recycledproducts').doc(`${doc.id}`).collection('materials').get().then(snapshot => {
-  //   setupMaterialUI(snapshot.docs)
-  //  })
-
-
-   
    
       // Get a reference from the dom to the tree elements
      const treeproducttitle = document.querySelector('.treeproducttitle')
@@ -231,29 +149,6 @@ const renderUser = doc => {
 
 //add parts 
  const btnpredit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
-// const addPart = document.querySelector('.addPart')
-// btnpredit.addEventListener('click', () => {
-//     console.log(doc.id, " => ", doc.data());
-//    addPart.addEventListener('click', e => {
-//   e.preventDefault();
-
-//   db.collection('recycledproducts').doc(`${doc.id}`).collection('parts').add({
-//     partNumber: partNumber.value,
-//     partSpecs: partSpecs.value,
-//     partMassgEA: partMassgEA.value,
-//     partMassg: partMassg.value,
-//     partMassPerc: partMassPerc.value,
-//     reusedPart: partClass.value,
-//     companyName: companyName.value,
-    
-//   })
-//   // materialtitle.innerHTML = `${doc.data().partName}`
-
-//     //view parts list for a single product
- 
-
-// })
-// })
 
  const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addPP`);
 btnpraddParts.addEventListener('click', () => {
@@ -356,13 +251,14 @@ addPPForm.reset();
     const editHeader = document.querySelector('.editheader')
     id = doc.id;
     editHeader.innerHTML = 'Edit ' + doc.data().productName
+     editmodalyForm.productCategory.value = doc.data().productCategory;
     editmodalyForm.productName.value = doc.data().productName;
-    editmodalyForm.productSpecs.value = doc.data().productSpecs;
-    editmodalyForm.productClass.value = doc.data().productClass;
+       editmodalyForm.editmodelName.value = doc.data().productMN;
     editmodalyForm.productWeight.value = doc.data().productWeight;
-    editmodalyForm.productNumber.value = doc.data().productNumber;
-    editmodalyForm.productCategory.value = doc.data().productCategory;
-      editmodalyForm.productStatus.value = doc.data().productStatus;
+    editmodalyForm.editproductSize.value = doc.data().productSize;
+    editmodalyForm.editregisteredDate.value = doc.data().registeredDate;
+    editmodalyForm.editproductStatus.value = doc.data().productStatus;
+      editmodalyForm.editMemo.value = doc.data().memo;
   });
 
 
@@ -390,8 +286,6 @@ addPPForm.reset();
 //   });
 // })
 
-  
-
   //  // get subcollection data 
   // const btnprget = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
   // btnprget.addEventListener('click', () => {
@@ -409,14 +303,6 @@ addPPForm.reset();
   //   });
   // });
 
-  
-
-
-
-
-
-
-
 }
  
 
@@ -427,14 +313,14 @@ addPPForm.reset();
 // Click add user button
 btnprAdd.addEventListener('click', () => {
   addmodaly.classList.add('modaly-show');
-
+ addModalyForm.productCategory.value = '';
   addModalyForm.productName.value = '';
-  addModalyForm.productSpecs.value = '';
-  addModalyForm.productClass.value = '';
+  addModalyForm.productMN.value = '';
   addModalyForm.productWeight.value = '';
-  addModalyForm.productNumber.value = '';
-  addModalyForm.productCategory.value = '';
+  addModalyForm.productSize.value = '';
+   addModalyForm.registeredDate.value = '';
   addModalyForm.productStatus.value = '';
+    addModalyForm.memo.value = '';
 
 
   
@@ -502,14 +388,14 @@ const addProduct = document.querySelector('.addProduct')
 addProduct.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledproducts').add({
-    productName: addModalyForm.productName.value,
-    productSpecs: addModalyForm.productSpecs.value,
-    productClass: addModalyForm.productClass.value,
-    productWeight: addModalyForm.productWeight.value,
-    productNumber: addModalyForm.productNumber.value,
     productCategory: addModalyForm.productCategory.value,
+    productName: addModalyForm.productName.value,
+    productMN: addModalyForm.productMN.value,
+    productWeight: addModalyForm.productWeight.value,
+    productSize: addModalyForm.productSize.value,
+    registeredDate: addModalyForm.registeredDate.value,
     productStatus: addModalyForm.productStatus.value,
-    
+    memo: addModalyForm.memo.value
 
     
 
@@ -525,16 +411,17 @@ addProduct.addEventListener('click', e => {
 
 
 // Click submit in edit modaly
-editmodalyForm.addEventListener('submit', e => {
+editForm.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledproducts').doc(id).update({
-    productName: editmodalyForm.productName.value,
-    productSpecs: editmodalyForm.productSpecs.value,
-    productClass: editmodalyForm.productClass.value,
-    productWeight: editmodalyForm.productWeight.value,
-    productNumber: editmodalyForm.productNumber.value,
     productCategory: editmodalyForm.productCategory.value,
-   productStatus: editmodalyForm.productStatus.value
+    productName: editmodalyForm.productName.value,
+    productMN: editmodalyForm.editmodelName.value,
+    productWeight: editmodalyForm.productWeight.value,
+    productSize: editmodalyForm.editproductSize.value,
+    registeredDate: editmodalyForm.editregisteredDate.value,
+   productStatus: editmodalyForm.editproductStatus.value,
+   memo: editmodalyForm.editMemo.value
      
   });
   });
@@ -625,7 +512,7 @@ const editUI = (user) => {
 //         console.log("Error getting documents: ", error);
 //     });
 
-
+const multiParts = document.querySelector('.multiParts')
 
   db.collection("recycledparts")
     .get()
@@ -653,9 +540,9 @@ const editUI = (user) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
            const tm = `
-      <option>${doc.data().partName}</option>
+      <option value="${doc.data().partName} ">${doc.data().partName}</option>
   `;
-
+multiParts.insertAdjacentHTML('beforeend', tm);
    partname.insertAdjacentHTML('beforeend', tm);
  
         });
@@ -712,3 +599,75 @@ checkpartdata.addEventListener('click', () => {
 //     });
 
 // 
+document.querySelector('.multiParts').onclick =  function() {
+    var selected = [];
+    for (var option of document.querySelector('.multiParts').options)
+    {
+        if (option.selected) {
+            selected.push(option.value);
+        }
+    }
+const docData = {AddedParts: selected}
+const addPProduct = document.querySelector('.addPartsProduct');
+addPProduct.addEventListener('click', ()=> {
+db.collection("recycledproducts").doc("KjIkTS9Cl3RYKGbZDm3h").update(docData);
+})
+
+
+
+
+
+  //  for (var i = 0; i < selected.length; i++) {
+  //       console.log("Current item: " + selected[i]);
+  //     const docRef = db.collection("recycledparts").where("partName" , "==", selected[i])
+  //     docRef.get()
+  //    .then((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //           // doc.data() is never undefined for query doc snapshots
+  //           console.log(doc.data());
+  //       });
+  //   })
+  //   .catch((error) => {
+  //       console.log("Error getting documents: ", error);
+  //   });
+  //     }
+
+
+
+
+
+  // console.log(element)
+  // console.log(typeof element)
+  // const docRef = db.collection("recycledparts").where("partName" , "==", multiParts.value)
+  //        docRef.get()
+  //    .then((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //           // doc.data() is never undefined for query doc snapshots
+  //           console.log(doc.data());
+  //       });
+  //   })
+  //   .catch((error) => {
+  //       console.log("Error getting documents: ", error);
+  //   });
+
+  
+}
+//     const addPProduct = document.querySelector('.addPartsProduct');
+ 
+//  for (const el of selected) {
+//   const docRef = db.collection('recycledparts').document(`${el}`)
+//         docRef.get().then((doc) => {
+//     if (doc.exists) {
+//         console.log("Document data:", doc.data());
+//     } else {
+//         // doc.data() will be undefined in this case
+//         console.log("No such document!");
+//     }
+// }).catch((error) => {
+//     console.log("Error getting document:", error);
+// });  }
+
+  
+
+
+

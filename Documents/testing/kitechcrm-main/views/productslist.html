@@ -228,32 +228,24 @@
             </div>
 
 
-               <div class="form-group" id="formfloat">
-                     <div class="input-group">
-                        <input type="text" class="form-control" id="myInputProd" style="margin: 0;" onkeyup='productSearch()' placeholder="Search Product Name" aria-label="Search Product Name"
-                           aria-describedby="basic-addon5">
-                        <div class="input-group-append">
-                           <span class="input-group-text" id="basic-addon5"><i class="las la-search font-size-20"></i></span>
-                        </div>
-                     </div>
-                       
-                     </div>
+            
         <!--Here starts the form-->
         
  <div class="tabledata">
    
     <div class="table-wrapper">
-      <table class="table-users" id="myTableProd"> 
+      <table class="table-users">
         <tr>
-            <th>Product Image</th>
+          
              <th>Product Category</th>
           <th>Product Name</th>
-          <th>Model Class</th>
-          <th>Product Specs</th>
+          <th>Model Model Name</th>
           <th>Product Weight</th>
-          <th>Model Name</th>
-          <th>Status</th>
-          <th>Action</th>
+          <th>Product Size</th>
+          <th>Registration Date</th>
+           <th>Registration Status</th>
+          <th>Memo</th>
+           <th>Action</th>
         </tr>
       </table>
     
@@ -293,52 +285,10 @@
                                  
                                  </div>
                               </div>
-                                     <div class="col-md-12">                      
-                                    <div class="form-group">
-                                        <label>Product Name *</label>
-                                        <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>    
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Product Number</label>
-                                        <input type="text" class="form-control"  id='productNumber'placeholder="Enter Product Number" data-errors="Please product number." name="editProductNumber" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                    <div class="row " >
-                                <div class="col-md-12">
-                                </div>  
-                                                     
-<!--                              
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
-                                    </div>
-                                </div> -->
-                            </div>  
-                              <div class="row">
-                                  <div class="col-md-12">
-                                    <div class="form-group">
-                                     <label>Product Class</label>
-                                        <input type="text" class="form-control" id='editproductClass'placeholder="Enter Code" data-errors="Please Enter Code." name="productClass" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                               
-                              </div>
-                           </div>
-                      
-                        
-                        
-                           <div class="form-card text-left">
-                          
-                              <div class="col-md-12">                      
-                                    <div class="form-group">
+                                 <div class="col-md-12"> 
+    <div class="form-group">
                                         <label>Product Category *</label>
-                                         <select class="partsName form-control" id="editproductCategory" name="productCategory" data-errors="Please Enter Product Category."  required>
+                                         <select class="partsName form-control"  id="editproductCategory" name="productCategory" data-errors="Please Enter Product Category."  required>
                                         
                                         
 <option>에어컨</option>
@@ -377,42 +327,68 @@
                                         <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
                                         <div class="help-block with-errors"></div>
                                     </div>
-                               <div class="row">  
-                                <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Product Specs</label>
-                                        <input type="text" class="form-control" id='editproductSpecs' placeholder="Enter Product Specs" data-errors="Please Product specs." name="productSpecs" required>
+                                 </div>
+                                     <div class="row">
+                                            <div class="col-md-6">  <div class="form-group">
+                                        <label>Product Name *</label>
+                                        <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required>
                                         <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Weight (g) *</label>
+                                    </div>   </div>                      
+                                       <div class="col-md-6">     <div class="form-group">
+                                        <label>Product Model Name *</label>
+                                        <input type="text" class="form-control" id='editproductMN' placeholder="Enter Product Model Name" data-errors="Please Enter Product Model Name." name="productMN" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div> </div>
+                                 
+                                </div>    
+                                <div class="col-md-12">
+                                       <div class="form-group">
+                                        <label>Product Weight (g) *</label>
                                         <input type="number" class="form-control" id='editproductWeight'placeholder="Enter Code" data-errors="Please product weight." name="productWeight" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
-                                </div>
-                                 </div>
-                                       <div class="row">  
-                                <div class="col-md-12"> 
-                                    
-                         <label>Add Multiple Parts </label>
-                   <select id="select-2" class="field_select" name="frameworks" multiple style="margin-bottom: 10%;">
-                  <option value="React">노즐</option>
-                  <option value="Vue">배터리 커버</option>
-                  <option value="Angular">샘플 부품</option>
-                  <option value="Ember">배터리 100W</option>
-                </select>
-                   <span > (You can select several items by pressing <b>Ctrl(or Command)+Element)</b></span>
-                  </div>
-
-                                       
                                 </div> 
+                                    <div class="row " >
+                                <div class="col-md-12">
+                                </div>  
+                                                     
+<!--                              
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
+                                    </div>
+                                </div> -->
+                            </div>  
+                              <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Product Size</label>
+                                        <input type="text" class="form-control" id='editproductSize'placeholder="Please Enter Product Size. (mm x mm x mm)" data-errors="Please Enter Product Size." name="productSize" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                               
+                              </div>
+                           </div>
+                      
+                        
+                        
+                           <div class="form-card text-left">
                           
-                                 </div>
+                                           
+                                  
+                               <div class="row">  
+                                <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Registered Date</label>
+                                        <input type="datetime-local" class="form-control" id='editregisteredDate' placeholder="Enter the registration date." data-errors="Please the right registration date." name="registeredDate" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
 
-                                       <div class="row" style="margin-top: 20%;">  
-                                <div class="col-md-12"> 
+                                      
+                                <div class="col-md-6"> 
                                     
                                   <div class="form-group">
                                         <label>Product Registration Status</label>
@@ -424,10 +400,40 @@
                                            </select>
                                         <div class="help-block with-errors"></div>
                                     </div>
-                                       
+                                </div> 
+                                 </div>
+                                     <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='editMemo' placeholder="Please Enter Memo." data-errors="Please Enter Memo." name="memo" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                               
+                              </div>
+                                       <div class="row">  
+                          
+                                       <div class="col-md-12"> 
+                                 <div class="form-group">
+                                        <label>Select Multiple Parts *</label>
+                                         <select class="multiParts form-control" multiple="multiple" id="multiParts" name="multiParts" data-errors="Please Enter Product Category."  style="    height: 20em;">
+                                        
+      
+
+                                           
+                                           </select>
+                                           <button class="addPartsProduct">Add Parts</button>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
                                 </div> 
                           
-                                 </div>
+                                
+                                 
+
+                            
 
 
                                   
@@ -548,29 +554,30 @@
                                 </div>    
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Product Number</label>
-                                        <input type="text" class="form-control"  id='productNumber'placeholder="Enter Product Number" data-errors="Please product number." name="editProductNumber" required>
+                                        <label>Product Model Name</label>
+                                        <input type="text" class="form-control"  id='editmodelName'placeholder="Enter Product Model Name" data-errors="Enter Product Model Name." name="editmodelName" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
+                            
                                 <div class="col-md-6"> 
                                     <div class="form-group">
-                                        <label>Product Specs</label>
-                                        <input type="text" class="form-control" id='editproductSpecs' placeholder="Enter Product Specs" data-errors="Please Product specs." name="productSpecs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                <div class="col-md-6"> 
-                                    <div class="form-group">
-                                        <label>Weight (g) *</label>
+                                        <label>Product Weight (g) *</label>
                                         <input type="number" class="form-control" id='editproductWeight'placeholder="Enter Code" data-errors="Please product weight." name="productWeight" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                    <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Product Size (mm x mm x mm)</label>
+                                        <input type="text" class="form-control" id='editproductSize' placeholder="Enter Product Size (mm x mm x mm)" data-errors="Enter Product Size (mm x mm x mm)" name="editproductSize" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                    <div class="col-md-12">
                                     <div class="form-group">
-                                     <label>Product Class</label>
-                                        <input type="text" class="form-control" id='editproductClass'placeholder="Enter Code" data-errors="Please Enter Code." name="productClass" required>
+                                     <label>Registration Date</label>
+                                        <input type="datetime-local" class="form-control" id='editregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editregisteredDate" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -578,13 +585,23 @@
                                   <div class="col-md-12"> 
                                         
                                   <div class="form-group">
-                                        <label>Product Registration Status</label>
-                                         <select class="productStatus form-control" id="editproductStatus" name="productStatus" data-errors="Please Enter Product Registration Status."  required>
+                                        <label>Registration Status</label>
+                                         <select class="productStatus form-control" id="editproductStatus" name="editproductStatus" data-errors="Please Enter Product Registration Status."  required>
                                             <option value="Complete">Complete</option>
                                             <option value="Processing">Processing</option>
                                             <option value="Ready">Ready</option>
                                            
                                            </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                       
+                                </div>
+                                    <div class="col-md-12"> 
+                                        
+                                  <div class="form-group">
+                                        <label>Memo</label>
+                                         <input type="text" class="productStatus form-control" id="editMemo" name="editMemo" data-errors="Please Enter Memo."  required>
+                                         
                                         <div class="help-block with-errors"></div>
                                     </div>
                                        
@@ -600,7 +617,7 @@
 
                               </div>
                            </div>
-                               <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Edit Product</button>
+                               <button  id="editForm" class="btn btn-primary btn-light action-button-previous float-right mr-3" value="Previous" >Edit Product</button>
                         </fieldset>
                    </form>
                  </div>
@@ -1021,10 +1038,13 @@
                         <li class="nav-item">
                            <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">부품 목록</a>
                         </li>
+                          <li class="nav-item">
+                           <a class="nav-link" id="pills-Accessment-tab-fill" data-toggle="pill" href="#Accessment" role="tab" aria-controls="Accessment" aria-selected="false">Accessment</a>
+                        </li>
                      
                      </ul>
                      <div class="tab-content" id="myTabContent-2">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
                              <tr data-id="2" data-parent="1" data-level="2">
                                <td class="" data-column="name">
                                      <div class="input-group mb-3">
@@ -1113,7 +1133,313 @@
                            </table>
                         </div>
                         </div>
+                         <div class="tab-pane fade show active" id="Accessment" role="tabpanel" aria-labelledby="Accessment-tab">
+                        
+                        <div  class="table-wrapper"> 
+                            <h1 style="margin: 25px;">제품 평가 보고서</h1>
+                                  
+                          <button type="button"  id="edit" class="buttony inline-block-child float-right" style="  position: -webkit-sticky;
+  position: sticky;"  >
+                                    <ul>
+                                        <li>Download</li>
+                                        <li>Downloading...</li>
+                                        <li>Success!</li>
+                                    </ul>
+                                    <div>
+                                        <svg viewBox="0 0 24 24"></svg>
+                                    </div>
+                                </button>
+                            <h4 style="margin: 10px; text-align:start;">1. 제품 개요</h4>
+                                  <table class="table table-hover">
+                      
+                        <tbody>
+                           <tr>
+                              <th scope="row">1</th>
+                              <td>제품 제조사명	</td>
+                              <td>(주)에이케이전자</td>
+                            
+                           </tr>
+                           <tr>
+                              <th scope="row">2</th>
+                              <td>제품 카데고리</td>
+                              <td>가정용 냉장고</td>
+                          
+                           </tr>
+                           <tr>
+                            <th scope="row">3</th>
+                              <td>제품명</td>
+                              <td>냉장고</td>
+                           </tr>
+                                <tr>
+                            <th scope="row">4</th>
+                              <td>제품모델명		</td>
+                              <td>Ref-001ss												</td>
+                           </tr>
+                                <tr>
+                            <th scope="row">5</th>
+                              <td>제품 중량		</td>
+                              <td>850x450x1600mm</td>
+                           </tr>
+                                <tr>
+                            <th scope="row">6</th>
+                              <td>제품 규격		</td>
+                              <td>120kg												</td>
+                           </tr>
+                                <tr>
+                            <th scope="row">7</th>
+                              <td>제품등록일		</td>
+                              <td>5/11/2021												</td>
+                           </tr>
+                                <tr>
+                            <th scope="row">8</th>
+                              <td>메모		
+		</td>
+                              <td>The assessment describes the theoretical recyclability. </td>
+                           </tr>
+                        </tbody>
+                                 </table>
+                        </div>
+                           <div  class="table-wrapper"> 
+                     
+                            <h4 style="margin-top: 25px; text-align:start;">2. 소재 구성</h4>
+                             <h5 style="margin: 20px; text-align:start;">2.1 소재 그룹 구성</h5>
+                            <table class="table table-hover">
+                        <thead class="thead-dark">
+                           <tr>
+                              <th scope="col">Material Group</th>
+                              <th scope="col">Weight(g)</th>
+                              <th scope="col">Ratio(%)</th>
+              
+                           </tr>
+                        </thead>
+                        <tbody >
+                           <tr>
+                          
+                              <td>Steels and ferrous materials	</td>
+                              <td>200			</td>
+                              <td>100.0%</td>
+                           </tr>
+                           <tr>
+                      
+                              <td>Non_ferrous metals and alloys		</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                           <tr>
+                  
+                              <td>Precious metals</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+                              <td>Non_metallic inorganic materials	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+             
+                              <td>Other inorganics	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+                    
+                              <td>Unfilled thermoplastics resin		</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+                        
+                              <td>Filled thermoplastics resin		</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
                        
+                              <td>Duromers	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+                       
+                              <td>Elastomers	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+                    
+                              <td>Natural materials	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+           
+                              <td>Other organics	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                              <tr>
+                     
+                              <td>Materials for product operation	</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                               <tr>
+                     
+                              <td>Others_mixing			</td>
+                              <td>0</td>
+                              <td>0.00%</td>
+                           </tr>
+                            <tr>
+                     
+                              <td>Total										</td>
+                              <td>200</td>
+                              <td>100.0%</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                        </div>
+
+                            <div  class="table-wrapper"> 
+                        
+                            <h5 style=" margin: 25px; text-align:start;">2.2 개별 소재 구성</h5>
+                                  <table class="table table-hover">
+                        <tbody >
+                               <thead class="thead-light">
+                           <tr>
+                              <th scope="col">Material Group</th>
+                              <th scope="col">Weight(g)</th>
+                              <th scope="col">Ratio(%)</th>
+              
+                           </tr>
+                        </thead>
+                           <tr>
+                              <th scope="row">Stainless steel </th>
+                              <td>200</td>
+                              <td>100,0%</td>
+                            
+                           </tr>
+                             <tr>
+                              <th scope="row">Total</th>
+                              <td>200</td>
+                              <td>100,0%</td>
+                            
+                           </tr>
+                           
+                        </tbody>
+                                 </table>
+                        </div>
+                             <div  class="table-wrapper"> 
+                            <h4 style="margin-top: 25px; margin-bottom: 25px; text-align:start;">3. 희소물질 평가 [EN45558]</h4>
+                            <table class="table table-hover">
+                        <thead class="thead-dark">
+                           <tr>
+                            <th scope="col">No.</th>
+                              <th scope="col">Part name</th>
+                              <th scope="col">Mass(g)		</th>
+                              <th scope="col">Mass(%)</th>
+                                <th scope="col">CRM/ROHS</th>
+                                <th scope="col">CAS No.</th>
+                           </tr>
+                        </thead>
+                        <tbody >
+                           <tr>
+                          
+                              <td>1	</td>
+                              <td>Circuit board						</td>
+                              <td>1</td>
+                              <td>2,04%		</td>
+                              <td>Beryllium					</td>
+                              <td>7440-41-7</td>
+                           </tr>
+                             <tr>
+                          
+                              <td>2	</td>
+                              <td>Circuit board						</td>
+                              <td>0.5</td>
+                              <td>1,02%		</td>
+                              <td>TBBA, unspecified							</td>
+                              <td>30496-13-0		</td>
+                           </tr>
+                                 <tr>
+                          
+                              <td>3</td>
+                              <td>Circuit board						</td>
+                              <td>0,1		</td>
+                              <td>,24%		</td>
+                              <td>TBBA							</td>
+                              <td>94676-1334		</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                        </div>
+                           <div  class="table-wrapper"> 
+                        
+                            <h4 style=" margin: 25px; text-align:start;">4. 재활용가능율 평가 [EN45555]</h4>
+                    <h5 style=" margin: 25px; text-align:start;">※ Simplified assessment:EN 45555 / WF-Rep tool Scenario</h5>
+                                  <table class="table table-hover">
+                        <tbody >
+                               <thead class="thead-light">
+                           <tr>
+                              <th scope="col">Indicator								</th>
+                              <th scope="col">Mass(g)			</th>
+                              <th scope="col">Mass(%)		</th>
+              
+                           </tr>
+                        </thead>
+                           <tr>
+                              <th scope="row">Reuse Weight (g)								
+								 </th>
+                              <td>0,0 			
+			</td>
+                              <td>0,0%		
+		</td>
+                            
+                           </tr>
+                             <tr>
+                              <th scope="row">Recycling Weight (g)</th>
+                              <td>200</td>
+                              <td>100,0%</td>
+                            
+                           </tr>
+                                 <tr>
+                              <th scope="row">Energy Recovery Weight (g)								
+								</th>
+                              <td>0,0 			
+			</td>
+                              <td>0,0%			
+			</td>
+                            
+                           </tr>
+                                 <tr>
+                              <th scope="row">Recovery Weight (g)								
+								</th>
+                              <td>200</td>
+                              <td>100,0%</td>
+                            
+                           </tr>
+                                 <tr>
+                              <th scope="row">Disposal Weight (g)								
+								</th>
+                              <td>0,0 			
+			</td>
+                              <td>0,0 %		
+			</td>
+                            
+                           </tr>
+                                 <tr>
+                              <th scope="row">Total Weight (g)								
+								</th>
+                              <td>200</td>
+                              <td>100,0%</td>
+                            
+                           </tr>
+                           
+                        </tbody>
+                                 </table>
+                        </div>
+                    
+                        </div>
                      </div>
                   </div>
                </div>            
@@ -1322,7 +1648,8 @@ const firebaseConfig = {
    
     <!-- Backend Bundle JavaScript -->
     <script src="./backend-bundle.min.js"></script>
-    
+<!--     
+      <script src="./multiselect-dropdown.js" ></script> -->
     <!-- Table Treeview JavaScript -->
     <script src="./table-treeview.js"></script>
  <script  type="module" src="./products.js" ></script>
@@ -1338,6 +1665,5 @@ const firebaseConfig = {
     <script src="./app.js"></script>
      <!-- <script   type="module" src="./auth.js" ></script> -->
      <script>feather.replace()</script>
-     <script src="./search.js" ></script>
   </body>
 </html>
