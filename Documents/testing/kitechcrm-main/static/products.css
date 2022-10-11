@@ -41,7 +41,7 @@ header h3 {
 
 .table-users {
   width: 100%;
-  margin: 2rem auto;
+  
   border-collapse: collapse;
   border-color: rgb(226, 2, 2);
   
@@ -252,7 +252,7 @@ option {
 .btnpr-add {
   width: fit-content;
   height: 3rem;
-  background: var(--primary-color);
+  background:#87CEF5;
   border: none;
   color: #fff;
   display: flex;
@@ -281,7 +281,7 @@ option {
   height: 100%;
   left: 0;
   top: 0;
-  background: #24232354;
+  background: #49464694;
   display: none;
 }
 
@@ -289,8 +289,8 @@ option {
   position: relative;
   background: #fff;
   z-index: 99999;
-  width: 70%;
-  left: 15%;
+  width: 90%;
+  left: 7%;
   -webkit-box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
   box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
@@ -742,8 +742,8 @@ flex-direction: row;
 
 
 .button {
-  border: 1px solid #7ee2ff;;
-  background: #7ee2ff;;
+ 
+  background: #87CEF5;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
@@ -778,7 +778,8 @@ flex-direction: row;
 }
 
 .button:hover {
-  background: #4eabc5;
+  color: white;
+  background: #156E9D;
   text-decoration: none;
 }
 

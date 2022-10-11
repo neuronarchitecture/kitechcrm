@@ -68,8 +68,15 @@ let PMmaterialMassg = document.getElementById('PMmaterialMassg')
   let addsubstanceMassPerc = document.querySelector('.addsubstanceMassPerc')
  let substancelisttable = document.querySelector('.substancelisttable')
  let delSubs = document.getElementById('delSubs')
-  
-  
+
+ let matnameSelect = document.querySelector('#editmaterialName');
+ let reuseMat = document.querySelector('#reuseMat');
+let recycMat = document.querySelector('#recycMat');
+let recovMat = document.querySelector('#recovMat');
+ let selecreuseMat = document.querySelector('#selecreuseMat');
+let selecrecycMat = document.querySelector('#selecrecycMat');
+let selecrecovMat = document.querySelector('#selecrecovMat');
+let selectiveMat = document.querySelector('#selectiveMat')
 // order and filtering 
 let id;
 
@@ -241,7 +248,7 @@ db.collection("substances")
     });
 
  getSubsname.addEventListener('click', ()=> {
- db.collection("substances").where("subtanceName", "==", getsubstancelist.value).where(`${getsubstancetype.value}`, "==", "Y").get()
+ db.collection("substances").where("subtanceName", "==", getsubstancelist.value).where(getsubstancetype.value, "==", "Y").get()
       .then((querySnapshot)=> {
            querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
@@ -262,7 +269,16 @@ db.collection("substances")
   
 addSubs.addEventListener('click', (e)=> {
   e.preventDefault();
- db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').add({
+     let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + s4() 
+}
+ db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').doc(guid()).set({
     substanceName: getsubstancelist.value,
     casnumber: addcas.value,
     crm: addcrm.value,
@@ -347,15 +363,31 @@ substancelisttable.innerHTML = "";
 
 //add materials 
  const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
-btnpraddParts.addEventListener('click', () => {
-  addmodalyPartsSingle.classList.add('modaly-show');
+btnpraddParts.addEventListener('click', (e) => {
+  e.preventDefault();
+  db.collection('recylcedparts').doc(`${doc.id}`).get().then(()=>{
+    let partData = doc.data()
+    console.log(partData);
+     addmodalyPartsSingle.classList.add('modaly-show');
 
   addModalyParts.addmaterialName.value = '';
 
    addModalyParts.addEventListener('submit', e => {
   e.preventDefault();
+   let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + s4() 
+}
+
+
   // console.log(doc.id, " => ", doc.data());
-  db.collection('recycledparts').doc(`${doc.id}`).collection('materials').add({
+  db.collection('recycledparts').doc(`${doc.id}`).collection('materials').doc(guid()).set({
+    partRef: partData.partName,
     materialName: addModalyParts.addmaterialName.value,
     materialGroup: addModalyParts.addmaterialGroup.value,
     materialClassId: addModalyParts.addmaterialClassID.value,
@@ -363,6 +395,14 @@ btnpraddParts.addEventListener('click', () => {
     materialRecycleType: addModalyParts.addmaterialRecycleType.value,
     materialMassg: addModalyParts.addmaterialMassg.value,
     materialMassPerc: addModalyParts.addmaterialMassPerc.value,
+    recovMat: recovMat.value,
+    recycMat: recycMat.value,
+    reuseMat: reuseMat.value,
+    selecrecovMat: selecrecovMat.value,
+    selecrecycMat: selecrecycMat.value,
+    selecreuseMat: selecreuseMat.value,
+    matnameSelect: matnameSelect.value,
+    selectiveMat: selectiveMat.value,
     
   })
 setTimeout(resetForm, 5000);
@@ -371,8 +411,87 @@ addModalyParts.reset();
 }
 
 })
-
+  })
  
+db.collection("materialsdb")
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+           const tm = `
+      <option>${doc.data().재료명}</option>
+  // `;
+  const addmaterialOptions = document.querySelector('#editmaterialName')
+   const editmaterialOptions = document.querySelector('.editmaterialName')
+  addmaterialOptions.insertAdjacentHTML('beforeend', tm);
+    editmaterialOptions.insertAdjacentHTML('beforeend', tm);
+  // editmodalyForm.editsubstancelist.insertAdjacentHTML('beforeend', tm);
+ 
+        });
+    })
+
+db.collection("selectivematerials")
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+           const tm = `
+      <option>${doc.data().selectiveMaterials}</option>
+  // `;
+  const addmaterialOptions = document.querySelector('#selectiveMat')
+   const editmaterialOptions = document.querySelector('.selectiveMat')
+  addmaterialOptions.insertAdjacentHTML('beforeend', tm);
+    editmaterialOptions.insertAdjacentHTML('beforeend', tm);
+  // editmodalyForm.editsubstancelist.insertAdjacentHTML('beforeend', tm);
+ 
+        });
+    })
+   
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+
+ matnameSelect.addEventListener('change', () => {
+  console.log(matnameSelect.value);
+  db.collection("materialsdb").where('재료명', '==', matnameSelect.value)
+    .get()
+       .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            recovMat.value = doc.data().Recoverability
+            recycMat.value = doc.data().Recyclability
+            reuseMat.value = doc.data().Reusabiity
+        });
+    })
+});
+ let selectiveMat = document.getElementById("selectiveMat");
+let seleccheckbox = document.querySelector('.seleccheckbox');
+seleccheckbox.addEventListener('click', ()=> {
+  if(seleccheckbox.checked == true) {
+selectiveMat.removeAttribute('disabled')
+  } else {
+    selectiveMat.setAttribute("disabled", "disabled") 
+  }
+}
+      )
+ selectiveMat.addEventListener('change', () => {
+  console.log(matnameSelect.value);
+  db.collection("selectivematerials").where('selectiveMaterials', '==', selectiveMat.value)
+    .get()
+       .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            selecrecovMat.value = doc.data().recoverability
+            selecrecycMat.value = doc.data().recyclability
+            selecreuseMat.value = doc.data().reusability
+        });
+    })
+});
+ 
+
+    
 
   })
 
@@ -401,6 +520,7 @@ addModalyParts.reset();
     const editHeader = document.querySelector('.editheader')
     id = doc.id;
     editHeader.innerHTML = 'Edit ' + doc.data().partName
+    editmodalyForm.editsupplierName.value = doc.data().supplierName;
     editmodalyForm.editpartName.value = doc.data().partName;
     editmodalyForm.editpartMN.value = doc.data().partMN;
     editmodalyForm.editpartClass.value = doc.data().partClass;
@@ -557,9 +677,10 @@ db.collection('recycledparts').onSnapshot(snapshot => {
 addPartsForm.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledparts').add({
+     supplierName: addModalyForm.addsupplierName.value,
    partName: addModalyForm.addpartName.value,
     partMN: addModalyForm.addpartMN.value,
-    partClass: addModalyForm.addpartClass.value,
+    partClass: document.querySelector('#addClass').value,
     partWeight: addModalyForm.addpartWeight.value,
     partSize: addModalyForm.addpartSize.value,
     reusedPart: addModalyForm.addreusedPart.value,
@@ -569,16 +690,17 @@ addPartsForm.addEventListener('click', e => {
   });
 });
 
-
+// document.querySelector('#addpartName').setAttribute("disabled","disabled")
 // Click submit in edit modaly
 editmodalyForm.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledparts').doc(id).update({
+     supplierName: editmodalyForm.editsupplierName.value,
  partName: editmodalyForm.editpartName.value,
-    partNumber: editmodalyForm.editpartMN.value,
+  
     partClass: editmodalyForm.editpartClass.value,
-    partWeight: editmodalyForm.editpartWeight.value,
-    partSize: editmodalyForm.editpartSize.value,
+    partWeight: parseFloat(editmodalyForm.editpartWeight.value),
+    partSize: parseFloat(editmodalyForm.editpartSize.value),
     reusedPart: editmodalyForm.editreusedPart.value,
     partRegisteredDate: editmodalyForm.editpartregisteredDate.value,
     partMemo: editmodalyForm.editMemo.value
@@ -587,7 +709,6 @@ editmodalyForm.addEventListener('click', e => {
 
 
 
-  
     //click add subsctance button
    
  
@@ -664,7 +785,4 @@ const editUI = (user) => {
     console.log("not an admin")
   }
 }
-
-
-
 

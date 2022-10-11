@@ -1,5 +1,12 @@
 
-
+.uploadbtn {
+      padding: 7px 71px 7px 70px;
+    background-color: lightblue;
+    color: white;
+    border-color: white;
+    border-radius: 12px;
+    border-style: none;
+}
 /*here starts the button animation*/
 
 
