@@ -19,11 +19,12 @@ const userroledisplay = document.querySelector('.userroledisplay')
 // modaly add
 const addmodaly = document.querySelector('.add-modaly');
 const addmodalyPartsSingle = document.querySelector('.addPartmodaly');
+
 const addmodalySubssSingle = document.querySelector('.addSubsmodaly');
 const addModalyForm = document.querySelector('.add-modaly .form');
 const addModalyParts = document.querySelector('.addPartmodaly .form');
 const addModalySubs = document.querySelector('.addSubsmodaly .form');
-const closebtn = document.querySelector('.action-button-close')
+const closebtn = document.querySelectorAll('.action-button-close')
 const addPPmodaly = document.querySelector('.addPPmodaly')
 
 // modaly edit
@@ -53,6 +54,7 @@ const partsTab = document.querySelector('#pills-contact-tab-fill')
     const supplierinfo = document.querySelector('#supplierinfo')
 const partname = document.querySelector('#partname')
 const quantity = document.querySelector('#quantity')
+const partCode = document.querySelector('#partCode')
 const partNumber = document.querySelector('#partNumber')
 const partSpecs = document.querySelector('#partSpecs')
 const partSize = document.querySelector('#partSize')
@@ -62,9 +64,10 @@ const partClass = document.querySelector('#partClass')
 const companyName = document.querySelector('#companyName')
 const partId = document.querySelector('#partId')
 const supplierName = document.querySelector('.supplierName')
+const renderEN4557 = document.querySelector('.renderEN4557')
 
 
-
+const sumTotalWeightPerc = document.querySelectorAll('.sumTotalWeightPerc')
 
 let id;
 
@@ -124,11 +127,14 @@ const renderUser = doc => {
 
 
 
-
-
-   closebtn.addEventListener('click', () =>{
+closebtn.forEach((eachClose)=> {
+  eachClose.addEventListener('click', () =>{
     addmodalyPartsSingle.classList.remove('modaly-show');
+    addPPmodaly.classList.remove('modaly-show');
    })
+})
+
+
 
 // Click on view product button to view assessment
 
@@ -142,25 +148,40 @@ console.log(dataPN)
     renderEN4555.innerHTML = "";
       // Get a reference from the dom to the tree elements
      const treeproducttitle = document.querySelector('.treeproducttitle')
-      const productCategory = document.querySelector('.productCategory')
-       const productStatus = document.querySelector('.productStatus')
-       const productName = document.querySelector('.productName')
-     const productClass = document.querySelector('.productClass')
-     const productSpecs = document.querySelector('.productSpecs')
-     const productWeight = document.querySelector('.productWeight')
-     const productNumber = document.querySelector('.productNumber')
+      const productCategory = document.querySelectorAll('.productCategory')
+       const productStatus = document.querySelectorAll('.productStatus')
+       const productName = document.querySelectorAll('.productName')
+     const productClass = document.querySelectorAll('.productClass')
+     const productSpecs = document.querySelectorAll('.productSpecs')
+     const productWeight = document.querySelectorAll('.productWeight')
+     const productNumber = document.querySelectorAll('.productNumber')
      
     // inject data from firebase document to the tree element and display them
      id = doc.id;
      
      treeproducttitle.innerHTML = 'View ' + doc.data().productName
-      productCategory.value =   doc.data().productCategory;
-       productName.value =   doc.data().productName;
-     productClass.value =   doc.data().productClass;
-      productSpecs.value =  doc.data().productSpecs;
-       productWeight.value =  doc.data().productWeight;
-     productNumber.value =  doc.data().productNumber;
-     productStatus.value =  doc.data().productStatus;
+     productCategory.forEach((el)=>{
+      el.value = doc.data().productCategory;
+     })
+      productName.forEach((el)=>{
+      el.value = doc.data().productName;
+     })
+      productClass.forEach((el)=>{
+      el.value = doc.data().productClass;
+     })
+      productSpecs.forEach((el)=>{
+      el.value = doc.data().productSpecs;
+     })
+      productWeight.forEach((el)=>{
+      el.value = doc.data().productWeight;
+     })
+      productNumber.forEach((el)=>{
+      el.value = doc.data().productNumber;
+     })
+      productStatus.forEach((el)=>{
+      el.value = doc.data().productStatus;
+     })
+
      
   var partsRef = db.collectionGroup('selectedSubs');
 partsRef
@@ -184,30 +205,11 @@ partsRef
   return el.productRef == dataPN;
 }
 );
-  //  console.log(newArray)
-
-buildTable(newArray)
-
-	function buildTable(newArray){
-
-		for (var i = 0; i < newArray.length; i++){
-			var row = `<tr>
-							<td>${newArray[i].partRef}</td>
-							<td>${newArray[i].substanceName}</td>
-							<td>${newArray[i].casnumber}</td>
-              	<td>${newArray[i].substanceMassg}</td>
-							<td>${newArray[i].substanceMassPerc}</td>
-					  </tr>`
-			table.innerHTML += row
-
-
-		}
-	}
+   console.log(newArray)
 
 
 
-
-   let options = {
+  let optionsthree = {
   chart: {
     type: 'bar'
   },
@@ -216,22 +218,45 @@ buildTable(newArray)
       horizontal: true
     }
   },
+
+  //Chart for 1st assessement
   series: [{
     data: [{
-      x: 'Number of Parts',
-      y: data.length
+      x: 'No. of CRMs',
+      y: newArray.length
     }, {
-      x: 'Parts Total Mass',
-      y: dataPartWeight.length
-    }, {
-      x: 'Number of Substances',
-      y: 46
+      x: 'CRM Weight(g)',
+      y: 0
     }]
   }]
 }
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+const chartsthree = document.querySelectorAll(".chartsthree")
+chartsthree.forEach((eachChart)=>{
+  var chartthree = new ApexCharts(eachChart, optionsthree);
+        chartthree.render();
      
+})
+buildTable(newArray)
+	function buildTable(newArray){
+
+		for (var i = 0; i < newArray.length; i++){
+			var row = `<tr>
+							<td>${newArray[i].partRef}</td>
+              <td>${newArray[i].partWeight}</td>
+                <td>${newArray[i].materialNameRef}</td>
+                    <td>${newArray[i].materialWeightgRef}</td>
+							<td>${newArray[i].substanceName}</td>
+							<td>${newArray[i].casnumber}</td>
+              	<td>${newArray[i].substanceMassg}</td>
+							<td>${newArray[i].substanceMassPerc}</td>
+              	<td>${newArray[i].crm}</td>
+                	<td>${newArray[i].rohs}</td>
+					  </tr>`
+			table.innerHTML += row
+
+
+		}
+	}
   })
 
   var matRef = db.collectionGroup('selectedMaterials');
@@ -251,7 +276,6 @@ matRef
 }
 );
    console.log(materialData)
-
 buildTable(materialData)
 
 	function buildTable(materialData){
@@ -262,29 +286,34 @@ buildTable(materialData)
       const recovMat = parseFloat(materialData[i].recovMat)
       const materialMass = parseFloat(materialData[i].materialMassg)
       const PartMass = parseFloat(materialData[i].partWeight)
+         const recycleRate = parseFloat(materialData[i].materialRecycleContent)
       // Reuse Mass (g)
       const reuseMassgAssess = reuseMat * materialMass
       // Reuse Mass (%)
-      const reuseMassPerAssess = reuseMassgAssess / PartMass * 100
+      const reuseMassPerAssess = reuseMassgAssess / PartMass
       // Recycle Mass (g),  Formula: material mass * Recycle factor
       const recycleMassgAssess = materialMass * recycMat
-      // Recycle Mass (%),  Formula: (material mass * Recycle factor) / Part Mass * 100
-      const recycleMassPercAssess = recycleMassgAssess  / PartMass * 100
+      // Recycle Mass (%),  Formula: (material mass * Recycle factor) / Part Mass
+      const recycleMassPercAssess = recycleMassgAssess  / PartMass
        //Recovery Mass (g),  Formula: material mass * Recovery factor
       const recovMassgAssess = materialMass * recovMat 
-     //Recovery Mass (%),  Formula: (material mass * Recovery factor) / Part Mass * 100
-      const recovMassPercAssess = recovMassgAssess / PartMass * 100 
+     //Recovery Mass (%),  Formula: (material mass * Recovery factor) / Part Mass
+      const recovMassPercAssess = recovMassgAssess / PartMass
       //  console.log(recovMassPercAssess.toFixed(2))
       // Disposable Mass (g), Formulat: Material total mass - Recovery mass 
-      const disposabaleMassg = materialMass - recovMassgAssess
-      // Disposable Mass (g), Formula: (Material total mass - Recovery mass) / Material mass * 100
-      const disposabalePercMass = disposabaleMassg / materialMass * 100 
+      const disposabaleMassg = (materialMass - recovMassgAssess).toFixed(2)
+      // Disposable Mass (%), Formula: (Material total mass - Recovery mass) / Material mass
+      const disposabalePercMass = disposabaleMassg / materialMass
       // Energy Recovery Mass (g), Formula: Recovery mass - Reuse mass - Recycling mass 
       const energyRecoMassgAssess = recovMassgAssess - reuseMassgAssess - recycleMassgAssess
      
-      //Energy Recovery Mass (%), Formula: (Recovery mass - Reuse mass - Recycling mass ) / Material mass * 100
-      const energyRecoMassPercAssess = energyRecoMassgAssess / materialMass * 100 
-      console.log(energyRecoMassPercAssess)
+      //Energy Recovery Mass (%), Formula: (Recovery mass - Reuse mass - Recycling mass ) / Material mass
+      const energyRecoMassPercAssess = energyRecoMassgAssess / materialMass 
+ console.log(energyRecoMassPercAssess)
+      // Recycled Material Mass (g), Formula: PartA's material mass * Recycled rate
+     const RecycMatg = materialMass * recycleRate
+        // Recycled Material Mass (g), Formula: PartA's material mass * Recycled rate
+     const RecycMatPer = (RecycMatg / materialMass)
 
 			var row = `<tr>
               <td>${materialData[i].partRef}</td>
@@ -306,20 +335,215 @@ buildTable(materialData)
 					  </tr>`
 			renderEN4555.innerHTML += row
 
+        
 
+      var rowMat = `
+         <tr> 
+         <td>${materialData[i].materialGroup}</td>
+         <td>${materialData[i].materialName}</td>
+         <td>${materialData[i].materialMassg}</td>
+         <td>${RecycMatg}</td>
+         <td>${RecycMatPer}</td>
+               </tr>
+      `
+      	renderEN4557.innerHTML += rowMat
 		}
 	}
+
+
+
+    // let dataSum = query.docs.map(doc=>{
+    //     let x = doc.data().productWeight
+         
+    //         return x;
+    // })
+  
+//     console.log(sum)
+//     const sum = data.reduce((accumulator, value) => {
+//   return accumulator + value;
+// }, 0);
+// document.querySelector('.totalWeight').innerHTML = sum
+// document.querySelector('.totalWeightPerc').innerHTML = parseFloat((sum / 3000000)/100000000000)  .toFixed(2) + "%" 
+// console.log(sum); // 👉️ 65
+
 })
+.then(()=>{
+  // Summary Reuse Weight (g)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[4].innerHTML);
+}
+const sumReuseWeight = document.querySelectorAll('.sumReuseWeight')
+sumReuseWeight.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Reuse Weigth (%)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[5].innerHTML);
+}
+const sumReuseWeightPerc = document.querySelectorAll('.sumReuseWeightPerc')
+sumReuseWeightPerc.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Recycling Weight (g)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[6].innerHTML);
+}
+const sumRecycWeightg = document.querySelectorAll('.sumRecycWeightg')
+sumRecycWeightg.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Recycling Weight (%)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[7].innerHTML);
+}
+const sumRecycWeightPerc = document.querySelectorAll('.sumRecycWeightPerc')
+sumRecycWeightPerc.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Recovering Weight (g)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[8].innerHTML);
+}
+const sumRecovWeightg = document.querySelectorAll('.sumRecovWeightg')
+sumRecovWeightg.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Recovering Weight (%)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[9].innerHTML);
+}
+const sumRecovWeightPerc = document.querySelectorAll('.sumRecovWeightPerc')
+sumRecovWeightPerc.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Total Weight (g)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[14].innerHTML);
+}
+const sumTotalWeightg = document.querySelectorAll('.sumTotalWeightg')
+sumTotalWeightg.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+
+// Summary Total Weight (%)
+  var sumAssess = document.querySelector(".sumAssess"),
+  sumVal = 0;
+for (var i = 1; i < sumAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(sumAssess.rows[i].cells[15].innerHTML);
+}
+
+sumTotalWeightPerc.forEach((el)=> {
+  el.innerHTML = "100";
+})
+const chartReuseWeight = document.querySelector('.sumReuseWeight').textContent
+const chartRecycWeight = document.querySelector('.sumRecycWeightg').textContent
+const chartRecovWeight = document.querySelector('.sumRecovWeightg').textContent
+
+   let options = {
+  chart: {
+    type: 'bar'
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true
+    }
+  },
+
+  //Chart for 1st assessement
+  series: [{
+    data: [{
+      x: 'Reuse Weight(g)',
+      y: chartReuseWeight
+    }, {
+      x: 'Recycled Weight(g)',
+      y: chartRecycWeight
+    }, {
+      x: 'Recovery Weight(g)',
+      y: chartRecovWeight
+    }]
+  }]
+}
+const charts = document.querySelectorAll(".chart")
+charts.forEach((eachChart)=>{
+  var chart = new ApexCharts(eachChart, options);
+        chart.render();
+     
+})
+
+const materialChart = document.querySelector('.materialChart');
+let materialnum = materialChart.rows.length
+   let optionstwo = {
+  chart: {
+    type: 'bar'
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true
+    }
+  },
+
+ //Chart for 2nd assessement
+series: [{
+  data: [{
+    x: 'No. of Recycled Materials',
+    y: materialnum - 1
+  }, {
+    x: 'Recycled Material(g)',
+    y: chartRecycWeight
+  }]
+}]
+
+
+}
+const chartsecond = document.querySelectorAll(".chartsecond")
+chartsecond.forEach((eachChart)=>{
+  var chartsecond = new ApexCharts(eachChart, optionstwo);
+        chartsecond.render();
+     
+})
+
+
+})
+
+
+
+
 
 });
 
-     
 
-
+btnprAdd.addEventListener('click', ()=>{
+   const buttony = document.querySelectorAll('.addProduct');
+  buttony.forEach(eachBtny => {
+  eachBtny.classList.remove('loading')
+  })
+})
 
 //add parts tp specific product
  const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addPP`);
 btnpraddParts.addEventListener('click', () => {
+ 
+ 
   addPPmodaly.classList.add('modaly-show');
   const addedpartslist = document.querySelector('.addedpartslist')
    const btnpraddRef = btnpraddParts.getAttribute('id');
@@ -354,6 +578,7 @@ for(let i = 0; i < json.length; i++) {
             partSize: obj.partSize,
             partRegisteredDate: obj.partRegisteredDate,
             quantity	: obj.quantity,
+
             partNumber: obj.partNumber,
             partMemo: obj.partMemo
         
@@ -403,7 +628,6 @@ const partname = document.querySelector('.partname');
 partname.addEventListener('change', () => {
  
   const partsRef = db.collection("recycledparts")
-    // partsRef.where("supplierInfo", "==", supplierinfo.value).where("partName", "==", partname.value)
      partsRef.where("partName", "==", partname.value).where("supplierName", "==", supplierName.value)
     .get()
     .then((querySnapshot) => {
@@ -441,11 +665,12 @@ partname.addEventListener('change', () => {
     supplierName: supplierName.value,
     partMN: partMN.value,
     partSize: partSize.value,
-    partWeight: partWeight.value,
+    partWeight: parseFloat(partWeight.value),
     partClass: partClass.value,
     partRegisteredDate: partRegisteredDate.value,
     partMemo: companyName.value,
     quantity: quantity.value,
+     partCode: partCode.value,
     
   },{merge:true})
   db.collection('recycledproducts').doc(btnpraddRef).collection('selectedParts').get().then((querySnapshot) => {
@@ -461,26 +686,24 @@ partname.addEventListener('change', () => {
                  
                   querySnapshot.forEach((doc) => {
                            const matRef = doc.id
-                    console.log(matRef)
+                             const matRefData = doc.data()
+                    console.log(matRefData)
                     db.collection('recycledproducts').doc(btnpraddRef).collection('selectedParts').doc(partproductRef).collection('selectedMaterials').doc(matRef).set({
                             productRef: productRef.productName,
                             partRef: partname.value,
-                             partWeight: partWeight.value,
+                             partWeight: parseFloat(partWeight.value),
                             materialName: doc.data().materialName,
                             materialGroup:doc.data().materialGroup,
                             materialClassId: doc.data().materialClassId,
                             materialRecycleContent: doc.data().materialRecycleContent,
                             materialRecycleType: doc.data().materialRecycleType,
-                            materialMassg:doc.data().materialMassg,
-                            materialMassPerc: doc.data().materialMassPerc,
-                            recovMat: doc.data().recovMat,
-                            recycMat: doc.data().recycMat,
-                            reuseMat: doc.data().reuseMat,
-                            selecrecovMat: doc.data().selecrecovMat,
-                            selecrecycMat: doc.data().selecrecycMat,
-                            selecreuseMat: doc.data().selecreuseMat,
+                            materialMassg:parseFloat(doc.data().materialMassg),
+                            materialMassPerc: parseFloat(doc.data().materialMassPerc),
+                            recovMat: parseFloat(doc.data().recovMat),
+                            recycMat: parseFloat(doc.data().recycMat),
+                            reuseMat: parseFloat(doc.data().reuseMat),
                             matnameSelect: doc.data().matnameSelect,
-                            selectiveMat: doc.data().selectiveMat
+                            selectiveMat: parseFloat(doc.data().selectiveMat)
                     }, {merge:true})
                     .then((docRef) => {
     db.collection("recycledparts").doc(partproductRef).collection('materials').doc(matRef).collection('substances').get()
@@ -501,12 +724,15 @@ partname.addEventListener('change', () => {
           
             productRef: productRef.productName,
             partRef: partname.value,
+            partWeight: parseFloat(partWeight.value),
+            materialWeightgRef: parseFloat(matRefData.materialMassg),
+              materialNameRef: matRefData.materialName,
             substanceName: doc.data().substanceName,
             casnumber: doc.data().casnumber,
             crm: doc.data().crm,
             rohs: doc.data().rohs,
-            substanceMassg: doc.data().substanceMassg,
-            substanceMassPerc: doc.data().substanceMassPerc,
+            substanceMassg: parseFloat(doc.data().substanceMassg),
+            substanceMassPerc: parseFloat(doc.data().substanceMassPerc),
 
          }, {merge:true})
        })
@@ -840,10 +1066,9 @@ db.collection('recycledproducts').onSnapshot(snapshot => {
   
   // });
 
-const addProduct = document.querySelector('.addProduct')
-
-// Click submit in add modaly
-addProduct.addEventListener('click', e => {
+const addProduct = document.querySelectorAll('.addProduct')
+addProduct.forEach((eachBtn)=>{
+  eachBtn.addEventListener('click', e => {
   e.preventDefault();
   db.collection('recycledproducts').add({
     productCategory: addModalyForm.productCategory.value,
@@ -866,12 +1091,16 @@ addProduct.addEventListener('click', e => {
 
  
 });
-
-
+})
+// Click submit in add modaly
+  const buttoni = document.querySelector(".buttoni");
+ 
 // Click submit in edit modaly
 editForm.addEventListener('click', e => {
+       buttoni.classList.add("active");
   e.preventDefault();
-  db.collection('recycledproducts').doc(id).update({
+setTimeout(()=>{
+    db.collection('recycledproducts').doc(id).update({
     productCategory: editmodalyForm.productCategory.value,
     productName: editmodalyForm.productName.value,
     productMN: editmodalyForm.editmodelName.value,
@@ -881,7 +1110,22 @@ editForm.addEventListener('click', e => {
    productStatus: editmodalyForm.editproductStatus.value,
    memo: editmodalyForm.editMemo.value
      
-  });
+  })
+
+   .then(()=>{
+
+   buttoni.classList.remove("active");
+        buttoni.querySelector("i").classList.replace( "bxs-edit", "bx-check-circle")
+        buttoni.querySelector("span").innerText = "Completed";
+   setTimeout(()=>{
+     buttoni.classList.remove("active");
+        buttoni.querySelector("i").classList.replace( "bx-check-circle", "bxs-edit")
+        buttoni.querySelector("span").innerText = "Edit Product";
+   }, 3500)
+   
+  })
+}, 2000)
+
   });
 
 
@@ -1029,11 +1273,49 @@ partsRef
 });
 
 
+//   var addpartsRef = db.collectionGroup('recycledparts');
+// addpartsRef
+// .get()
+//  .then(query=>{
+//     let data = query.docs.map(doc=>{
+//         let x = doc.data()
+//             return x;
+//     })
+//      let dataPartWeight = query.docs.map(doc=>{
+//         let x = doc.data().substanceMassg
 
-
-
+         
+//             return x;
+//     })
   
-     db.collection("recycledparts")
+//     console.log(data)
+//   })
+
+// buildTable(newArray)
+// 	function buildTable(newArray){
+
+// 		for (var i = 0; i < newArray.length; i++){
+// 			var row = `<tr>
+// 							<td>${newArray[i].partRef}</td>
+//               <td>${newArray[i].partWeight}</td>
+//                 <td>${newArray[i].materialNameRef}</td>
+//                     <td>${newArray[i].materialWeightgRef}</td>
+// 							<td>${newArray[i].substanceName}</td>
+// 							<td>${newArray[i].casnumber}</td>
+//               	<td>${newArray[i].substanceMassg}</td>
+// 							<td>${newArray[i].substanceMassPerc}</td>
+//               	<td>${newArray[i].crm}</td>
+//                 	<td>${newArray[i].rohs}</td>
+// 					  </tr>`
+// 			table.innerHTML += row
+
+
+// 		}
+// 	}
+
+supplierName.addEventListener('change', ()=>{
+  partname.innerHTML = "";
+db.collection("recycledparts").where("supplierName", "==", supplierName.value)
     .get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -1050,6 +1332,9 @@ partsRef
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
+})
+  
+     
 
        db.collection("recycledparts")
     .get()
@@ -1169,7 +1454,4 @@ substances
 // });
 
 // })
-
-
-
 

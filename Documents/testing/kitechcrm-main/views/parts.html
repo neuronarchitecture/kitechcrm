@@ -67,9 +67,9 @@
       <li>
        <a class="notadmin" href="./parts" style="display: none;">
          <i  class='bx bx-user' ></i>
-         <span class="links_name">제품목록</span>
+         <span class="links_name">부품목록</span>
        </a>
-       <span class="tooltip">제품목록</span>
+       <span class="tooltip">부품목록</span>
      </li>
        <li>
        <a class="adminelement" href="./partslist" style="display: none;">
@@ -238,27 +238,26 @@
  </div>
             
         <!--Here starts the form-->
-        
- <div class="tabledata">
-   
-    <div class="table-wrapper">
-      <table class="table-users" id="myTableMat">
-        <tr>
+             <div class="loadingtitle"></div>
+ <div class="tabledata" >
+    <div class="table-wrapper" style="height: 850px;
+    overflow-y: scroll;"> 
+      <table class="table-users" id="myTableMat" >
+        <thead style="position: sticky; top: 0; z-index: 1;">
 
              <th>Part Name</th>
           <th>Model Name</th>
-            <th>Part Class</th>
+            <th>Part Code</th>
             <th>Part Weight (g)</th>
               <th>Part Size</th>
                 <th>Reused Parts</th>
                   <th>Registred Date</th>
              <th>Memo </th>
-     
-        
-        
-      
           <th>Action</th>
-        </tr>
+        </thead>
+        <tbody class="parttable">
+
+        </tbody>
       </table>
     
     </div>
@@ -324,8 +323,8 @@
                                 </div> 
                                  <div class="col-md-3">                      
                                     <div class="form-group">
-                                        <label>Part Class *</label>
-                                        <input type="text" class="form-control" id='addClass' placeholder="Enter Part Class" data-errors="Please Enter Part Class." name="addClass" required>
+                                        <label>Part Code *</label>
+                                        <input type="text" class="form-control" id='addClass' placeholder="Enter Part Code" data-errors="Please Enter Part Code." name="addClass" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -347,7 +346,7 @@
                                    <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Reused Part</label>
-                                      <select name="addreusedPart" id="addpartClass" class="selectpicker form-control" data-style="py-0">
+                                      <select name="addreusedPart" id="addpartClass" class=" form-control" data-style="py-0">
                                        <option>Select Option</option>
                                        <option>Yes</option>
                                        <option>No</option>
@@ -360,7 +359,7 @@
                                     <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Registration Date</label>
-                                        <input type="datetime-local" class="form-control" id='addpartregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="addpartregisteredDate" required>
+                                        <input type="date" class="form-control" id='addpartregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="addpartregisteredDate" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -376,7 +375,7 @@
                                 
                          
                            
-                        <button  id="addPartsForm" class="btn btn-primary btn-light  previous action-button-previous float-left mr-3" value="Previous" >Add Part</button>
+                        <button  id="addPartsForm" class="btn btn-primary btn-light float-right mr-3"  >Add Part</button>
                                      
                                 </fieldset>
                                 
@@ -446,8 +445,8 @@
                              
                                 <div class="col-md-3"> 
                                     <div class="form-group">
-                                        <label>Part Class *</label>
-                                        <input type="text" class="form-control" id='editpartClass' placeholder="Please part class" data-errors="Please part class." name="editpartClass" required>
+                                        <label>Part Code *</label>
+                                        <input type="text" class="form-control" id='editpartClass' placeholder="Please part Code" data-errors="Please part Code." name="editpartClass" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -460,15 +459,15 @@
                                 </div> 
                                  <div class="col-md-6"> 
                                     <div class="form-group">
-                                        <label>Part Size (%) *</label>
-                                        <input type="number" step=".01" class="form-control" id='editpartSize' placeholder="Please part size (mm x mm x mm)" data-errors="Please part size." name="editpartSize" required>
+                                        <label>Part Size *</label>
+                                        <input type="text" step=".01" class="form-control" id='editpartSize' placeholder="Please part size (mm x mm x mm)" data-errors="Please part size." name="editpartSize" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                    <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Reused Part</label>
-                                      <select name="editreusedPart" id="editreusedPart" class="selectpicker form-control" data-style="py-0">
+                                      <select name="editreusedPart" id="editreusedPart" class=" form-control" data-style="py-0">
                                        <option>Select Option</option>
                                        <option>Yes</option>
                                        <option>No</option>
@@ -481,7 +480,7 @@
                                   <div class="col-md-6">
                                     <div class="form-group">
                                      <label>Registration Date</label>
-                                        <input type="datetime-local" class="form-control" id='editpartregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editpartregisteredDate" required>
+                                        <input type="date" class="form-control" id='editpartregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editpartregisteredDate" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -495,7 +494,7 @@
                              
                                 
                                 </fieldset>
-      <button id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Edit Part</button>
+      <button id="edit" class="btn btn-primary btn-light   float-right mr-3"  >Edit Part</button>
                    </form>
                  </div>
             <!-- Modal -->
@@ -542,18 +541,7 @@
                                     <div class="form-group">
                                         <label>Material Group *</label>
                                          <select class="form-control" id="editmaterialGroup" name="addmaterialGroup" data-errors="Please Enter Material Category."  required>
-                                             <option>Steels and ferrous materials</option>
-                                             <option>Non-ferrous metals and alloys</option>
-                                             <option>Precious metals</option>
-                                             <option>Non-metallic inorganic materials</option>
-                                               <option>Other inorganics</option>
-                                             <option>Unfilled thermoplastics resin</option>
-                                             <option>Filled thermoplastics resin</option>
-                                             <option>Duromers</option>
-                                               <option>Elastomers</option>
-                                             <option>Natural materials</option>
-                                             <option>Other organics</option>
-                                             <option>Materials for product operation</option>
+                                            
                                              
                                            </select>
                                         <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
@@ -605,7 +593,7 @@
                                 </div> 
                                 <div class="col-md-6"> 
                                     <div class="form-group">
-                                        <label>Recycle Content (%)</label>
+                                        <label>Recycle Rate (%)</label>
                                         <input type="number" class="form-control" id='materialRecycleContent' placeholder="Enter Material Recycle Content" data-errors="Please part specs." name="addmaterialRecycleContent" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -615,7 +603,7 @@
                                   <div class="col-md-12"> 
                                     <div class="form-group">
                                         <label>Recycle Type *</label>
-                                         <select name="addmaterialRecycleType" id="editMaterialRecycleType" class="selectpicker form-control" data-style="py-0">
+                                         <select name="addmaterialRecycleType" id="editMaterialRecycleType" class="form-control" data-style="py-0">
                                        <option>Select Option</option>
                                        <option>Pre Consumer </option>
                                        <option>Post Consumer </option>
@@ -680,8 +668,8 @@
                            </div>
                            </div>
                     
-                        <button  id="edit"  class="btn btn-primary btn-light  action-button-previous float-right mr-3" >소재 추가</button>
-                             <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modaly" >Close</button>
+                        <button  id="edit"  class="btn btn-primary btn-light float-right mr-3" >소재 추가</button>
+                             <button type="button" class="btn btn-secondary" id="subsmodalclose" data-dismiss="modaly" >Close</button>
                         </fieldset>
                       
                    </form>
@@ -726,18 +714,7 @@
                                     <div class="form-group">
                                         <label>Material Group *</label>
                                          <select class="form-control" id="PMmaterialGroup" name="PMmaterialGroup" data-errors="Please Enter Material Category."  required>
-                                             <option>Steels and ferrous materials</option>
-                                             <option>Non-ferrous metals and alloys</option>
-                                             <option>Precious metals</option>
-                                             <option>Non-metallic inorganic materials</option>
-                                               <option>Other inorganics</option>
-                                             <option>Unfilled thermoplastics resin</option>
-                                             <option>Filled thermoplastics resin</option>
-                                             <option>Duromers</option>
-                                               <option>Elastomers</option>
-                                             <option>Natural materials</option>
-                                             <option>Other organics</option>
-                                             <option>Materials for product operation</option>
+                                       
                                              
                                            </select>
                                         <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
@@ -787,7 +764,7 @@
                                 </div> 
                                 <div class="col-md-4"> 
                                     <div class="form-group">
-                                        <label>Recycle Content (%)</label>
+                                        <label>Recycle Rate (%)</label>
                                         <input type="number" class="form-control" id='PMmaterialRecycleContent' placeholder="Enter Material Recycle Content" data-errors="Please part specs." name="editmaterialRecycleContent" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -797,7 +774,7 @@
                                   <div class="col-md-12"> 
                                     <div class="form-group">
                                         <label>Recycle Type *</label>
-                                         <select name="editMaterialRecycleType" id="PMMaterialRecycleType" class="selectpicker form-control" data-style="py-0">
+                                         <select name="editMaterialRecycleType" id="PMMaterialRecycleType" class="form-control" data-style="py-0">
                                            <option>Select Option</option>
                                        <option>Pre Consumer </option>
                                        <option>Post Consumer </option>
@@ -830,7 +807,7 @@
                            </div>
                     
                         <button  id="editMat"  class="btn btn-primary btn-light  action-button-previous float-right mr-3" >소재 편집</button>
-                            <button type="button" class="btn btn-secondary action-button-close" data-dismiss="editMatmodaly" >Close</button>
+                            <button type="button" id="subsmodalclose" class="btn btn-secondary "  >Close</button>
                         </fieldset>
                       
                    </form>
@@ -855,29 +832,12 @@
                 
                   <div class="iq-card-body">
                      <form id="form-wizard1" class="text-center mt-4" name="formwizard" >
-                        <ul id="top-tab-list" class="p-0">
-                           <li class="active" id="account">
-                              <a href="javascript:void();">
-                              <i class="ri-lock-unlock-line"></i><span>Choose your Substance</span>
-                              </a>
-                           </li>
-                           <li id="personal">
-                              <a href="javascript:void();">
-                              <i class="ri-user-fill"></i><span>Substance Details</span>
-                              </a>
-                           </li>
-                          
-                        </ul>
-                        <!-- fieldsets -->
-                        <fieldset>
+                      
+                    
                            <div class="form-card text-left">
                               <div class="row">
-                                 <div class="col-7">
-                                    <h3 class="mb-4">Choose your Substance:</h3>
-                                 </div>
-                                 <div class="col-5">
-                                    <h2 class="steps">Step 1 - 2</h2>
-                                 </div>
+                            
+                             
                               </div>
                               <div class="row">
                                      <div class="col-md-6">
@@ -895,7 +855,7 @@
                                  <div class="col-md-6">
                                     <div class="form-group">
                                        <label>Substance Name: *</label>
-                                        <select  class="getsubstancelist form-control" id="sel1" name="getsubstancelist">
+                                        <select  class="getsubstancelist form-control" id="getSubsname" name="getsubstancelist">
                                             
                                           
                                         </select>
@@ -904,17 +864,13 @@
                               
                               </div>
                            </div>
-                           <button type="button" name="next" id="getSubsname" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
-                        </fieldset>
-                        <fieldset>
+                         
+                   
                            <div class="form-card text-left">
                               <div class="row">
                                  <div class="col-7">
-                                    <!-- <h3 class="mb-4">Personal Information:</h3> -->
                                  </div>
-                                 <div class="col-5">
-                                    <h2 class="steps">Step 2 - 2</h2>
-                                 </div>
+                                
                               </div>
                               <div class="row">
                                  <div class="col-md-6">
@@ -952,9 +908,7 @@
                               </div>
                            </div>
                               <button type="button" id="addSubs" class="btn btn-primary action-button float-right" value="Submit" >제출하기</button>
-                           <button type="button" id="delSubs" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous">Previous</button>
-                        
-                        </fieldset>
+                    
                      </form>
                         <button type="button" id="subsmodalclose" class="btn btn-secondary action-button-close" data-dismiss="modaly-wrapper" >Close</button>
                   </div>
@@ -997,7 +951,7 @@
                               </div>
                               <div class="modal-body">
                                 <div class="form-group" id="formfloat">
-                     <div class="input-group">
+                     <div class="input-group" >
                         <input type="text" class="form-control" id="myInput" style="margin: 0;" onkeyup='tableSearch()' placeholder="Search Material Name" aria-label="Search Material Name"
                            aria-describedby="basic-addon5">
                         <div class="input-group-append">

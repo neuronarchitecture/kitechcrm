@@ -64,14 +64,7 @@ const renderUser = doc => {
      <td>${doc.data().casnumber}</td>
       <td>${doc.data().crm}</td>
        <td>${doc.data().rohs}</td>
-        <td>${doc.data().substancemassg}</td>
-         <td>${doc.data().substancemassperc}</td>
-      <td>
-        <button class="adminelement btnpr-edit"> <a class="badge bg-success mr-2" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalScrollableEDIT" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#" ><i class="ri-pencil-line mr-0"></i></a></button>
-      
-         
-        <button class=" btnpr-delete"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></button>
-      </td>
+    
     </tr>
   `;
   tableUsers.insertAdjacentHTML('beforeend', tr);
@@ -114,38 +107,38 @@ const renderUser = doc => {
 
 
   // Click edit user
-  const btnprEdit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
-  btnprEdit.addEventListener('click', () => {
-    editmodaly.classList.add('modaly-show');
-    const editHeader = document.querySelector('.editheader')
-    id = doc.id;
-    editHeader.innerHTML = 'Edit ' + doc.data().subtanceName
-    editmodalyForm.editsubstanceName.value = doc.data().subtanceName;
-    editmodalyForm.editcas.value = doc.data().casnumber;
-    editmodalyForm.editcrm.value = doc.data().crm;
-    editmodalyForm.editrohs.value = doc.data().rohs;
-    editmodalyForm.editsubstanceMassg.value = doc.data().substancemassg;
-    editmodalyForm.editsubstanceMassPerc.value = doc.data().substancemassperc;
+  // const btnprEdit = document.querySelector(`[data-id='${doc.id}'] .btnpr-edit`);
+  // btnprEdit.addEventListener('click', () => {
+  //   editmodaly.classList.add('modaly-show');
+  //   const editHeader = document.querySelector('.editheader')
+  //   id = doc.id;
+  //   editHeader.innerHTML = 'Edit ' + doc.data().subtanceName
+  //   editmodalyForm.editsubstanceName.value = doc.data().subtanceName;
+  //   editmodalyForm.editcas.value = doc.data().casnumber;
+  //   editmodalyForm.editcrm.value = doc.data().crm;
+  //   editmodalyForm.editrohs.value = doc.data().rohs;
+  //   editmodalyForm.editsubstanceMassg.value = doc.data().substancemassg;
+  //   editmodalyForm.editsubstanceMassPerc.value = doc.data().substancemassperc;
     
     
 
     
-    //edit the parts section
+  //   //edit the parts section
     
 
    
 
-  });
+  // });
 
-  // Click delete user
-  const btnprDelete = document.querySelector(`[data-id='${doc.id}'] .btnpr-delete`);
-  btnprDelete.addEventListener('click', () => {
-    db.collection('substances').doc(`${doc.id}`).delete().then(() => {
-      console.log('Document succesfully deleted!');
-    }).catch(err => {
-      console.log('Error removing document', err);
-    });
-  });
+  // // Click delete user
+  // const btnprDelete = document.querySelector(`[data-id='${doc.id}'] .btnpr-delete`);
+  // btnprDelete.addEventListener('click', () => {
+  //   db.collection('substances').doc(`${doc.id}`).delete().then(() => {
+  //     console.log('Document succesfully deleted!');
+  //   }).catch(err => {
+  //     console.log('Error removing document', err);
+  //   });
+  // });
 
 
   //  // get subcollection data 
@@ -176,6 +169,76 @@ const renderUser = doc => {
 
 // Click add user button
 btnprAdd.addEventListener('click', () => {
+
+  
+
+    
+        
+        // Get the form and file field
+
+		/**
+		 * Log the uploaded file to the console
+		 * @param {event} Event The file loaded event
+		 */
+		function logFile (event) {
+      event.preventDefault()
+			let str = event.target.result;
+			let json = JSON.parse(str);
+			console.log('string', str);
+			console.log('json', json);
+for(let i = 0; i < json.length; i++) {
+    let obj = json[i];
+
+
+      
+       db.collection('substances').add({
+            subtanceName: obj.subtanceName,
+            casnumber: obj.casnumber,
+            rohs: obj.rohs,
+            crm: obj.crm,
+        
+       
+        }) .then(()=> {
+      console.log("Documents Added!")
+    });
+}
+
+
+		}
+
+		/**
+		 * Handle submit events
+		 * @param  {Event} event The event object
+		 */
+		function handleSubmit (event) {
+
+			// Stop the form from reloading the page
+			event.preventDefault();
+
+			// If there's no file, do nothing
+			if (!file.value.length) return;
+
+			// Create a new FileReader() object
+			let reader = new FileReader();
+
+			// Setup the callback event to run when the file is read
+			reader.onload = logFile;
+
+			// Read the file
+			reader.readAsText(file.files[0]);
+
+
+    
+		}
+
+
+		let form = document.querySelector('#upload');
+		let file = document.querySelector('.filey');
+		// Listen for submit events
+		form.addEventListener('submit', handleSubmit);
+
+
+
   addmodaly.classList.add('modaly-show');
 
   addModalyForm.substanceName.value = '';

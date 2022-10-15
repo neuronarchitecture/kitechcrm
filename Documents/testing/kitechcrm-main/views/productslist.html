@@ -232,10 +232,11 @@
         
  <div class="tabledata">
    
-    <div class="table-wrapper table-responsive rounded mb-3" style="overflow-x: hidden; padding-bottom: 15rem ;">
+    <div class="table-wrapper table-responsive rounded mb-3" style="overflow-x: hidden; height: 850px;
+    overflow-y: scroll;">
           <div class="loadingtitle"></div>
       <table class="table-users  mb-0 " >
-    <thead class="bg-white text-uppercase">
+    <thead class="bg-white text-uppercase" style="position: sticky; top: 0; z-index: 1;">
   <tr class="ligth ligth-data">
             <th ><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 20 20">
   <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
@@ -290,7 +291,16 @@
                                     <h3 class="mb-4">Enter Product Identification:</h3>
                                  </div>
                                  <div class="col-5">
-                                 
+                                       <button type="button" id="edit" class="buttony addProduct float-right" >
+                                    <ul>
+                                        <li>제품 추가하기</li>
+                                        <li>등록중...</li>
+                                        <li>등록 완료!</li>
+                                    </ul>
+                                    <div>
+                                        <svg viewBox="0 0 24 24"></svg>
+                                    </div>
+                                </button>
                                  </div>
                               </div>
                                  <div class="col-md-12"> 
@@ -391,7 +401,7 @@
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>Registered Date</label>
-                                        <input type="datetime-local" class="form-control" id='editregisteredDate' placeholder="Enter the registration date." data-errors="Please the right registration date." name="registeredDate" >
+                                        <input type="date" class="form-control" id='editregisteredDate' placeholder="Enter the registration date." data-errors="Please the right registration date." name="registeredDate" >
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -458,6 +468,20 @@
     <!-- Edit modaly -->
     <div class="edit-modaly modaly-wrapper">
       <div class="modaly">
+        
+    <div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
+
+            <div class="message">
+                <span class="text text-1">Success</span>
+                <span class="text text-2">Your changes has been saved</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+
+        <div class="progress"></div>
+    </div>
         <div class="modaly-header"></div>
         <div class="modaly-body">
              <div class="card-body">
@@ -569,7 +593,7 @@
                                    <div class="col-md-12">
                                     <div class="form-group">
                                      <label>Registration Date</label>
-                                        <input type="datetime-local" class="form-control" id='editregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editregisteredDate" required>
+                                        <input type="date" class="form-control" id='editregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editregisteredDate" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -609,8 +633,21 @@
 
                               </div>
                            </div>
-                               <button  id="editForm" class="btn btn-primary btn-light action-button-previous float-right mr-3" value="Previous" >Edit Product</button>
+                       
+                            <!-- <div class="buttony " id="editForm">
+                                <div class="text-icon">
+                                <i class="bx bx-cloud-upload"></i>
+                                <span class="texty">Edit Product</span>
+                                </div>
+                            </div> -->
+
                         </fieldset>
+                         <div class="buttoni" id="editForm">
+                                <div class="content">
+                                    <i class="bx bxs-edit"></i>
+                                    <span class="buttoni-text">Edit Product</span>
+                                </div>
+                            </div>
                    </form>
                  </div>
                         </div>
@@ -660,7 +697,7 @@
                              
                                        <div class="col-md-4">
                                     <div class="form-group">
-                                     <label>Supplier Name</label>
+                                     <label>부품사</label>
                                
                                       <select  class="supplierName form-control" name="supplierName" id="supplierName"  data-style="py-0">
                                       
@@ -683,11 +720,18 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>부품코드</label>
+                                        <input type="text" class="form-control"  id='partCode' placeholder="부품 코드를 입력하세요"  data-errors="부품 코드를 입력하세요." name="addpartQuantity" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
                             
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>부품 수량</label>
-                                        <input type="number" class="form-control"  id='quantity' placeholder="부품 수량을 입력하세요" data-errors="Please Part Quantity." name="addpartQuantity" required>
+                                        <input type="number" class="form-control"  id='quantity' placeholder="부품 수량을 입력하세요" data-errors="부품 수량을 입력하세요." name="addpartQuantity" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -731,7 +775,7 @@
                                  <div class="col-md-2"> 
                                     <div class="form-group">
                                         <label>Registration Date</label>
-                                        <input readonly type="datetime-local" class="form-control" id='partRegisteredDate'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
+                                        <input readonly type="date" class="form-control" id='partRegisteredDate'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -766,18 +810,13 @@
                                         <svg viewBox="0 0 24 24"></svg>
                                     </div>
                                 </button>
-                               
-                                             <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-left mr-3" value="Previous" style="margin:0;">Previous</button>
                         </fieldset>
                         
                      </form>
                      
                                        <form id="upload">    
-                  <label style="    font-size: 22px;
-    color: #676e8a;
-    font-weight: 600;
-    margin-left: 15px;" >Bulk Products Upload </label>    
-  <div class="input-group">
+                     
+  <div class="input-group" style="margin-top: 5%; width: 30%; margin-left: 70%;">
    
      
   <div class="custom-file" >
@@ -817,6 +856,7 @@
                             </tbody>
                            </table>
                         </div>
+                          <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modaly">Close</button>
                   </div>
                </div>
             </div>
@@ -1161,13 +1201,14 @@
         
                      <ul class="nav nav-tabs" id="myTab-1" role="tablist">
                         <li class="nav-item">
-                           <a class="nav-link " id="pills-home-tab-fill" data-toggle="pill" href="#home" role="tab" aria-controls="home" aria-selected="true">제품 정보</a>
+                           <a class="nav-link " id="pills-home-tab-fill" data-toggle="pill" href="#home" role="tab" aria-controls="home" aria-selected="true">재활용가능율평가[EN45555]
+</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">부품 목록</a>
+                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">재활용함유율평가[EN4557]</a>
                         </li>
                           <li class="nav-item">
-                           <a class="nav-link" id="pills-Accessment-tab-fill" data-toggle="pill" href="#Accessment" role="tab" aria-controls="Accessment" aria-selected="false">Assessment</a>
+                           <a class="nav-link" id="pills-Accessment-tab-fill" data-toggle="pill" href="#Accessment" role="tab" aria-controls="Accessment" aria-selected="false">희소물질선언[EN4558]</a>
                         </li>
                      
                      </ul>
@@ -1177,15 +1218,14 @@
                                     <button type="button"  id="edit" class="buttony inline-block-child reportbtn float-right" style="  position: -webkit-sticky;
   position: sticky;"  >
                                     <ul>
-                                        <li>Download</li>
-                                        <li>Downloading...</li>
-                                        <li>Success!</li>
+                                        <li>다운로드</li>
+                                        <li>다운로드중...</li>
+                                        <li>완료!</li>
                                     </ul>
                                     <div>
                                         <svg viewBox="0 0 24 24"></svg>
                                     </div>
                                 </button>
-                            <h4 style="margin: 10px; text-align:start;">1. 제품 개요</h4>
                             </div>
                             <div class="report">
                                <div class="row" style="align-items: center;">
@@ -1240,21 +1280,9 @@
                                              </div>
                                  </td>
                               </tr>
-                             
-                                <tr data-id="2" data-parent="1" data-level="2">
-
-                                 <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Product Number</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="productNumber form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
                           </div>
                           <div class="col-md-4">
-                               <table class="table">
+                      <table class="table">
                         <thead class="thead-light">
                            <tr>
                               <th scope="col">Indication</th>
@@ -1265,27 +1293,27 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <th scope="row">Reuse Weight(g)</th>
-                              <td>150</td>
-                              <td>23</td>
+                              <th scope="row">Reuse Weight</th>
+                              <td class="sumReuseWeight"></td>
+                              <td class="sumReuseWeightPerc"></td>
                             
                            </tr>
                            <tr>
-                              <th scope="row">Recycling Weight(g)</th>
-                              <td>100</td>
-                              <td>100</td>
+                              <th scope="row">Recycling Weight</th>
+                              <td class="sumRecycWeightg"></td>
+                              <td class="sumRecycWeightPerc"></td>
                        
                            </tr>
                            <tr>
-                              <th scope="row">Recovery Weight(g)</th>
-                              <td>0</td>
-                              <td>0</td>
+                              <th scope="row">Recovery Weight</th>
+                              <td class="sumRecovWeightg">0/td>
+                              <td class="sumRecovWeightPerc"></td>
                            
                            </tr>
                              <tr>
-                              <th scope="row">Total Weight(g)</th>
-                              <td>200</td>
-                              <td>100</td>
+                              <th scope="row">Total Weight</th>
+                              <td class="sumTotalWeightg"></td>
+                              <td class="sumTotalWeightPerc"></td>
                            
                            </tr>
                         </tbody>
@@ -1293,114 +1321,40 @@
                           </div>
                           <div class="col-md-4">
                               <div class="card">
-                  <div class="card-header d-flex justify-content-between">
-                     <div class="header-title">
-                        <h4 class="card-title">Product Statistics</h4>
-                     </div>
-                  </div>
                   <div class="card-body">
-                     <div id="chart"></div>
+                     <div class="chart"></div>
                   </div>
                </div>
                           </div>
                          </div>
                    
                          <div class="row">
-                    <table class="tg" style="width: 100%;">
-<thead>
-  <tr>
-    <th class="tg-0lax" colspan="2">Brand Name</th>
-    <th class="tg-0lax" colspan="2">KEA Ref</th>
-    <th class="tg-0lax" colspan="2">Recycling Scenario</th>
-    <th class="tg-0lax" colspan="2">KEA large home appliance</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0lax" colspan="2">Model Name</td>
-    <td class="tg-0lax" colspan="2">Ref-541</td>
-    <td class="tg-0lax" colspan="2">Total Weight </td>
-    <td class="tg-0lax" colspan="2">98271 g</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Name of Part</td>
-    <td class="tg-0pky">Mass (g)</td>
-    <td class="tg-0pky">Material</td>
-    <td class="tg-0pky">Recycling Rate (%)</td>
-    <td class="tg-0pky">Recyclable Mass (g)</td>
-    <td class="tg-0pky">Recovery Rate (%)</td>
-    <td class="tg-0pky">Recoverable Mass (g)</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">Reusable Parts</td>
-    <td class="tg-lboi">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky" rowspan="2">Parts for selective<br>treatement</td>
-    <td class="tg-0pky">PCB Main</td>
-    <td class="tg-0pky">417</td>
-    <td class="tg-0pky">PCB</td>
-    <td class="tg-0pky">10</td>
-    <td class="tg-0pky">42</td>
-    <td class="tg-0pky">90</td>
-    <td class="tg-0pky">375</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">PCB F AS</td>
-    <td class="tg-0pky">80</td>
-    <td class="tg-0pky">PCB</td>
-    <td class="tg-0pky">10</td>
-    <td class="tg-0pky">8</td>
-    <td class="tg-0pky">90</td>
-    <td class="tg-0pky">72</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax" rowspan="4">Parts with single Material</td>
-    <td class="tg-0lax">CASE VEGETB A </td>
-    <td class="tg-0lax">1840</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1656</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1656</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">CASE VEGETB A</td>
-    <td class="tg-0lax">1740</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1566</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1566</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">POCKET RS</td>
-    <td class="tg-0lax">880</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">792</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">792</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">POCKET RM</td>
-    <td class="tg-0lax">694</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">625</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">625</td>
-  </tr>
-</tbody>
-
-</table>
+                      <table class="table sumAssess">
+                        <thead class="thead-dark">
+                           <tr>
+                              <th scope="col">Part</th>
+                              <th scope="col">Part Mass</th>
+                              <th scope="col">Material</th>
+                              <th scope="col">Material Mass(g) </th>
+                              <th scope="col">Reuse Mass(g)</th>
+                              <th scope="col">Reuse Mass(%)</th>
+                              <th scope="col">Recycling Mass(g)</th>
+                              <th scope="col">Recycling Mass(%)</th>
+                              <th scope="col">Recovery Mass(g)</th>
+                              <th scope="col">Recovery Mass(%)</th>
+                              <th scope="col">Disposable Mass(g)</th>
+                              <th scope="col">Disposable Mass(%)</th>
+                              <th scope="col">Eng Rcv Mass(g)</th>
+                              <th scope="col">Eng Rcv Mass(%)</th>
+                              <th scope="col">Total Mass(g)</th>
+                              <th scope="col">Total Mass(%)</th>
+                            
+                           </tr>
+                        </thead>
+                        <tbody class="renderEN4555">
+                         
+                        </tbody>
+                     </table>
                          </div>
                             </div>
                         
@@ -1409,23 +1363,21 @@
                         
                         <div  class="table-wrapper"> 
                           
-                            <h1 style="margin: 25px;">제품 평가 보고서</h1>
                                   
                         <div class="row downloadtitle">
-                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtn float-right" style="  position: -webkit-sticky;
+                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtnEN4557 float-right" style="  position: -webkit-sticky;
   position: sticky;"  >
                                     <ul>
-                                        <li>Download</li>
-                                        <li>Downloading...</li>
-                                        <li>Success!</li>
+                                        <li>다운로드</li>
+                                        <li>다운로드중...</li>
+                                        <li>완료!</li>
                                     </ul>
                                     <div>
                                         <svg viewBox="0 0 24 24"></svg>
                                     </div>
                                 </button>
-                            <h4 style="margin: 10px; text-align:start;">1. 제품 개요</h4>
                             </div>
-                               <div class="report">
+                               <div class="reportEN4557">
                                <div class="row" style="align-items: center;">
                           <div class="col-md-4">
                                 <tr data-id="2" data-parent="1" data-level="2">
@@ -1478,21 +1430,9 @@
                                              </div>
                                  </td>
                               </tr>
-                             
-                                <tr data-id="2" data-parent="1" data-level="2">
-
-                                 <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Product Number</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="productNumber form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
                           </div>
                           <div class="col-md-4">
-                               <table class="table">
+                              <table class="table">
                         <thead class="thead-light">
                            <tr>
                               <th scope="col">Indication</th>
@@ -1503,27 +1443,15 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <th scope="row">Reuse Weight(g)</th>
-                              <td>150</td>
-                              <td>23</td>
-                            
+                              <th scope="row">Recycled Material</th>
+                              <td class="sumReuseWeight"></td>
+                              <td class="sumReuseWeightPerc"></td>
                            </tr>
-                           <tr>
-                              <th scope="row">Recycling Weight(g)</th>
-                              <td>100</td>
-                              <td>100</td>
-                       
-                           </tr>
-                           <tr>
-                              <th scope="row">Recovery Weight(g)</th>
-                              <td>0</td>
-                              <td>0</td>
-                           
                            </tr>
                              <tr>
-                              <th scope="row">Total Weight(g)</th>
-                              <td>200</td>
-                              <td>100</td>
+                              <th scope="row">Total Weight</th>
+                              <td class="sumTotalWeightg"></td>
+                              <td class="sumTotalWeightPerc"></td>
                            
                            </tr>
                         </tbody>
@@ -1531,114 +1459,29 @@
                           </div>
                           <div class="col-md-4">
                               <div class="card">
-                  <div class="card-header d-flex justify-content-between">
-                     <div class="header-title">
-                        <h4 class="card-title">Product Statistics</h4>
-                     </div>
-                  </div>
                   <div class="card-body">
-                     <div id="chart"></div>
+                     <div class="chartsecond"></div>
                   </div>
                </div>
                           </div>
                          </div>
                    
                          <div class="row">
-                    <table class="tg" style="width: 100%;">
-<thead>
-  <tr>
-    <th class="tg-0lax" colspan="2">Brand Name</th>
-    <th class="tg-0lax" colspan="2">KEA Ref</th>
-    <th class="tg-0lax" colspan="2">Recycling Scenario</th>
-    <th class="tg-0lax" colspan="2">KEA large home appliance</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0lax" colspan="2">Model Name</td>
-    <td class="tg-0lax" colspan="2">Ref-541</td>
-    <td class="tg-0lax" colspan="2">Total Weight </td>
-    <td class="tg-0lax" colspan="2">98271 g</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky">Name of Part</td>
-    <td class="tg-0pky">Mass (g)</td>
-    <td class="tg-0pky">Material</td>
-    <td class="tg-0pky">Recycling Rate (%)</td>
-    <td class="tg-0pky">Recyclable Mass (g)</td>
-    <td class="tg-0pky">Recovery Rate (%)</td>
-    <td class="tg-0pky">Recoverable Mass (g)</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">Reusable Parts</td>
-    <td class="tg-lboi">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky" rowspan="2">Parts for selective<br>treatement</td>
-    <td class="tg-0pky">PCB Main</td>
-    <td class="tg-0pky">417</td>
-    <td class="tg-0pky">PCB</td>
-    <td class="tg-0pky">10</td>
-    <td class="tg-0pky">42</td>
-    <td class="tg-0pky">90</td>
-    <td class="tg-0pky">375</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">PCB F AS</td>
-    <td class="tg-0pky">80</td>
-    <td class="tg-0pky">PCB</td>
-    <td class="tg-0pky">10</td>
-    <td class="tg-0pky">8</td>
-    <td class="tg-0pky">90</td>
-    <td class="tg-0pky">72</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax" rowspan="4">Parts with single Material</td>
-    <td class="tg-0lax">CASE VEGETB A </td>
-    <td class="tg-0lax">1840</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1656</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1656</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">CASE VEGETB A</td>
-    <td class="tg-0lax">1740</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1566</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">1566</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">POCKET RS</td>
-    <td class="tg-0lax">880</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">792</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">792</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">POCKET RM</td>
-    <td class="tg-0lax">694</td>
-    <td class="tg-0lax">PS</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">625</td>
-    <td class="tg-0lax">90</td>
-    <td class="tg-0lax">625</td>
-  </tr>
-</tbody>
-
-</table>
+                    <table class="table materialChart">
+                        <thead class="thead-dark">
+                           <tr>
+                              <th scope="col">Material Group List</th>
+                                 <th scope="col">Material Name List</th>
+                                    <th scope="col">Material Mass</th>
+                                       <th scope="col">Recycled Material Mass(g)</th>
+                                                   <th scope="col">Recycled Material Mass(%)</th>
+                            
+                           </tr>
+                        </thead>
+                        <tbody class="renderEN4557">
+                         
+                        </tbody>
+                     </table>
                          </div>
                             </div>
                         </div>
@@ -1647,24 +1490,21 @@
                          <div class="tab-pane fade" id="Accessment" role="tabpanel" aria-labelledby="Accessment-tab">
                         
                         <div  class="table-wrapper"> 
-                          
-                            <h1 style="margin: 25px;">제품 평가 보고서</h1>
                                   
                         <div class="row downloadtitle">
-                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtn float-right" style="  position: -webkit-sticky;
+                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtnEN4558 float-right" style="  position: -webkit-sticky;
   position: sticky;"  >
                                     <ul>
-                                        <li>Download</li>
-                                        <li>Downloading...</li>
-                                        <li>Success!</li>
+                                        <li>다운로드</li>
+                                        <li>다운로드중...</li>
+                                        <li>완료!</li>
                                     </ul>
                                     <div>
                                         <svg viewBox="0 0 24 24"></svg>
                                     </div>
                                 </button>
-                            <h4 style="margin: 10px; text-align:start;">1. 제품 개요</h4>
                             </div>
-                               <div class="report">
+                               <div class="reportEN4558">
                                <div class="row" style="align-items: center;">
                           <div class="col-md-4">
                                 <tr data-id="2" data-parent="1" data-level="2">
@@ -1717,52 +1557,27 @@
                                              </div>
                                  </td>
                               </tr>
-                             
-                                <tr data-id="2" data-parent="1" data-level="2">
-
-                                 <td class="" data-column="name">
-                                                <div class="input-group mb-3">
-                                                 <div class="input-group-prepend" height="15px;">
-                                                 <span class="input-group-text" id="basic-addon3">Product Number</span>
-                                                    </div>
-                                             <input readonly type="text" style="margin:0;" data-column="name" class="productNumber form-control" id="basic-url" aria-describedby="basic-addon3">
-                                             </div>
-                                 </td>
-                              </tr>
                           </div>
                           <div class="col-md-4">
-                               <table class="table">
+                              <table class="table">
                         <thead class="thead-light">
                            <tr>
                               <th scope="col">Indication</th>
                               <th scope="col">Mass(g)</th>
                               <th scope="col">Mass(%)</th>
-                        
                            </tr>
                         </thead>
                         <tbody>
                            <tr>
-                              <th scope="row">Reuse Weight(g)</th>
-                              <td>150</td>
-                              <td>23</td>
-                            
-                           </tr>
-                           <tr>
-                              <th scope="row">Recycling Weight(g)</th>
-                              <td>100</td>
-                              <td>100</td>
-                       
-                           </tr>
-                           <tr>
-                              <th scope="row">Recovery Weight(g)</th>
-                              <td>0</td>
-                              <td>0</td>
+                              <th scope="row">CRM Weight(g)</th>
+                              <td class="sumReuseWeight"></td>
+                              <td class="sumReuseWeightPerc"></td>
                            
                            </tr>
                              <tr>
-                              <th scope="row">Total Weight(g)</th>
-                              <td>200</td>
-                              <td>100</td>
+                              <th scope="row">Total Weight</th>
+                              <td class="sumTotalWeightg"></td>
+                              <td class="sumTotalWeightPerc"></td>
                            
                            </tr>
                         </tbody>
@@ -1770,28 +1585,28 @@
                           </div>
                           <div class="col-md-4">
                               <div class="card">
-                  <div class="card-header d-flex justify-content-between">
-                     <div class="header-title">
-                        <h4 class="card-title">Product Statistics</h4>
-                     </div>
-                  </div>
                   <div class="card-body">
-                     <div id="chart"></div>
+                     <div class="chartsthree"></div>
                   </div>
                </div>
                           </div>
                          </div>
                    
                          <div class="row">
-                          <h3>CRM Declaration Tool  [EN4558]</h3>
-                    <table class="table">
+                    <table class="table subsAssess">
                         <thead class="thead-dark">
                            <tr>
                               <th scope="col">Part Name</th>
+                                 <th scope="col">Part Mass(g)</th>
+                                    <th scope="col">Material Name</th>
+                                       <th scope="col">Material Mass(g)</th>
+                                        
                               <th scope="col">CRM Substance</th>
                               <th scope="col">CAS No.</th>
-                              <th scope="col">Mass (g) </th>
+                              <th scope="col">Mass(g) </th>
                                    <th scope="col">Mass(%)</th>
+                                      <th scope="col">CRMs</th>
+                                         <th scope="col">ROHS</th>
                            </tr>
                         </thead>
                         <tbody class="renderParts">
@@ -1799,33 +1614,8 @@
                         </tbody>
                      </table>
 
-                     <h3>Recyclability and Recoverability Assessing Tool  [EN45555]</h3>
-                      <table class="table">
-                        <thead class="thead-dark">
-                           <tr>
-                              <th scope="col">Part Name</th>
-                              <th scope="col">Part Mass</th>
-                              <th scope="col">Material Name</th>
-                              <th scope="col">Material Mass (g) </th>
-                              <th scope="col">Reuse Mass (g)</th>
-                              <th scope="col">Reuse Mass (%)</th>
-                              <th scope="col">Recycling Mass (g)</th>
-                              <th scope="col">Recycling Mass (%)</th>
-                              <th scope="col">Recovery Mass (g)</th>
-                              <th scope="col">Recovery Mass (%)</th>
-                              <th scope="col">Disposable Mass (g)</th>
-                              <th scope="col">Disposable Mass (%)</th>
-                              <th scope="col">Energy Recovery Mass (g)</th>
-                              <th scope="col">Energy Recovery Mass (%)</th>
-                              <th scope="col">Total Mass (g)</th>
-                              <th scope="col">Total Mass (%)</th>
-                            
-                           </tr>
-                        </thead>
-                        <tbody class="renderEN4555">
-                         
-                        </tbody>
-                     </table>
+                     
+                     
                          </div>
                             </div>
                         </div>
@@ -1838,7 +1628,8 @@
          </div>    
         </div>
 
-   
+
+ 
 
                     
     <!-- Wrapper End-->
@@ -1915,9 +1706,13 @@
      <script>
        const report = document.querySelector('.report')
        const reportbtn = document.querySelector('.reportbtn')
-  
+        const reportEN4558 = document.querySelector('.reportEN4558')
+       const reportbtnEN4558 = document.querySelector('.reportbtnEN4558')
+        const reportEN4557 = document.querySelector('.reportEN4557')
+       const reportbtnEN4557 = document.querySelector('.reportbtnEN4557')
+
 window.onload = function () {
-    reportbtn
+       reportbtn
         .addEventListener("click", () => {
             const invoice = report;
             console.log(invoice);
@@ -1925,6 +1720,36 @@ window.onload = function () {
             var opt = {
                 margin: 0.1,
                 filename: 'Assessment Report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'cm', format: 'A2', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+
+    reportbtnEN4558
+        .addEventListener("click", () => {
+            const invoice = reportEN4558;
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 0.1,
+                filename: 'Assessment Report EN4558.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'cm', format: 'A2', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+
+     reportbtnEN4557
+        .addEventListener("click", () => {
+            const invoice = reportEN4557;
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 0.1,
+                filename: 'Assessment Report EN4557.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'cm', format: 'A2', orientation: 'portrait' }

@@ -56,12 +56,9 @@ let id;
 // Create element and render users
 const renderUser = doc => {
   const tr = `
-   
-   
-     
        <tr data-id='${doc.id}'>
-      <td>${doc.data().재료명}</td>
-     <td>${doc.data().구분ID}</td>
+      <td>${doc.data().MaterialGroup}</td>
+     <td>${doc.data().재료명}</td>
       <td>${doc.data().Reusabiity}</td>
        <td>${doc.data().Recyclability}</td>
  <td>${doc.data().Recoverability}</td>
@@ -203,8 +200,9 @@ for(let i = 0; i < json.length; i++) {
 
       
        db.collection('materialsdb').add({
-     재료명: obj.재료명,
-            구분ID: obj.구분ID,
+            MaterialGroup: obj.MaterialGroup,
+            GroupID: obj.GroupID,
+            재료명: obj.재료명,
             Reusabiity: obj.Reusabiity,
             Recyclability:obj.Recyclability,
             Recoverability:obj.Recoverability,
