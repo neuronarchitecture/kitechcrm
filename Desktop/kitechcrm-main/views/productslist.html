@@ -1,0 +1,1744 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>자원효율성 통합시스템 | Dashboard for managing recyclable products</title>
+      
+      <!-- Favicon -->
+     
+ <link rel="stylesheet" href="./products.css" />
+ <link rel="stylesheet" href="./addbtn.css" />
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+      <link rel="stylesheet" href="./backend.css" />
+      <link rel="stylesheet" href="./backend-plugin.min.css">
+       <link rel="stylesheet" href="./all.min.css">
+      <link rel="stylesheet" href="./line-awesome.min.css">
+      <link rel="stylesheet" href="./remixicon.css">
+        <!-- <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js"></script>
+   
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js" defer ></script> -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js"></script>
+  
+      </head>
+  <body class="">
+    <!-- loader Start -->
+   
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+     <div class="sidebar">
+    <div class="logo-details">
+     
+        <div class="logo_name">KitechCRM</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a class="adminelement" href="./dashboard"style="display: none;">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">대시보드</span>
+        </a>
+         <span class="tooltip">대시보드</span>
+      </li>
+       <li>
+        <a class="notadmin" href="./dashboard"  style="display: none;">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">대시보드</span>
+        </a>
+         <span class="tooltip">대시보드</span>
+      </li>
+      <li>
+       <a class="adminelement" href="./listofproducts" style="display: none;">
+         <i  class='bx bx-user' ></i>
+         <span class="links_name">제품목록</span>
+       </a>
+       <span class="tooltip">제품목록</span>
+     </li>
+      <li>
+       <a class="notadmin" href="./parts" style="display: none;">
+         <i  class='bx bx-user' ></i>
+         <span class="links_name">제품목록</span>
+       </a>
+       <span class="tooltip">제품목록</span>
+     </li>
+       <li>
+       <a class="adminelement" href="./partslist" style="display: none;">
+         <i  class='bx bx-user' ></i>
+         <span class="links_name">부품목록</span>
+       </a>
+       <span class="tooltip">부품목록</span>
+     </li>
+          <li>
+       <a class="adminelement" href="#" style="display: none;">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name">공지사항</span>
+       </a>
+       <span class="tooltip">공지사항</span>
+     </li>
+     <li>
+       <a class="notadmin" href="#" style="display: none;">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name">공지사항</span>
+       </a>
+       <span class="tooltip">공지사항</span>
+     </li>
+    
+     <li class="profile" style="margin-bottom: 30px; background:#11101D;">
+         <div class="profile-details">
+           <!--<img src="profile.jpg" alt="profileImg">-->
+           <div class="name_job">
+             <div class="name">Logout</div>
+             <div class="job">2022 - 2023</div>
+           </div>
+         </div>
+        <a href="/sessionLogout"> <i class='bx bx-log-out' id="log_out" ></i> </a>
+     </li>
+    </ul>
+  </div>
+    
+    
+  <section class="home-section">
+        
+<div class="content-page">
+     <div class="container-fluid" style="    padding-top: 60px;">
+           <div class="iq-top-navbar">
+          <div class="iq-navbar-custom">
+              <nav class="navbar navbar-expand-lg navbar-light p-0">
+            
+               
+              
+                  <div class="d-flex align-items-center">
+                        <div class="userroledisplay adminelement" style="display: none;">
+                         <div class="card-body">
+                  
+                      <button type="button" class="btn mb-1 bg-primary-light">
+                      제품 제조사
+                      </button>
+                      <!-- <button type="button" class="btn mb-1 bg-success-light">
+                      Part Supplier <span class="badge badge-success ml-2">4</span>
+                      </button> -->
+                      <!-- <button type="button" class="btn mb-1 bg-danger-light">
+                      Notifications <span class="badge badge-danger ml-2">4</span>
+                      </button> -->
+                  </div>
+                  </div>
+                  <div class="userroledisplay notadmin" style="display: none;" >
+                         <div class="card-body">
+                  
+                      <!-- <button type="button" class="btn mb-1 bg-primary-light">
+                      Product Manufacturer
+                      </button> -->
+                      <button type="button" class="btn mb-1 bg-success-light">
+                      부품 공급사 
+                      </button>
+                      
+                      <!-- <button type="button" class="btn mb-1 bg-danger-light">
+                      Notifications <span class="badge badge-danger ml-2">4</span>
+                      </button> -->
+                  </div>
+                  </div>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse"
+                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                          aria-label="Toggle navigation">
+                          <i class="ri-menu-3-line"></i>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                             
+                              <li class="nav-item nav-icon search-content">
+                                  <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
+                                      aria-haspopup="true" aria-expanded="false">
+                                      <i class="ri-search-line"></i>
+                                  </a>
+                                  <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
+                                      <form action="#" class="searchbox p-2">
+                                          <div class="form-group mb-0 position-relative">
+                                              <input type="text" class="text search-input font-size-12"
+                                                  placeholder="type here to search...">
+                                              <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </li>
+                              <li class="nav-item nav-icon dropdown caption-content">
+                                  <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
+                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <img src="./1.png" class="img-fluid rounded" alt="user">
+                                  </a>
+                                  <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <div class="card shadow-none m-0">
+                                          <div class="card-body p-0 text-center">
+                                              <div class="media-body profile-detail text-center">
+                                                  <img src="./profile-bg.jpg" alt="profile-bg"
+                                                      class="rounded-top img-fluid mb-4">
+                                                  <img src="./1.png" alt="profile-img"
+                                                      class="rounded profile-img img-fluid avatar-70">
+                                              </div>
+                                              <div class="p-3" >
+                                                   <div class="mb-1">
+                                                    <h5 class="mb-1 " id="usertitle" ></h5>
+                                                    <h5 class="mb-1 " id="useremailcard" ></h5>
+                                                </div>
+                                                  
+                                                  <p class="mb-0">계정 생성일: 2022/08/02</p>
+                                                  <div class="d-flex align-items-center justify-content-center mt-3">
+                                                      <a href="./userprofile" class="btn border mr-2">내 계정</a>
+                                                      <a href="/sessionLogout" class="btn border">로그아웃</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+      </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                    <div>
+                        <h4 class="mb-3">제품 목록</h4>
+                        <p class="mb-0">등록된 제품 목록을 보여줍니다.</p>
+                    </div>
+                    <button class="btnpr btnpr-add adminelement" style="display: none;"><div class="addnewproductbtnpr">신규 제품 등록</div></button>
+                </div>
+            </div>
+
+
+     
+                      
+<!-- <form id="upload">
+	<label for="file">File to upload</label>
+	<input type="file" id="file" accept=".json">
+
+	<button class="uploadbtn">Upload</button>
+</form> -->
+            
+        <!--Here starts the form-->
+        
+        
+ <div class="tabledata">
+   
+    <div class="table-wrapper table-responsive rounded mb-3" style="overflow-x: hidden; height: 850px;
+    overflow-y: scroll;">
+          <div class="loadingtitle"></div>
+      <table class="table-users  mb-0 " >
+    <thead class="bg-white text-uppercase" style="position: sticky; top: 0; z-index: 1;">
+  <tr class="ligth ligth-data">
+            <th ><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 20 20">
+  <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+  <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+</svg></th>
+             <th >Product Category</th>
+          <th>Product Name</th>
+          <th>Model Name</th>
+          <th>Product Weight</th>
+          <th>Product Size</th>
+          <th>Registration Date</th>
+           <th>Registration Status</th>
+          <th>Memo</th>
+           <th>Action</th>
+        </tr>
+  
+    </thead>
+   
+   
+      </table>
+    
+    </div>
+    </div>
+
+
+  <!--Add modaly second-->
+    
+    <!-- Add modaly -->
+    <div class="add-modaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="">
+                        <form class="form"   autocomplete="off"  data-toggle="validator" id="form-wizard1">
+                             <ul id="top-tab-list" class="p-0">
+                           
+                           <li id="personal">
+                              <a href="#personal">
+                              <i class="ri-user-fill"></i><span>Product Identification</span>
+                              </a>
+                           </li>
+                       
+                        
+                        </ul>
+                        <!-- fieldsets -->
+                     
+                        <fieldset id="personal">
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-5">
+                                    <h3 class="mb-4">Enter Product Identification:</h3>
+                                 </div>
+                                 <div class="col-5">
+                        
+                                      
+                                 </div>
+                              </div>
+                                 <div class="col-md-12"> 
+    <div class="form-group">
+                                        <label>Product Category *</label>
+                                         <select class="partsName form-control"  id="editproductCategory" name="productCategory" data-errors="Please Enter Product Category."  >
+                                        
+                                        
+<option>에어컨</option>
+<option>가정용 오븐 및 레인지후드</option>
+<option>전기램프 및 등 조명기기</selectoption>
+<option>가정용 식기세척기</option>
+<option>가정용 냉장고</option>
+<option>가정용 드럼 건조기</option>
+<option>가정용 세탁기 및 세탁기겸 건조기</option>
+<option>로컬 스페이스 히터</option>
+<option>전문가용 냉장용 보관 캐비닛</option>
+<option>주거용 환기 장치</option>
+<option>고체연료 보일러 및 고체 연료 보일러 패키지, 보조 히터, 온도 제어 및 태양광 장치</option>
+<option>콤비네이션 히터, 공간 히터 패키지</option>
+<option>전자 디스플레이 및 텔레비젼</option>
+<option>청소기</option>
+<option>온수기, 온수 저장 탱크, 온수기 및 태양광 장치 패키지</option>
+<option>공기 가열 제품, 냉각 제품, 고온 공정 냉각기 및 팬 코일 장치</option>
+<option>서큘레이터</option>
+<option>컴퓨터 및 컴퓨터 서버</option>
+<option>전동기</option>
+<option>외부 전원 공급 장치</option>
+<option>125W~500kW 전기 모터로 구동되는 팬</option>
+<option>심플 셋톱 박스</option>
+<option>소형, 중형 및 대형 전력 변압기</option>
+<option>전기전자 가정 및 사무기기의 대기/오프모드 전력소비</option>
+<option>양수 펌프</option>
+<option>용접기기</option>
+<option>직판 냉장기기</option>
+<option>이동전화</option>
+<option>스마트폰</option>
+<option>태블릿</option>
+<option>Others</option>
+
+                                           
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" > -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                 </div>
+                                     <div class="row">
+                                            <div class="col-md-6">  <div class="form-group">
+                                        <label>Product Name *</label>
+                                        <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>   </div>                      
+                                       <div class="col-md-6">     <div class="form-group">
+                                        <label>Product Model Name *</label>
+                                        <input type="text" class="form-control" id='editproductMN' placeholder="Enter Product Model Name" data-errors="Please Enter Product Model Name." name="productMN" >
+                                        <div class="help-block with-errors"></div>
+                                    </div> </div>
+                                 
+                                </div>    
+                                <div class="col-md-12">
+                                       <div class="form-group">
+                                        <label>Product Weight (g) *</label>
+                                        <input type="number" step=".01" class="form-control" id='editproductWeight'placeholder="Enter Code" data-errors="Please product weight." name="productWeight" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                    <div class="row " >
+                                <div class="col-md-12">
+                                </div>  
+                                                     
+<!--                              
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
+                                    </div>
+                                </div> -->
+                            </div>  
+                              <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Product Size</label>
+                                        <input type="text" class="form-control" id='editproductSize'placeholder="Please Enter Product Size. (mm x mm x mm)" data-errors="Please Enter Product Size." name="productSize" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                               
+                              </div>
+                           </div>
+                      
+                        
+                        
+                           <div class="form-card text-left">
+                          
+                                           
+                                  
+                               <div class="row">  
+                                <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Registered Date</label>
+                                        <input type="date" class="form-control" id='editregisteredDate' placeholder="Enter the registration date." data-errors="Please the right registration date." name="registeredDate" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+
+                                      
+                                <div class="col-md-6"> 
+                                    
+                                  <div class="form-group">
+                                        <label>Product Registration Status</label>
+                                         <select class="productStatus form-control" id="editproductStatus" name="productStatus" data-errors="Please Enter Product Registration Status."  >
+                                            <option value="Complete">Complete</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Ready">Ready</option>
+                                           
+                                           </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 </div>
+                                     <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='editMemo' placeholder="Please Enter Memo." data-errors="Please Enter Memo." name="memo" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                               
+                              </div>
+                                
+                                
+                                 
+
+                            
+
+
+                                  
+                               </div>
+                           </div>
+                         <div class="col-11">
+                                        <div class="buttonaddProducts addProduct" id="editForm">
+                                <div class="content">
+                                    <i class="bx bxs-edit"></i>
+                                    <span class="buttonaddProducts-text">Add New Product</span>
+                                </div>
+                            </div>
+                                      
+                                 </div>
+                               
+                    
+               
+                         
+                        </fieldset>
+                      
+                   </form>
+                 </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit modaly -->
+    <div class="edit-modaly modaly-wrapper">
+      <div class="modaly">
+        
+    <div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
+
+            <div class="message">
+                <span class="text text-1">Success</span>
+                <span class="text text-2">Your changes has been saved</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+
+        <div class="progress"></div>
+    </div>
+        <div class="modaly-header"></div>
+        <div class="modaly-body">
+             <div class="card-body">
+                <!-- here starts the edit product data form -->
+                   <div class="card">
+               
+                  <div class="card-body">
+                   
+                     <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab-1" role="tablist">
+                        <li class="nav-item">
+                           <a class="nav-link active" id="pills-home-tab-fill" data-toggle="pill" href="#pills-home-fill" role="tab" aria-controls="pills-home" aria-selected="true">  <span class="editheader"></span></a>
+                        </li>
+                      
+                     </ul>
+                     <div class="tab-content" id="pills-tabContent-1">
+                        <!--here start the products entry form-->
+                        <div class="tab-pane fade show active" id="pills-home-fill" role="tabpanel" aria-labelledby="pills-home-tab-fill">
+                           <div class="">
+                                 <form class="form"  autocomplete="off"  data-toggle="validator" id='form-wizard1'>
+                    
+                        <!-- fieldsets -->
+                        
+                        <fieldset >
+                           <div class="form-card text-left">
+                       
+                              <!-- class="row adminelement" style="display: none;" -->
+                              <div class="row" class="row">
+                              
+                                 <!-- <div class="col-5">
+                                    <h2 class="steps">Step 1 - 4</h2>
+                                 </div> -->
+                              </div>
+                              <div class="row">
+                                 
+                          <div class="row">
+                            
+                               
+                                   <div class="col-md-12">                      
+                                    <div class="form-group">
+                                        <label>Product Category *</label>
+                                         <select class="editpartsName form-control" id="editproductCategory" name="productCategory" data-errors="Please Enter Product Category."  required>
+                              
+                                                                                 
+<option>에어컨</option>
+<option>가정용 오븐 및 레인지후드</option>
+<option>전기램프 및 등 조명기기</selectoption>
+<option>가정용 식기세척기</option>
+<option>가정용 냉장고</option>
+<option>가정용 드럼 건조기</option>
+<option>가정용 세탁기 및 세탁기겸 건조기</option>
+<option>로컬 스페이스 히터</option>
+<option>전문가용 냉장용 보관 캐비닛</option>
+<option>주거용 환기 장치</option>
+<option>고체연료 보일러 및 고체 연료 보일러 패키지, 보조 히터, 온도 제어 및 태양광 장치</option>
+<option>콤비네이션 히터, 공간 히터 패키지</option>
+<option>전자 디스플레이 및 텔레비젼</option>
+<option>청소기</option>
+<option>온수기, 온수 저장 탱크, 온수기 및 태양광 장치 패키지</option>
+<option>공기 가열 제품, 냉각 제품, 고온 공정 냉각기 및 팬 코일 장치</option>
+<option>서큘레이터</option>
+<option>컴퓨터 및 컴퓨터 서버</option>
+<option>전동기</option>
+<option>외부 전원 공급 장치</option>
+<option>125W~500kW 전기 모터로 구동되는 팬</option>
+<option>심플 셋톱 박스</option>
+<option>소형, 중형 및 대형 전력 변압기</option>
+<option>전기전자 가정 및 사무기기의 대기/오프모드 전력소비</option>
+<option>양수 펌프</option>
+<option>용접기기</option>
+<option>직판 냉장기기</option>
+<option>이동전화</option>
+<option>스마트폰</option>
+<option>태블릿</option>
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>                   
+                             
+                                <div class="col-md-6">                      
+                                    <div class="form-group">
+                                        <label>Product Name *</label>
+                                        <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Product Model Name</label>
+                                        <input type="text" class="form-control"  id='editmodelName'placeholder="Enter Product Model Name" data-errors="Enter Product Model Name." name="editmodelName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                            
+                                <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Product Weight (g) *</label>
+                                        <input type="number" class="form-control" id='editproductWeight'placeholder="Enter Code" data-errors="Please product weight." name="productWeight" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                    <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Product Size (mm x mm x mm)</label>
+                                        <input type="text" class="form-control" id='editproductSize' placeholder="Enter Product Size (mm x mm x mm)" data-errors="Enter Product Size (mm x mm x mm)" name="editproductSize" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                   <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Registration Date</label>
+                                        <input type="date" class="form-control" id='editregisteredDate'placeholder="Enter Registration Date" data-errors="Please Registration Date." name="editregisteredDate" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                  <div class="col-md-12"> 
+                                        
+                                  <div class="form-group">
+                                        <label>Registration Status</label>
+                                         <select class="productStatus form-control" id="editproductStatus" name="editproductStatus" data-errors="Please Enter Product Registration Status."  required>
+                                            <option value="Complete">Complete</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Ready">Ready</option>
+                                           
+                                           </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                       
+                                </div>
+                                    <div class="col-md-12"> 
+                                        
+                                  <div class="form-group">
+                                        <label>Memo</label>
+                                         <input type="text" class="productStatus form-control" id="editMemo" name="editMemo" data-errors="Please Enter Memo."  required>
+                                         
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                       
+                                </div>
+                               
+                                <!-- <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control image-file" style="height: fit-content;" name="pic" accept="image/*">
+                                    </div>
+                                </div> -->
+                            </div>   
+
+                              </div>
+                           </div>
+                       
+                            <!-- <div class="buttony " id="editForm">
+                                <div class="text-icon">
+                                <i class="bx bx-cloud-upload"></i>
+                                <span class="texty">Edit Product</span>
+                                </div>
+                            </div> -->
+
+                        </fieldset>
+                         <div class="buttoni" id="editForm">
+                                <div class="content">
+                                    <i class="bx bxs-edit"></i>
+                                    <span class="buttoni-text">Edit Product</span>
+                                </div>
+                            </div>
+                   </form>
+                 </div>
+                        </div>
+                         <!--here ends the products entry form-->
+                           <!--here start the adding parts entry form for the specific product-->
+                    
+                          <!--here ends the adding parts entry form for the specific product-->
+                     </div>
+                  </div>
+               </div>
+                  <!-- here ends the edit product data form -->
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+     <div class="addPPmodaly modaly-wrapper" style="padding-top: 50px;">
+      <div class="modaly">
+     <div class="card-header d-flex justify-content-between">
+               
+                  </div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12 col-lg-12">
+               <div class="iq-card">
+                
+                  <div class="iq-card-body">
+                     <form id="form-wizard1" class="addPPForm text-center mt-4">
+                        <ul id="top-tab-list" class="p-0">
+                         
+                      
+                            <li id="personal">
+                              <a href="javascript:void();">
+                              <i class="ri-user-fill"></i><span>Add New Part</span>
+                              </a>
+                           </li>
+                        </ul>
+                        <!-- fieldsets -->
+                        
+                              
+                              <fieldset>
+                           
+                            
+                            <div class="row" style="align-items: center;">
+                           
+                             
+                                       <div class="col-md-4">
+                                    <div class="form-group">
+                                     <label>부품사</label>
+                               
+                                      <select  class="supplierName form-control" name="supplierName" id="supplierName"  data-style="py-0">
+                                      
+                                     
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                   <div class="col-md-2">
+                                    <div class="form-group">
+                                     <label>부품명</label>
+                               
+                                      <select  class="partname form-control" name="partname" id="partname"  data-style="py-0">
+                                     <option value="--" selected>Select a Part</option>
+                                     <div class="partname">
+                                         
+                                     </div>
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>부품코드</label>
+                                        <select   class="form-control"  id='partCode' placeholder="부품 코드를 입력하세요"  data-errors="부품 코드를 입력하세요." name="addpartCode" required>
+
+                                        </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                            
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>부품 수량</label>
+                                        <input type="number" class="form-control"  id='quantity' placeholder="부품 수량을 입력하세요" data-errors="부품 수량을 입력하세요." name="addpartQuantity" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary btn-light float-left  mr-3 getPPdata" style="  margin-top: 10%;  background-color: lightblue"> Get Part Information </button>
+                                </div>
+                                     
+                                </div> 
+                        <!-- <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Add Part</button> -->
+                      <!-- <button type="button" name="next" class="  btn checkpartdata btn-primary next action-button-next float-right" value="next"  >Next</button>
+                        </fieldset>
+                        
+                        <fieldset> -->
+                         
+                                  <div class="col-md-12" style="visibility: hidden; height: 0;">
+                                    <div class="form-group">
+                                        <label>Part id</label>
+                                        <input readonly type="hidden" class="form-control"  id='partId' placeholder="Enter Part Number" data-errors="Please Part number." name="addpartNumber" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                           <div class="row">
+                                
+                                   <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>부품 크기</label>
+                                        <input readonly type="text" class="form-control" id='partSize' placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                              <div class="col-md-2"> 
+                                    <div class="form-group">
+                                        <label>부품중량 *</label>
+                                        <input readonly type="number" class="form-control" id='partWeight'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-2"> 
+                                    <div class="form-group">
+                                        <label>등록일자</label>
+                                        <input readonly type="date" class="form-control" id='partRegisteredDate'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                        
+                           
+                            
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                     <label>메모</label>
+                                        <input readonly type="text" class="form-control" id='companyName' placeholder="Enter Code" data-errors="Please Enter Code." name="addsupplierInfo" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                       </div>
+
+              
+                                       <div class="buttonaddParts addPart" id="editForm">
+                                <div class="content">
+                                    <i class="bx bxs-edit"></i>
+                                    <span class="buttonaddParts-text">Add Part to Product</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        
+                     </form>
+                     
+                                       <form id="upload">    
+                     
+  <div class="input-group" style="margin-top: 5%; width: 30%; margin-left: 70%;">
+   
+     
+  <div class="custom-file" >
+   
+                           <input type="file" class="filey custom-file-input" id="inputGroupFile04" accept=".json">
+                           <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                             
+                        </div>
+                         <div class="input-group-append">
+                           <button class="btn btn-outline-secondary" type="submit" style="margin: 0;">Upload</button>
+                        </div>
+                     
+                     </div>
+    </form>
+                     
+       <div class="row" style="align-items: center;">
+        <div class="col-md-2">
+     <div class="table-responsive" style="    height: 310px; overflow: auto;">
+                        <table id="tree-table-1" class="table table-hover table-bordered iq-bg-white tree" style="    overflow: auto;">
+                           <thead class="bg-white" style="position: sticky; top: 0;">
+                              <tr>
+                                 <th class="breadproductname"></th>
+                              </tr>
+                           </thead>
+                           <tbody class="breadbody">
+                       
+                            
+                           </tbody>
+                        </table>
+                     </div>
+        </div>
+         <div class="col-md-10">
+              <div  class="table-wrapper"> 
+                               <table class="table-parts">
+                                <tr>
+                                   <th>Part Name</th>
+                                <th>Part Code</th>
+                                   <th>Part Weight</th>
+                                 <th>Part Size</th>
+                                     <th>Registration Date</th>
+                                       <th>Quantity</th>
+                                   <th>Memo</th>
+                                   <th>Action</th>
+                              
+                                </tr>
+                        
+                            <tbody class="addedpartslist">
+
+                            </tbody>
+                           </table>
+                        </div>
+        </div>
+       </div>
+                        
+                          <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modaly">Close</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--add new material-->
+     <div class="addPartmodaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"><h3>Add New Material</h3></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="">
+                        <form class="form"  autocomplete="off"  data-toggle="validator" id="form-wizard1">
+                             <ul id="top-tab-list" class="p-0">
+                           
+                           <li id="personal">
+                              <a href="#personal">
+                              <i class="ri-user-fill"></i><span>Material Details </span>
+                              </a>
+                           </li>
+                        
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-7">
+                                    <h3 class="mb-4">Enter New Material Details:</h3>
+                                 </div>
+                                 <div class="col-5">
+                                    <!-- <h2 class="steps">Step 3 - 4</h2> -->
+                                 </div>
+                              </div>
+                              
+                           <div class="row">
+                                           <div class="col-md-6">                      
+                                    <div class="form-group">
+                                        <label>Material Group *</label>
+                                         <select class="form-control" id="editmaterialGroup" name="addmaterialGroup" data-errors="Please Enter Material Category."  required>
+                                             <option>Steels and ferrous materials</option>
+                                             <option>Non-ferrous metals and alloys</option>
+                                             <option>Precious metals</option>
+                                             <option>Non-metallic inorganic materials</option>
+                                               <option>Other inorganics</option>
+                                             <option>Unfilled thermoplastics resin</option>
+                                             <option>Filled thermoplastics resin</option>
+                                             <option>Duromers</option>
+                                               <option>Elastomers</option>
+                                             <option>Natural materials</option>
+                                             <option>Other organics</option>
+                                             <option>Materials for product operation</option>
+                                             
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                               <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Material Name</label>
+                                        <input type="text" class="form-control"  id='materialClassID'placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="addmaterialName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  -->
+                                  <div class="col-md-6">                
+                                            <div class="form-group">
+                                        <label>Material Name *</label>
+                                         <select class="form-control addmaterialName" id="editmaterialName" name="addmaterialName" data-errors="Please Enter Product Name."  required>
+                                            <option>Stainless steel </option>
+                                            <option>Cast and sintered irons</option>
+                                            <option>Other ferrous alloys, non-stainless steels</option>
+                                            <option>Aluminium and its alloys</option>
+                                            <option>Copper and its alloys</option>
+                                            <option>Magnesium and its alloys</option>
+                                            <option>Nickel and its alloys</option>
+                                            <option>Zinc and its alloys</option>
+                                            <option>Lead and its alloys (including Pb solders)</option>
+                                            <option>Tin and its alloys (including Pb-free solders)</option>
+                                            <option>Other non-ferrous metals and alloys</option>
+                                            <option>Gold</option>
+                                            <option>Platinum</option>
+                                            <option>Other precious metals</option>
+                                            <option>Ceramics</option>
+                                            <option>Glass</option>
+                                            <option>Other inorganic materials </option>
+                                            <option>PolyVinylChloride (PVC)</option>
+                                            <option>PolyEthylene (PE)</option>
+                                            <option>PolyPropylene (PP)</option>
+                                            <option>PolyStyrene (PS)</option>
+                                            <option>PolyCarbonate (PC)</option>
+                                            <option>PolyOxyMethylene (POM)</option>
+                                            <option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
+                                            <option>Styrene Acrylonitrile (SAN)</option>
+                                            <option>PolyAmide (PA)</option>
+                                            <option>PolyEthyleneTerephthalate (PET)</option>
+                                            <option>PolyPhenyleneEther (PPE)</option>
+                                            <option>PolyButyleneTerephthalate (PBT)</option>
+                                            <option>PC-PBT</option>
+                                            <option>PC-ABS</option>
+                                            <option>PPE-PS</option>
+                                            <option>Other unfilled thermoplastics</option>
+                                            <option>PolyVinylChloride (PVC)</option>
+                                            <option>PolyEthylene (PE)</option>
+                                            <option>PolyPropylene (PP)</option>
+                                            <option>PolyStyrene (PS)</option>
+                                            <option>PolyCarbonate (PC)</option>
+                                            <option>PolyOxyMethylene (POM)</option>
+                                            <option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
+                                            <option>Styrene Acrylonitrile (SAN)</option>
+                                            <option>PolyAmide (PA)</option>
+                                            <option>PolyEthyleneTerephthalate (PET)</option>
+                                            <option>PolyPhenyleneEther (PPE)</option>
+                                            <option>PolyButyleneTerephthalate (PBT)</option>
+                                            <option>PC-PBT</option>
+                                            <option>PC-ABS</option>
+                                            <option>PPE-PS</option>
+                                            <option>Other filled thermoplastics</option>
+                                            <option>Polyurethane (PUR)</option>
+                                            <option>Unsaturated polyester (UP)</option>
+                                            <option>Epoxy resin (EP)</option>
+                                            <option>Other duromers</option>
+                                            <option>NBR</option>
+                                            <option>Silicone</option>
+                                            <option>Other elastomers</option>
+                                            <option>Wood</option>
+                                            <option>Paper</option>
+                                            <option>Fiber</option>
+                                            <option>Leather</option>
+                                            <option>Other organic materials </option>
+                                            <option>Refrigerant gases and cryogens and other greenhouse gases</option>
+                                            <option>Other gases</option>
+                                            <option>Oils and greases</option>
+                                            <option>Fuels </option>
+                                            <option>Other liquids</option>
+                                            <option>Other substances or mixtures for product operation </option>
+                                                                                        
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                           </div>  
+                               <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Class ID</label>
+                                        <input type="text" class="form-control"  id='materialClassID' placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="addmaterialClassID" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>Recycle Content (%)</label>
+                                        <input type="number" class="form-control" id='materialRecycleContent' placeholder="Enter Material Recycle Content" data-errors="Please part specs." name="addmaterialRecycleContent" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                               </div>
+                              <div class="row">
+                                  <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label>Recycle Type *</label>
+                                         <select name="addmaterialRecycleType" id="editMaterialRecycleType" class="selectpicker form-control" data-style="py-0">
+                                       <option>Select Option</option>
+                                       <option>Option 1</option>
+                                       <option>Option 2</option>
+                                       <option >Option 3</option>
+                                       <option>Option 4</option>
+                                    
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                              </div>
+                            <div class="row">
+                                     <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Material Mass (g) *</label>
+                                        <input type="number" class="form-control" id='editMaterialMassg'placeholder="Please enter Material mass" data-errors="Please part mass." name="addmaterialMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Material Mass (%) *</label>
+                                        <input type="number" class="form-control" id='editMaterialMassPerc'placeholder="Please enter Material mass" data-errors="Please part mass." name="addmaterialMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                            </div>
+                           </div>
+                    
+                        <button  id="edit"  class="btn btn-primary btn-light  action-button-previous float-right mr-3" >소재 추가하기</button>
+                             <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modaly" >Close</button>
+                        </fieldset>
+                      
+                   </form>
+                 </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+<!--view partproduct material-->
+  <div class="modal fade" id="partproductmaterial" tabindex="-1" role="dialog" aria-labelledby="partproductmaterial" style="z-index: 99999;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title " id="partproductmaterialTitle"><span class="treeproducttitle"></span></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                          
+      <div class="container-fluid">
+        <div class="row" style="align-items: center;">
+        <!-- <div class="col-md-2">
+     <div class="table-responsive">
+                        <table id="tree-table-4" class="table table-hover table-bordered iq-bg-success  tree">
+                           <thead class="bg-success">
+                              <tr>
+                                 <th class="breadpartname"></th>
+                              </tr>
+                           </thead>
+                           <tbody class="breadpartmat">
+                        
+                           
+                           </tbody>
+                        </table>
+                     </div>
+        </div> -->
+        <div class="col-md-12">
+   <div class="table-responsive">
+                    <div  class="table-wrapper"> 
+                               <table class="table-parts" id="myTable">
+                            <thead>
+                                <tr>
+                                <th >  Material Category</th>
+                                  <th>  Material Name</th>
+                                    <th>  MaterialClass ID</th>
+                                      <th>  Recycle Content</th>
+                                        <th>  Recycle Type</th>
+                                          <th>  Mass (g)</th>
+                                            <th>  Mass (%)</th>
+                                <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="materiallist">
+
+                            </tbody>
+                           </table>
+                        </div>
+                         <div class="modal-footer" style="margin-top: 30%;">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                              </div>
+                     </div>
+        </div>
+        </div>
+                       
+                  </div>
+               </div>            
+            </div>
+         </div>    
+        </div>
+
+ <div class="modal fade" id="partproductmaterialsubs" tabindex="-1" role="dialog" aria-labelledby="partproductmaterialsubs" style="z-index: 99999;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title " id="partproductmaterialsubsTitle"><span class="treeproducttitle"></span></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                          
+      <div class="container-fluid">
+
+                  
+        
+                          <div class="table-responsive">
+                    <div  class="table-wrapper"> 
+                               <table class="table-parts" id="myTable">
+                            <thead>
+                                
+                                <tr>
+
+                               <th>Substance Name</th>
+                                    <th>CAS No</th>
+                                    <th>CRMs</th>
+                                        <th>ROHS</th>
+                                        <th>Substance Mass (g)</th>
+                                      
+                                            <th>Substance Mass (%)</th>
+                                 
+                                <th>Action</th>
+                                </tr>
+                        
+                            </thead>
+                            <tbody class="substancelist">
+
+                            </tbody>
+                           </table>
+                        </div>
+                         <div class="modal-footer" style="margin-top: 30%;">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                              </div>
+                     </div>
+                  </div>
+               </div>            
+            </div>
+         </div>    
+        </div>
+
+  </div>
+         <!--Here ends the form-->
+          </div>
+          </div>
+         </div>
+        </div>
+      </div>
+     </div>
+    </div>
+ </div>
+</div>
+
+    <!--View Data table tree-->
+     <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title " id="exampleModalScrollableTitle"><span class="treeproducttitle"></span></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                          
+      <div class="container-fluid">
+
+                  
+        
+                     <ul class="nav nav-tabs" id="myTab-1" role="tablist">
+                        <li class="nav-item">
+                           <a class="nav-link " id="pills-home-tab-fill" data-toggle="pill" href="#home" role="tab" aria-controls="home" aria-selected="true">재활용가능율평가[EN45555]
+</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" id="pills-profile-tab-fill" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">재활용함유율평가[EN4557]</a>
+                        </li>
+                          <li class="nav-item">
+                           <a class="nav-link" id="pills-Accessment-tab-fill" data-toggle="pill" href="#Accessment" role="tab" aria-controls="Accessment" aria-selected="false">희소물질선언[EN4558]</a>
+                        </li>
+                     
+                     </ul>
+                     <div class="tab-content" id="myTabContent-2">
+                        <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+                 
+                              <div class="row downloadtitle">
+                                    <button type="button"  id="edit" class="btn btn-secondary reportbtn float-right" style="  position: -webkit-sticky; position: sticky;"  > Download Assessment Report [EN4555] </button>
+                            </div>
+                            <div class="report">
+                               <div class="row" style="align-items: center;">
+                          <div class="col-md-4">
+                                <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Category</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productCategory form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Name</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productName form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Class</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productClass form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                              <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Weight</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0px;" data-column="name" class="productWeight form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                                <tr data-id="2" data-parent="1" data-level="2">
+                                  <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Specs</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productSpecs form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                          </div>
+                          <div class="col-md-4">
+                      <table class="table">
+                        <thead class="thead-light">
+                           <tr>
+                              <th scope="col">Indication</th>
+                              <th scope="col">Mass(g)</th>
+                              <th scope="col">Mass(%)</th>
+                        
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <th scope="row">Reuse Weight</th>
+                              <td class="sumReuseWeight"></td>
+                              <td class="sumReuseWeightPerc"></td>
+                            
+                           </tr>
+                           <tr>
+                              <th scope="row">Recycling Weight</th>
+                              <td class="sumRecycWeightg"></td>
+                              <td class="sumRecycWeightPerc"></td>
+                       
+                           </tr>
+                           <tr>
+                              <th scope="row">Recovery Weight</th>
+                              <td class="sumRecovWeightg">
+                              <td class="sumRecovWeightPerc"></td>
+                           
+                           </tr>
+                             <tr>
+                              <th scope="row">Total Weight</th>
+                              <td class="sumTotalWeightg"></td>
+                              <td class="sumTotalWeightPerc"></td>
+                           
+                           </tr>
+                        </tbody>
+                     </table>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="card">
+                  <div class="card-body">
+                     <div class="chart"></div>
+                  </div>
+               </div>
+                          </div>
+                         </div>
+                   
+                         <div class="row">
+                      <table class="table sumAssess">
+                        <thead class="thead-dark">
+                           <tr>
+                              <th scope="col">Part</th>
+                              <th scope="col">Part Mass</th>
+                              <th scope="col">Material</th>
+                              <th scope="col">Material Mass(g) </th>
+                              <th scope="col">Reuse Mass(g)</th>
+                              <th scope="col">Reuse Mass(%)</th>
+                              <th scope="col">Recycling Mass(g)</th>
+                              <th scope="col">Recycling Mass(%)</th>
+                              <th scope="col">Recovery Mass(g)</th>
+                              <th scope="col">Recovery Mass(%)</th>
+                              <th scope="col">Disposable Mass(g)</th>
+                              <th scope="col">Disposable Mass(%)</th>
+                              <th scope="col">Eng Rcv Mass(g)</th>
+                              <th scope="col">Eng Rcv Mass(%)</th>
+                              <th scope="col">Total Mass(g)</th>
+                              <th scope="col">Total Mass(%)</th>
+                            
+                           </tr>
+                        </thead>
+                        <tbody class="renderEN4555">
+                         
+                        </tbody>
+                     </table>
+                         </div>
+                            </div>
+                        
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        
+                        <div  class="table-wrapper"> 
+                          
+                                      <div class="row downloadtitle">
+                                    <button type="button"  id="edit" class="btn btn-secondary reportbtnEN4557 float-right" style="  position: -webkit-sticky; position: sticky;"  > Download Assessment Report [EN4557] </button>
+                            </div>
+                
+                               <div class="reportEN4557">
+                               <div class="row" style="align-items: center;">
+                          <div class="col-md-4">
+                                <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Category</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productCategory form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Name</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productName form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Class</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productClass form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                              <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Weight</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0px;" data-column="name" class="productWeight form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                                <tr data-id="2" data-parent="1" data-level="2">
+                                  <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Specs</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productSpecs form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                          </div>
+                          <div class="col-md-4">
+                              <table class="table">
+                        <thead class="thead-light">
+                           <tr>
+                              <th scope="col">Indication</th>
+                              <th scope="col">Mass(g)</th>
+                              <th scope="col">Mass(%)</th>
+                        
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <th scope="row">Recycled Material</th>
+                              <td class="sumRecycWeight"></td>
+                              <td class="sumRecycWeightPer"></td>
+                           </tr>
+                           </tr>
+                             <tr>
+                              <th scope="row">Total Weight</th>
+                              <td class="sumTotalWeightg"></td>
+                              <td class="sumTotalWeightPerc"></td>
+                           
+                           </tr>
+                        </tbody>
+                     </table>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="card">
+                  <div class="card-body">
+                     <div class="chartsecond"></div>
+                  </div>
+               </div>
+                          </div>
+                         </div>
+                   
+                         <div class="row">
+                    <table class="table materialChart">
+                        <thead class="thead-dark">
+                           <tr>
+                              <th scope="col">Material Group List</th>
+                                 <th scope="col">Material Name List</th>
+                                    <th scope="col">Material Mass</th>
+                                       <th scope="col">Recycled Material Mass(g)</th>
+                                                   <th scope="col">Recycled Material Mass(%)</th>
+                            
+                           </tr>
+                        </thead>
+                        <tbody class="renderEN4557">
+                         
+                        </tbody>
+                     </table>
+                         </div>
+                            </div>
+                        </div>
+                       
+                        </div>
+                         <div class="tab-pane fade" id="Accessment" role="tabpanel" aria-labelledby="Accessment-tab">
+                        
+                        <div  class="table-wrapper"> 
+                                      <div class="row downloadtitle">
+                                    <button type="button"  id="edit" class="btn btn-secondary reportbtnEN4558 float-right" style="  position: -webkit-sticky; position: sticky;"  > Download Assessment Report [EN4558] </button>
+                            </div>
+                  
+                               <div class="reportEN4558">
+                               <div class="row" style="align-items: center;">
+                          <div class="col-md-4">
+                                <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Category</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productCategory form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Name</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productName form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                               <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Class</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productClass form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                              <tr data-id="2" data-parent="1" data-level="2">
+                               <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Weight</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0px;" data-column="name" class="productWeight form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                                <tr data-id="2" data-parent="1" data-level="2">
+                                  <td class="" data-column="name">
+                                     <div class="input-group mb-3">
+                                                 <div class="input-group-prepend" height="15px;">
+                                                 <span class="input-group-text" id="basic-addon3">Product Specs</span>
+                                                    </div>
+                                             <input readonly type="text" style="margin:0;" data-column="name" class="productSpecs form-control" id="basic-url" aria-describedby="basic-addon3">
+                                             </div>
+                                 </td>
+                              </tr>
+                          </div>
+                          <div class="col-md-4">
+                              <table class="table">
+                        <thead class="thead-light">
+                           <tr>
+                              <th scope="col">Indication</th>
+                              <th scope="col">Mass(g)</th>
+                              <th scope="col">Mass(%)</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <th scope="row">CRM Weight(g)</th>
+                              <td class="crmweightg"></td>
+                              <td class="crmweightPerc"></td>
+                           
+                           </tr>
+                             <tr>
+                              <th scope="row">Total Weight</th>
+                              <td class="sumTotalWeightg"></td>
+                              <td class="sumTotalWeightPerc"></td>
+                           
+                           </tr>
+                        </tbody>
+                     </table>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="card">
+                  <div class="card-body">
+                     <div class="chartsthree"></div>
+                  </div>
+               </div>
+                          </div>
+                         </div>
+                   
+                         <div class="row">
+                    <table class="table subsAssess">
+                        <thead class="thead-dark">
+                           <tr>
+                              <th scope="col">Part Name</th>
+                                 <th scope="col">Part Mass(g)</th>
+                                    <th scope="col">Material Name</th>
+                                       <th scope="col">Material Mass(g)</th>
+                                        
+                              <th scope="col">CRM Substance</th>
+                              <th scope="col">CAS No.</th>
+                              <th scope="col">Mass(g) </th>
+                                   <th scope="col">Mass(%)</th>
+                                      <th scope="col">CRMs</th>
+                                         <th scope="col">ROHS</th>
+                           </tr>
+                        </thead>
+                        <tbody class="renderParts">
+                         
+                        </tbody>
+                     </table>
+
+                     
+                     
+                         </div>
+                            </div>
+                        </div>
+                       
+                        </div>
+                     </div>
+                  </div>
+               </div>            
+            </div>
+         </div>    
+        </div>
+
+
+ 
+
+                    
+    <!-- Wrapper End-->
+    <footer class="iq-footer">
+            <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item"><a href="../backend/privacy-policy.html">Privacy Policy</a></li>
+                                <li class="list-inline-item"><a href="../backend/terms-of-service.html">Terms of Use</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">CRM Dashbord</a>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  </section>
+    
+
+    
+    
+           
+     
+ <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+  <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+
+  <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+  <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-functions.js"></script>
+  <!-- <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyAq2QjImxRXEtRHN-N6u2YEod-wUJMtI1s",
+  authDomain: "projectcrm-f4e5f.firebaseapp.com",
+  databaseURL: "https://projectcrm-f4e5f-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "projectcrm-f4e5f",
+  storageBucket: "projectcrm-f4e5f.appspot.com",
+  messagingSenderId: "404890912341",
+  appId: "1:404890912341:web:5b129be76ccdfeba8c76dc",
+  measurementId: "G-TL8J23TNZE"
+};
+  </script> -->
+
+ <!-- <script  type="module" src="./auth.js" defer></script> -->
+
+   
+    <!-- Backend Bundle JavaScript -->
+    <script src="./backend-bundle.min.js"></script>
+<!--     
+      <script src="./multiselect-dropdown.js" ></script> -->
+    <!-- Table Treeview JavaScript -->
+    <script src="./table-treeview.js"></script>
+ <script  type="module" src="./products.js" ></script>
+    <script    src="./sidemenu.js" ></script>
+     <script  type="module" src="./addbtn.js" ></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="./customizer.js"></script>
+    
+    <!-- Chart Custom JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <!-- app JavaScript -->
+    <script src="./app.js"></script>
+     <!-- <script   type="module" src="./auth.js" ></script> -->
+     <script>feather.replace()</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+     <script>
+       const report = document.querySelector('.report')
+       const reportbtn = document.querySelector('.reportbtn')
+        const reportEN4558 = document.querySelector('.reportEN4558')
+       const reportbtnEN4558 = document.querySelector('.reportbtnEN4558')
+        const reportEN4557 = document.querySelector('.reportEN4557')
+       const reportbtnEN4557 = document.querySelector('.reportbtnEN4557')
+
+window.onload = function () {
+       reportbtn
+        .addEventListener("click", () => {
+            const invoice = report;
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 0.1,
+                filename: 'Assessment Report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'cm', format: 'A2', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+
+    reportbtnEN4558
+        .addEventListener("click", () => {
+            const invoice = reportEN4558;
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 0.1,
+                filename: 'Assessment Report EN4558.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'cm', format: 'A2', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+
+     reportbtnEN4557
+        .addEventListener("click", () => {
+            const invoice = reportEN4557;
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 0.1,
+                filename: 'Assessment Report EN4557.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'cm', format: 'A2', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+
+     </script>
+  </body>
+</html>

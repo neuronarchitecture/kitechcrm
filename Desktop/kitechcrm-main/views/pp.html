@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>자원효율성 통합시스템 | Dashboard for managing recyclable products</title>
+      
+      <!-- Favicon -->
+     
+ <link rel="stylesheet" href="./products.css" />
+ <link rel="stylesheet" href="./addbtn.css" />
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+      <link rel="stylesheet" href="./backend.css" />
+      <link rel="stylesheet" href="./backend-plugin.min.css">
+       <link rel="stylesheet" href="./all.min.css">
+      <link rel="stylesheet" href="./line-awesome.min.css">
+      <link rel="stylesheet" href="./remixicon.css">
+        <!-- <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js"></script>
+   
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js" defer ></script> -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js"></script>
+  
+      </head>
+  <body class="">
+    <!-- loader Start -->
+   
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+     <div class="sidebar">
+    <div class="logo-details">
+     
+        <div class="logo_name">KitechCRM</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a class="adminelement" href="./dashboard"style="display: none;">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">대시보드</span>
+        </a>
+         <span class="tooltip">대시보드</span>
+      </li>
+       <li>
+        <a class="notadmin" href="./dashboard"  style="display: none;">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">대시보드</span>
+        </a>
+         <span class="tooltip">대시보드</span>
+      </li>
+      <li>
+       <a class="adminelement" href="./listofproducts" style="display: none;">
+         <i  class='bx bx-user' ></i>
+         <span class="links_name">제품목록</span>
+       </a>
+       <span class="tooltip">제품목록</span>
+     </li>
+      <li>
+       <a class="notadmin" href="./parts" style="display: none;">
+         <i  class='bx bx-user' ></i>
+         <span class="links_name">제품목록</span>
+       </a>
+       <span class="tooltip">제품목록</span>
+     </li>
+       <li>
+       <a class="adminelement" href="./partslist" style="display: none;">
+         <i  class='bx bx-user' ></i>
+         <span class="links_name">부품목록</span>
+       </a>
+       <span class="tooltip">부품목록</span>
+     </li>
+          <li>
+       <a class="adminelement" href="#" style="display: none;">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name">공지사항</span>
+       </a>
+       <span class="tooltip">공지사항</span>
+     </li>
+     <li>
+       <a class="notadmin" href="#" style="display: none;">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name">공지사항</span>
+       </a>
+       <span class="tooltip">공지사항</span>
+     </li>
+    
+     <li class="profile" style="margin-bottom: 30px; background:#11101D;">
+         <div class="profile-details">
+           <!--<img src="profile.jpg" alt="profileImg">-->
+           <div class="name_job">
+             <div class="name">Logout</div>
+             <div class="job">2022 - 2023</div>
+           </div>
+         </div>
+        <a href="/sessionLogout"> <i class='bx bx-log-out' id="log_out" ></i> </a>
+     </li>
+    </ul>
+  </div>
+    
+    
+  <section class="home-section">
+        
+<div class="content-page">
+     <div class="container-fluid">
+           <div class="iq-top-navbar">
+          <div class="iq-navbar-custom">
+              <nav class="navbar navbar-expand-lg navbar-light p-0">
+            
+               
+              
+                  <div class="d-flex align-items-center">
+                        <div class="userroledisplay adminelement" style="display: none;">
+                         <div class="card-body">
+                  
+                      <button type="button" class="btn mb-1 bg-primary-light">
+                      제품 제조사
+                      </button>
+                      <!-- <button type="button" class="btn mb-1 bg-success-light">
+                      Part Supplier <span class="badge badge-success ml-2">4</span>
+                      </button> -->
+                      <!-- <button type="button" class="btn mb-1 bg-danger-light">
+                      Notifications <span class="badge badge-danger ml-2">4</span>
+                      </button> -->
+                  </div>
+                  </div>
+                  <div class="userroledisplay notadmin" style="display: none;" >
+                         <div class="card-body">
+                  
+                      <!-- <button type="button" class="btn mb-1 bg-primary-light">
+                      Product Manufacturer
+                      </button> -->
+                      <button type="button" class="btn mb-1 bg-success-light">
+                      부품 공급사 
+                      </button>
+                      
+                      <!-- <button type="button" class="btn mb-1 bg-danger-light">
+                      Notifications <span class="badge badge-danger ml-2">4</span>
+                      </button> -->
+                  </div>
+                  </div>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse"
+                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                          aria-label="Toggle navigation">
+                          <i class="ri-menu-3-line"></i>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                             
+                              <li class="nav-item nav-icon search-content">
+                                  <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
+                                      aria-haspopup="true" aria-expanded="false">
+                                      <i class="ri-search-line"></i>
+                                  </a>
+                                  <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
+                                      <form action="#" class="searchbox p-2">
+                                          <div class="form-group mb-0 position-relative">
+                                              <input type="text" class="text search-input font-size-12"
+                                                  placeholder="type here to search...">
+                                              <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </li>
+                              <li class="nav-item nav-icon dropdown caption-content">
+                                  <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
+                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <img src="./1.png" class="img-fluid rounded" alt="user">
+                                  </a>
+                                  <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <div class="card shadow-none m-0">
+                                          <div class="card-body p-0 text-center">
+                                              <div class="media-body profile-detail text-center">
+                                                  <img src="./profile-bg.jpg" alt="profile-bg"
+                                                      class="rounded-top img-fluid mb-4">
+                                                  <img src="./1.png" alt="profile-img"
+                                                      class="rounded profile-img img-fluid avatar-70">
+                                              </div>
+                                              <div class="p-3" >
+                                                   <div class="mb-1">
+                                                    <h5 class="mb-1 " id="usertitle" ></h5>
+                                                    <h5 class="mb-1 " id="useremailcard" ></h5>
+                                                </div>
+                                                  
+                                                  <p class="mb-0">계정 생성일: 2022/08/02</p>
+                                                  <div class="d-flex align-items-center justify-content-center mt-3">
+                                                      <a href="./userprofile" class="btn border mr-2">내 계정</a>
+                                                      <a href="/sessionLogout" class="btn border">로그아웃</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+      </div>
+    
+    
+<div class="content-page">
+     <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                    <div>
+                        <h4 class="mb-3">부품목록</h4>
+                        <p class="mb-0">등록된 부품을 보여줍니다.</p>
+                    </div>
+                    <div class="btnpr-add" style="visibility: hidden;"><div class="addnewproductbtnpr"> </div></div>
+                </div>
+            </div>
+ <div class="div" style="width: 100%;">
+        <div class="form-group" id="formfloat">
+                     <div class="input-group">
+                        <input type="text" class="form-control" id="myInputMat" style="margin: 0;" onkeyup='materialSearch()' placeholder="Search Part Name" aria-label="Search Material Name"
+                           aria-describedby="basic-addon5">
+                        <div class="input-group-append">
+                           <span class="input-group-text" id="basic-addon5"><i class="las la-search font-size-20"></i></span>
+                        </div>
+                     </div>
+                       
+                     </div>
+
+ </div>
+
+            
+        <!--Here starts the form-->
+        
+ <div class="tabledata">
+   
+    <div class="table-wrapper" >
+      <table class="table-users" id="myTableMat">
+        <tr>
+    <th ><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 20 20">
+  <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+  <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+</svg></th>
+             <th>Part Name</th>
+          <th>Model Name</th>
+            <th>Part Mass (g)</th>
+             <th>Reusable Parts </th>
+          <th>Part Mass (g/EA)</th>
+          <th>Action</th>
+        </tr>
+      </table>
+    
+    </div>
+    </div>
+
+
+  <!--Add modaly second-->
+    
+    <!-- Add modaly -->
+    <div class="add-modaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"><h3>Add New Part</h3></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="">
+                        <form class="form"  autocomplete="off"  data-toggle="validator" id="form-wizard1">
+                             <ul id="top-tab-list" class="p-0">
+                           
+                           <li id="personal">
+                              <a href="#personal">
+                              <i class="ri-user-fill"></i><span>Parts Identification</span>
+                              </a>
+                           </li>
+                           <li id="payment">
+                              <a href="#payment">
+                              <i class="ri-lock-unlock-line"></i><span>Part Details</span>
+                              </a>
+                           </li>
+                        
+                        </ul>
+                        <!-- fieldsets -->
+                     
+                        <fieldset >
+                     
+                           <div class="form-card text-left">
+                             <div class="row "> 
+                             <div class="row error"> 
+                                <!-- <h3>
+                                    해당 데이터를 확인할 권한이 없습니다
+                                </h3> -->
+                              </div>
+                            </div>
+                         
+                            <div class="row" style="    justify-content: flex-end;">
+                           
+                                <div class="col-md-12">
+                                </div>  
+                                <div class="col-md-7">                      
+                                    <div class="form-group">
+                                        <label>Part Name *</label>
+                                        <input type="text" class="form-control" id='editpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="addpartName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>    
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Part Number</label>
+                                        <input type="text" class="form-control"  id='partNumber'placeholder="Enter Part Number" data-errors="Please Part number." name="addpartNumber" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label>Part Specs</label>
+                                        <input type="text" class="form-control" id='editpartSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="addpartSpecs" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (g/EA) *</label>
+                                        <input type="number" class="form-control" id='editpartMassgEA'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-3"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (g) *</label>
+                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (%) *</label>
+                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                   <div class="col-md-6">
+                                    <div class="form-group">
+                                     <label>Reused Part</label>
+                                      <select name="addreusedPart" id="editpartClass" class="selectpicker form-control" data-style="py-0">
+                                       <option>Select Option</option>
+                                       <option>Yes</option>
+                                       <option>No</option>
+                                     
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='editcompanyName'placeholder="Enter Code" data-errors="Please Enter Code." name="addsupplierInfo" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Substance</label>
+                               
+                                      <select  class="substancelist  form-control" name="substancelist" id="substancelist"  data-style="py-0">
+                                      
+                                     
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                         
+                           
+                        <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-left mr-3" value="Previous" >Add Part</button>
+                                     
+                                </fieldset>
+                                
+                   </form>
+                 </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit modaly for Parts -->
+    <div class="edit-modaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"><h3 class="editheader"></h3></div>
+        <div class="modaly-body">
+             <div class="card-body">
+                 <div class="">
+                    <form class="form"  autocomplete="off"  data-toggle="validator" id='form-wizard1'>
+                      
+                        <ul id="top-tab-list" class="p-0">
+                           <li class="active" id="account" >
+                              <a href="javascript:void();">
+                              <i class="ri-lock-unlock-line"></i><span>Parts</span>
+                              </a>
+                           </li>
+                
+                       
+                         
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset >
+                           <div class="form-card text-left">
+                             <div class="row"> 
+                             <div class="row error"> 
+                                <!-- <h3>
+                                    해당 데이터를 확인할 권한이 없습니다
+                                </h3> -->
+                              </div>
+                            </div>
+                         
+                            <div class="row">
+                           
+                                <div class="col-md-12">
+                                </div>  
+                                <div class="col-md-7">                      
+                                    <div class="form-group">
+                                        <label>Part Name *</label>
+                                        <input type="text" class="form-control" id='editpartName' placeholder="Enter Product Name" data-errors="Please Enter Part Name." name="editpartName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>    
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Part Number</label>
+                                        <input type="text" class="form-control"  id='partNumber'placeholder="Enter Part Number" data-errors="Please Part number." name="editpartNumber" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label>Part Specs</label>
+                                        <input type="text" class="form-control" id='editpartSpecs' placeholder="Enter part Specs" data-errors="Please part specs." name="editpartSpecs" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (g/EA) *</label>
+                                        <input type="number" class="form-control" id='editpartMassgEA'placeholder="Please part mass" data-errors="Please part mass." name="editpartMassgEA" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-3"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (g) *</label>
+                                        <input type="number" class="form-control" id='editpartMassg'placeholder="Please part mass" data-errors="Please part mass." name="editpartMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Part Mass (%) *</label>
+                                        <input type="number" class="form-control" id='editpartMassPerc'placeholder="Please part mass" data-errors="Please part mass." name="editpartMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                   <div class="col-md-6">
+                                    <div class="form-group">
+                                     <label>Reused Part</label>
+                                      <select name="editreusedPart" id="editpartClass" class="selectpicker form-control" data-style="py-0">
+                                       <option>Select Option</option>
+                                       <option>Yes</option>
+                                       <option>No</option>
+                                     
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                     <label>Memo</label>
+                                        <input type="text" class="form-control" id='editcompanyName'placeholder="Enter Code" data-errors="Please Enter Code." name="editsupplierInfo" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                              <div class="col-md-12">
+                                    <div class="form-group">
+                                     <label>Substance</label>
+                                      <select name="editsubstancelist" id="editsubstancelist" class="editsubstancelist form-control" data-style="py-0">
+                                      
+                                     
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                
+                                </fieldset>
+      <button id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Edit Part</button>
+                   </form>
+                 </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!--add new material-->
+     <div class="addPartmodaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"><h3>Add New Material</h3></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="">
+                        <form class="form"  autocomplete="off"  data-toggle="validator" id="form-wizard1">
+                             <ul id="top-tab-list" class="p-0">
+                           
+                           <li id="personal">
+                              <a href="#personal">
+                              <i class="ri-user-fill"></i><span>Material Details </span>
+                              </a>
+                           </li>
+                        
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-7">
+                                    <h3 class="mb-4">Enter New Material Details:</h3>
+                                 </div>
+                                 <div class="col-5">
+                                    <!-- <h2 class="steps">Step 3 - 4</h2> -->
+                                 </div>
+                              </div>
+                              
+                           <div class="row">
+                                           <div class="col-md-6">                      
+                                    <div class="form-group">
+                                        <label>Material Group *</label>
+                                         <select class="form-control" id="editmaterialGroup" name="addmaterialGroup" data-errors="Please Enter Material Category."  required>
+                                             <option>Steels and ferrous materials</option>
+                                             <option>Non-ferrous metals and alloys</option>
+                                             <option>Precious metals</option>
+                                             <option>Non-metallic inorganic materials</option>
+                                               <option>Other inorganics</option>
+                                             <option>Unfilled thermoplastics resin</option>
+                                             <option>Filled thermoplastics resin</option>
+                                             <option>Duromers</option>
+                                               <option>Elastomers</option>
+                                             <option>Natural materials</option>
+                                             <option>Other organics</option>
+                                             <option>Materials for product operation</option>
+                                             
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                               <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Material Name</label>
+                                        <input type="text" class="form-control"  id='materialClassID'placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="addmaterialName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  -->
+                                  <div class="col-md-6">                
+                                            <div class="form-group">
+                                        <label>Material Name *</label>
+                                         <select class="form-control addmaterialName" id="editmaterialName" name="addmaterialName" data-errors="Please Enter Product Name."  required>
+                                            <option>Stainless steel </option>
+                                            <option>Cast and sintered irons</option>
+                                            <option>Other ferrous alloys, non-stainless steels</option>
+                                            <option>Aluminium and its alloys</option>
+                                            <option>Copper and its alloys</option>
+                                            <option>Magnesium and its alloys</option>
+                                            <option>Nickel and its alloys</option>
+                                            <option>Zinc and its alloys</option>
+                                            <option>Lead and its alloys (including Pb solders)</option>
+                                            <option>Tin and its alloys (including Pb-free solders)</option>
+                                            <option>Other non-ferrous metals and alloys</option>
+                                            <option>Gold</option>
+                                            <option>Platinum</option>
+                                            <option>Other precious metals</option>
+                                            <option>Ceramics</option>
+                                            <option>Glass</option>
+                                            <option>Other inorganic materials </option>
+                                            <option>PolyVinylChloride (PVC)</option>
+                                            <option>PolyEthylene (PE)</option>
+                                            <option>PolyPropylene (PP)</option>
+                                            <option>PolyStyrene (PS)</option>
+                                            <option>PolyCarbonate (PC)</option>
+                                            <option>PolyOxyMethylene (POM)</option>
+                                            <option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
+                                            <option>Styrene Acrylonitrile (SAN)</option>
+                                            <option>PolyAmide (PA)</option>
+                                            <option>PolyEthyleneTerephthalate (PET)</option>
+                                            <option>PolyPhenyleneEther (PPE)</option>
+                                            <option>PolyButyleneTerephthalate (PBT)</option>
+                                            <option>PC-PBT</option>
+                                            <option>PC-ABS</option>
+                                            <option>PPE-PS</option>
+                                            <option>Other unfilled thermoplastics</option>
+                                            <option>PolyVinylChloride (PVC)</option>
+                                            <option>PolyEthylene (PE)</option>
+                                            <option>PolyPropylene (PP)</option>
+                                            <option>PolyStyrene (PS)</option>
+                                            <option>PolyCarbonate (PC)</option>
+                                            <option>PolyOxyMethylene (POM)</option>
+                                            <option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
+                                            <option>Styrene Acrylonitrile (SAN)</option>
+                                            <option>PolyAmide (PA)</option>
+                                            <option>PolyEthyleneTerephthalate (PET)</option>
+                                            <option>PolyPhenyleneEther (PPE)</option>
+                                            <option>PolyButyleneTerephthalate (PBT)</option>
+                                            <option>PC-PBT</option>
+                                            <option>PC-ABS</option>
+                                            <option>PPE-PS</option>
+                                            <option>Other filled thermoplastics</option>
+                                            <option>Polyurethane (PUR)</option>
+                                            <option>Unsaturated polyester (UP)</option>
+                                            <option>Epoxy resin (EP)</option>
+                                            <option>Other duromers</option>
+                                            <option>NBR</option>
+                                            <option>Silicone</option>
+                                            <option>Other elastomers</option>
+                                            <option>Wood</option>
+                                            <option>Paper</option>
+                                            <option>Fiber</option>
+                                            <option>Leather</option>
+                                            <option>Other organic materials </option>
+                                            <option>Refrigerant gases and cryogens and other greenhouse gases</option>
+                                            <option>Other gases</option>
+                                            <option>Oils and greases</option>
+                                            <option>Fuels </option>
+                                            <option>Other liquids</option>
+                                            <option>Other substances or mixtures for product operation </option>
+                                                                                        
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                           </div>  
+                               <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Class ID</label>
+                                        <input type="text" class="form-control"  id='materialClassID' placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="addmaterialClassID" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>Recycle Content (%)</label>
+                                        <input type="number" class="form-control" id='materialRecycleContent' placeholder="Enter Material Recycle Content" data-errors="Please part specs." name="addmaterialRecycleContent" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                               </div>
+                              <div class="row">
+                                  <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label>Recycle Type *</label>
+                                         <select name="addmaterialRecycleType" id="editMaterialRecycleType" class="selectpicker form-control" data-style="py-0">
+                                       <option>Select Option</option>
+                                       <option>Option 1</option>
+                                       <option>Option 2</option>
+                                       <option >Option 3</option>
+                                       <option>Option 4</option>
+                                    
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                              </div>
+                            <div class="row">
+                                     <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Material Mass (g) *</label>
+                                        <input type="number" class="form-control" id='editMaterialMassg'placeholder="Please enter Material mass" data-errors="Please part mass." name="addmaterialMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Material Mass (%) *</label>
+                                        <input type="number" class="form-control" id='editMaterialMassPerc'placeholder="Please enter Material mass" data-errors="Please part mass." name="addmaterialMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                            </div>
+                           </div>
+                    
+                        <button  id="edit"  class="btn btn-primary btn-light  action-button-previous float-right mr-3" >Add New Material</button>
+                             <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modaly" >Close</button>
+                        </fieldset>
+                      
+                   </form>
+                 </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit modaly for Material -->
+     <div class="editMatmodaly modaly-wrapper">
+      <div class="modaly">
+        <div class="modaly-header"><h3>Edit <span class="editMatHeader"></span></h3></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                     <div class="">
+                        <form class="form"  autocomplete="off"  data-toggle="validator" id="form-wizard1">
+                             <ul id="top-tab-list" class="p-0">
+                           
+                           <li id="personal">
+                              <a href="#personal">
+                              <i class="ri-user-fill"></i><span>Material Details </span>
+                              </a>
+                           </li>
+                        
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-7">
+                                    <h3 class="mb-4">Edit Material Details:</h3>
+                                 </div>
+                                 <div class="col-5">
+                                    <!-- <h2 class="steps">Step 3 - 4</h2> -->
+                                 </div>
+                              </div>
+                              
+                           <div class="row">
+                                           <div class="col-md-6">                      
+                                    <div class="form-group">
+                                        <label>Material Group *</label>
+                                         <select class="form-control" id="PMmaterialGroup" name="PMmaterialGroup" data-errors="Please Enter Material Category."  required>
+                                             <option>Steels and ferrous materials</option>
+                                             <option>Non-ferrous metals and alloys</option>
+                                             <option>Precious metals</option>
+                                             <option>Non-metallic inorganic materials</option>
+                                               <option>Other inorganics</option>
+                                             <option>Unfilled thermoplastics resin</option>
+                                             <option>Filled thermoplastics resin</option>
+                                             <option>Duromers</option>
+                                               <option>Elastomers</option>
+                                             <option>Natural materials</option>
+                                             <option>Other organics</option>
+                                             <option>Materials for product operation</option>
+                                             
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                               <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Material Name</label>
+                                        <input type="text" class="form-control"  id='materialClassID'placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="addmaterialName" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  -->
+                                  <div class="col-md-6">                
+                                            <div class="form-group">
+                                        <label>Material Name *</label>
+                                         <select class="form-control addmaterialName" id="PMmaterialName" name="editmaterialName" data-errors="Please Enter Product Name."  required>
+                                            <option>Stainless steel </option>
+                                            <option>Cast and sintered irons</option>
+                                            <option>Other ferrous alloys, non-stainless steels</option>
+                                            <option>Aluminium and its alloys</option>
+                                            <option>Copper and its alloys</option>
+                                            <option>Magnesium and its alloys</option>
+                                            <option>Nickel and its alloys</option>
+                                            <option>Zinc and its alloys</option>
+                                            <option>Lead and its alloys (including Pb solders)</option>
+                                            <option>Tin and its alloys (including Pb-free solders)</option>
+                                            <option>Other non-ferrous metals and alloys</option>
+                                            <option>Gold</option>
+                                            <option>Platinum</option>
+                                            <option>Other precious metals</option>
+                                            <option>Ceramics</option>
+                                            <option>Glass</option>
+                                            <option>Other inorganic materials </option>
+                                            <option>PolyVinylChloride (PVC)</option>
+                                            <option>PolyEthylene (PE)</option>
+                                            <option>PolyPropylene (PP)</option>
+                                            <option>PolyStyrene (PS)</option>
+                                            <option>PolyCarbonate (PC)</option>
+                                            <option>PolyOxyMethylene (POM)</option>
+                                            <option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
+                                            <option>Styrene Acrylonitrile (SAN)</option>
+                                            <option>PolyAmide (PA)</option>
+                                            <option>PolyEthyleneTerephthalate (PET)</option>
+                                            <option>PolyPhenyleneEther (PPE)</option>
+                                            <option>PolyButyleneTerephthalate (PBT)</option>
+                                            <option>PC-PBT</option>
+                                            <option>PC-ABS</option>
+                                            <option>PPE-PS</option>
+                                            <option>Other unfilled thermoplastics</option>
+                                            <option>PolyVinylChloride (PVC)</option>
+                                            <option>PolyEthylene (PE)</option>
+                                            <option>PolyPropylene (PP)</option>
+                                            <option>PolyStyrene (PS)</option>
+                                            <option>PolyCarbonate (PC)</option>
+                                            <option>PolyOxyMethylene (POM)</option>
+                                            <option>Acrylonitrile-Butadiene-Styrene (ABS)</option>
+                                            <option>Styrene Acrylonitrile (SAN)</option>
+                                            <option>PolyAmide (PA)</option>
+                                            <option>PolyEthyleneTerephthalate (PET)</option>
+                                            <option>PolyPhenyleneEther (PPE)</option>
+                                            <option>PolyButyleneTerephthalate (PBT)</option>
+                                            <option>PC-PBT</option>
+                                            <option>PC-ABS</option>
+                                            <option>PPE-PS</option>
+                                            <option>Other filled thermoplastics</option>
+                                            <option>Polyurethane (PUR)</option>
+                                            <option>Unsaturated polyester (UP)</option>
+                                            <option>Epoxy resin (EP)</option>
+                                            <option>Other duromers</option>
+                                            <option>NBR</option>
+                                            <option>Silicone</option>
+                                            <option>Other elastomers</option>
+                                            <option>Wood</option>
+                                            <option>Paper</option>
+                                            <option>Fiber</option>
+                                            <option>Leather</option>
+                                            <option>Other organic materials </option>
+                                            <option>Refrigerant gases and cryogens and other greenhouse gases</option>
+                                            <option>Other gases</option>
+                                            <option>Oils and greases</option>
+                                            <option>Fuels </option>
+                                            <option>Other liquids</option>
+                                            <option>Other substances or mixtures for product operation </option>
+                                                                                        
+                                           </select>
+                                        <!-- <input type="text" class="form-control" id='editproductName' placeholder="Enter Product Name" data-errors="Please Enter Product Name." name="productName" required> -->
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>  
+                           </div>  
+                               <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Class ID</label>
+                                        <input type="text" class="form-control"  id='PMmaterialClassID' placeholder="Enter Enter Material Class ID" data-errors="Please Part number." name="PMmaterialClassID" >
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-4"> 
+                                    <div class="form-group">
+                                        <label>Recycle Content (%)</label>
+                                        <input type="number" class="form-control" id='PMmaterialRecycleContent' placeholder="Enter Material Recycle Content" data-errors="Please part specs." name="editmaterialRecycleContent" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                               </div>
+                              <div class="row">
+                                  <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label>Recycle Type *</label>
+                                         <select name="editMaterialRecycleType" id="PMMaterialRecycleType" class="selectpicker form-control" data-style="py-0">
+                                       <option>Select Option</option>
+                                       <option>Option 1</option>
+                                       <option>Option 2</option>
+                                       <option >Option 3</option>
+                                       <option>Option 4</option>
+                                    
+                                    </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                              </div>
+                            <div class="row">
+                                     <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Material Mass (g) *</label>
+                                        <input type="number" class="form-control" id='PMmaterialMassg' placeholder="Please enter Material mass" data-errors="Please part mass." name="editmaterialMassg" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-6"> 
+                                    <div class="form-group">
+                                        <label>Material Mass (%) *</label>
+                                        <input type="number" class="form-control" id='PMMaterialMassPerc' placeholder="Please enter Material mass" data-errors="Please part mass." name="editMaterialMassPerc" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div> 
+                            </div>
+                           </div>
+                    
+                        <button  id="editMat"  class="btn btn-primary btn-light  action-button-previous float-right mr-3" >Edit Material</button>
+                            <button type="button" class="btn btn-secondary action-button-close" data-dismiss="editMatmodaly" >Close</button>
+                        </fieldset>
+                      
+                   </form>
+                 </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+ <!-- Edit Substance for specific Material -->
+    <div class="addSubsmodaly modaly-wrapper" id="exampleModalScrollableSUBS" >
+      <div class="modaly">
+        <div class="modaly-header"><h3>Add New Substance</h3></div>
+        <div class="modaly-body">
+          <div class="card-body">
+                    <div class="content-page" style="margin-left: 0;">
+      <div class="container-fluid">
+         <div class="row" >
+            <div class="col-sm-12 col-lg-12">
+               <div class="iq-card">
+                
+                  <div class="iq-card-body">
+                     <form id="form-wizard1" class="text-center mt-4" name="formwizard" >
+                        <ul id="top-tab-list" class="p-0">
+                           <li class="active" id="account">
+                              <a href="javascript:void();">
+                              <i class="ri-lock-unlock-line"></i><span>Choose your Substance</span>
+                              </a>
+                           </li>
+                           <li id="personal">
+                              <a href="javascript:void();">
+                              <i class="ri-user-fill"></i><span>Substance Details</span>
+                              </a>
+                           </li>
+                          
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-7">
+                                    <h3 class="mb-4">Choose your Substance:</h3>
+                                 </div>
+                                 <div class="col-5">
+                                    <h2 class="steps">Step 1 - 2</h2>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                     <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Substance Type: *</label>
+                                        <select  class="getsubstancetype form-control" id="sel1" name="getsubstancetype">
+                                            <option value="">Select Option</option>
+                                            <option value="crm">CRM</option>
+                                            <option value="rohs">ROHS</option>
+                                          
+                                        </select>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Substance Name: *</label>
+                                        <select  class="getsubstancelist form-control" id="sel1" name="getsubstancelist">
+                                            
+                                          
+                                        </select>
+                                    </div>
+                                 </div>
+                              
+                              </div>
+                           </div>
+                           <button type="button" name="next" id="getSubsname" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
+                        </fieldset>
+                        <fieldset>
+                           <div class="form-card text-left">
+                              <div class="row">
+                                 <div class="col-7">
+                                    <!-- <h3 class="mb-4">Personal Information:</h3> -->
+                                 </div>
+                                 <div class="col-5">
+                                    <h2 class="steps">Step 2 - 2</h2>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>CAS Number: *</label>
+                                       <input type="text" class="addcas form-control" name="addcas" value="" placeholder=""  />
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>CRM: *</label>
+                                       <input type="text" class="addcrm form-control" name="addcrm" />
+                                    </div>
+                                 </div>
+                               
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>ROHS: *</label>
+                                        <input type="text" class="addrohs form-control" name="addrohs" />
+                                      
+                                    </div>
+                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Substance Mass (g): *</label>
+                                       <input type="number" class="addsubstanceMassg form-control" name="addsubstanceMassg"  />
+                                    </div>
+                                 </div>
+                                   <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>Substance Mass (%) : *</label>
+                                       <input type="number" class="addsubstanceMassPerc form-control" name="addsubstanceMassPerc"  />
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                              <button type="button" id="addSubs" class="btn btn-primary action-button float-right" value="Submit" >Submit</button>
+                           <button type="button" id="delSubs" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+                        </fieldset>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+            <!-- Modal -->
+             </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+         <!--Here ends the form-->
+          </div>
+          </div>
+         </div>
+        </div>
+      </div>
+     </div>
+    </div>
+ </div>
+</div>
+
+    <!--View Data table tree Material-->
+
+      <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title materialtitle" id="exampleModalScrollableTitle"></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                           <div class="form-group" id="formfloat">
+                     <div class="input-group">
+                        <input type="text" class="form-control" id="myInput" style="margin: 0;" onkeyup='tableSearch()' placeholder="Search Material Name" aria-label="Search Material Name"
+                           aria-describedby="basic-addon5">
+                        <div class="input-group-append">
+                           <span class="input-group-text" id="basic-addon5"><i class="las la-search font-size-20"></i></span>
+                        </div>
+                     </div>
+                       
+                     </div>
+                                <div class="table-responsive">
+                    <div  class="table-wrapper"> 
+                               <table class="table-parts " id="myTable">
+                            
+                                <tr>
+                                      <th ><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 20 20">
+  <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+  <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+</svg></th>
+                                <th>Material Category</th>
+                                    <th>Material Name</th>
+                                    <th>Material Class ID</th>
+                                        <th>Recycle Content</th>
+                                        <th>Recycle Type</th>
+                                        <th>Mass (g)</th>
+                                            <th>Mass (%)</th>
+                                <th>Action</th>
+                                </tr>
+                        
+                            <tbody class="materiallist">
+
+                            </tbody>
+                           </table>
+                        </div>
+                         <div class="modal-footer" style="margin-top: 30%;">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                              </div>
+                     </div>
+                              </div>
+                              
+                           </div>
+                        </div>
+                     </div>
+
+      
+    <!--View Data table tree Substance-->
+
+      <div class="modal fade" id="exampleModalScrollableSubstances" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title materialtitle" id="exampleModalScrollableTitle"></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="table-responsive">
+                    <div  class="table-wrapper"> 
+                               <table class="table-parts">
+                            
+                                <tr>
+                               <th ><svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 20 20">
+  <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+  <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+</svg></th>
+                                <th>Substance Name</th>
+                                    <th>CAS</th>
+                                    <th>CRM</th>
+                                        <th>ROHS</th>
+                                        <th>Substance Mass (g)</th>
+                                      
+                                            <th>Substance Mass (%)</th>
+                           
+                                </tr>
+                        
+                            <tbody class="substancelisttable">
+
+                            </tbody>
+                           </table>
+                        </div>
+                         <div class="modal-footer" style="margin-top: 30%;">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          
+                              </div>
+                     </div>
+                              </div>
+                              
+                           </div>
+                        </div>
+                     </div>
+
+                    
+    <!-- Wrapper End-->
+    <footer class="iq-footer">
+            <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item"><a href="../backend/privacy-policy.html">Privacy Policy</a></li>
+                                <li class="list-inline-item"><a href="../backend/terms-of-service.html">Terms of Use</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">CRM Dashbord</a>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    
+               </div>
+
+     
+ <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+  <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+
+  <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+  <script  src="https://www.gstatic.com/firebasejs/7.14.1/firebase-functions.js"></script>
+<script  type="module">
+
+
+
+        
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAq2QjImxRXEtRHN-N6u2YEod-wUJMtI1s",
+  authDomain: "projectcrm-f4e5f.firebaseapp.com",
+  databaseURL: "https://projectcrm-f4e5f-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "projectcrm-f4e5f",
+  storageBucket: "projectcrm-f4e5f.appspot.com",
+  messagingSenderId: "404890912341",
+  appId: "1:404890912341:web:5b129be76ccdfeba8c76dc",
+  measurementId: "G-TL8J23TNZE"
+};
+</script>
+ <!-- <script  type="module" src="./auth.js" defer></script> -->
+
+   
+    <!-- Backend Bundle JavaScript -->
+    <script src="./backend-bundle.min.js"></script>
+    
+    <!-- Table Treeview JavaScript -->
+    <script src="./table-treeview.js"></script>
+ <script  type="module" src="./pp.js" ></script>
+     <script   src="./sidemenu.js" ></script>
+
+    
+    <!-- Chart Custom JavaScript -->
+    <script src="./customizer.js"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script async src="./chart-custom.js"></script>
+    
+    <!-- app JavaScript -->
+    <script src="./app.js"></script>
+     <!-- <script   type="module" src="./auth.js" ></script> -->
+     <script>feather.replace()</script>
+ <script src="./search.js"></script>
+  </body>
+</html>
