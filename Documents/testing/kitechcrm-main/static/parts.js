@@ -19,10 +19,10 @@ const userroledisplay = document.querySelector('.userroledisplay')
 const materialtitle = document.querySelector('.modal-title')
 // modaly add
 const addmodaly = document.querySelector('.add-modaly');
-const addmodalyPartsSingle = document.querySelector('.addPartmodaly');
+const addmodalyPartsSingle = document.querySelector('.addPartMatmodaly');
 const addmodalySubssSingle = document.querySelector('.addSubsmodaly');
 const addModalyForm = document.querySelector('.add-modaly .form');
-const addModalyParts = document.querySelector('.addPartmodaly .form');
+const addModalyParts = document.querySelector('.addPartMatmodaly .form');
 const editMatmodaly = document.querySelector('.editMatmodaly')
 const addModalySubs = document.querySelector('.addSubsmodaly .form');
 const subsmodalclose = document.querySelector('#subsmodalclose')
@@ -99,9 +99,15 @@ document.querySelector('.loadingtitle').innerHTML = "Data is loading - Please wa
     document.querySelector('.loadingtitle').style.marginLeft = "43%";
 const renderUser = doc => {
   const tr = `
-    <tr data-id='${doc.id}'>
+    <tr data-id='${doc.id}' style="  border-bottom: 0.5px solid grey;">
+        <td>
+                                <div class="checkbox d-inline-block">
+                                    <input type="checkbox" class="checkbox-input" id="checkbox2">
+                                    <label for="checkbox2" class="mb-0"></label>
+                                </div>
+                            </td>
      <td>${doc.data().partName}</td>
-      <td>${doc.data().partMN}</td>
+   
       <td>${doc.data().partCode}</td>
         <td>${doc.data().partWeight}</td>
          <td>${doc.data().partSize}</td>
@@ -117,9 +123,8 @@ const renderUser = doc => {
         <a class="button toggle"></a>
         <ul class="dropdown">
           <li><a href="#" class="dropdown-link btnpr-edit">Edit</a></li>
-          <li><a href="#" class="dropdown-link btnpr-addParts">Add New Material</a></li>
+          <li><a href="#" class="dropdown-link btnpr-addParts" data-id='${doc.id}'>Add New Material</a></li>
           <li><a href="#" class="dropdown-link btnpr-delete">Delete</a></li>
-          <li><a href="#" class="dropdown-link btnpr-delete">Download</a></li>
         </ul>
       </div>
     </div>
@@ -133,6 +138,10 @@ const renderUser = doc => {
   
  const viewbtn = document.querySelector(`[data-id='${doc.id}'] .viewbtn`);
   viewbtn.addEventListener('click', ()=> {
+      const breadbody = document.querySelector('.breadbody')
+      breadbody.innerHTML = ""
+    const breadpartname = document.querySelector('.breadpartname')
+    breadpartname.innerHTML = `${doc.data().partName}`
   materialtitle.innerHTML = `${doc.data().partName}`
  const materiallist = document.querySelector('.materiallist')
  materiallist.innerHTML = "";
@@ -155,15 +164,15 @@ const renderUser = doc => {
 
   <td>
 <div class="btngroup">
-     <span href="#" id="btnpmviewSubs" class="button btn-large btnpmviewSubs" data-id='${doc.id}' data-toggle="modal" data-target="#exampleModalScrollableSubstances" >View Substances</span>
+  
      <div class="button-dropdown" >
         <a class="button toggle" style="padding: 1.5em 0.3em;"></a>
         <ul class="dropdown">
+      
+           <li><a href="#" class="dropdown-link btnpmviewSubs" data-id='${doc.id}' data-toggle="modal" data-target="#exampleModalScrollableSubstances">View Substances</a></li>
           <li><a href="#" class="dropdown-link btnpmedit" data-id='${doc.id}'>Edit</a></li>
           <li><a href="#" class="dropdown-link btnpmSubs" data-id='${doc.id}'>Add New Substance</a></li>
     <li><a href="#" class="dropdown-link btnpmdelete" data-id='${doc.id}'>Delete</a></li>
-          
-                <li><a href="#" class="dropdown-link btnpr-delete">Download</a></li>
         </ul>
       </div>
     </div>
@@ -172,11 +181,16 @@ const renderUser = doc => {
       
       `;
       html+=li
+       const bpart = `
+       <tr data-id="1" data-parent="0" data-level="1">
+                                 <td data-column="name">${doc.data().materialName}</td>
+                              </tr>
+
+      `;
+        
+       breadbody.insertAdjacentHTML('beforeend', bpart)
     }
-
-
     )
-
     materiallist.insertAdjacentHTML('beforeend', html)
   }
   
@@ -189,17 +203,20 @@ const renderUser = doc => {
    let btnpmedit = document.querySelectorAll(".btnpmedit");
   let btnpmSubs = document.querySelectorAll(".btnpmSubs");
    let btnpmviewSubs = document.querySelectorAll(".btnpmviewSubs");
- for (let i = 0; i < btnpmedit.length; i++) {
-      let editData = btnpmedit[i].getAttribute("data-id");
-       let matId = btnpmSubs[i].getAttribute("data-id");
 
+    
+      
+btnpmedit.forEach((eachbtnpmedit)=>{
 // edit a material of a specific part
- btnpmedit[i].addEventListener('click', () => {
+ eachbtnpmedit.addEventListener('click', () => {
 editMatmodaly.classList.add('modaly-show');
+  let editData = eachbtnpmedit.getAttribute("data-id");
+  console.log(editData)
  db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).get().then((doc)=> {
   if (doc.exists) {
         console.log("Document data:", doc.id, doc.data());
          const editMatHeader = document.querySelector('.editMatHeader')
+         console.log(doc.data())
     id = doc.id;
     editMatHeader.innerHTML = ' ' + doc.data().materialName
     PMmaterialGroup.value = doc.data().materialGroup;
@@ -214,7 +231,9 @@ editMatmodaly.classList.add('modaly-show');
         console.log("No such document!");
     }
  })
- editMat.addEventListener('click', (e)=> {
+ const editMatPartBtn = document.querySelector('.editMatmodaly .editMatPartForm')
+ editMatPartBtn.addEventListener('submit', (e)=> {
+  materiallist.innerHTML = ""
 e.preventDefault()
   db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).update({
     materialGroup: PMmaterialGroup.value,
@@ -233,16 +252,19 @@ e.preventDefault()
  })
  
   })
-//add a new substance to a specific material
- btnpmSubs[i].addEventListener('click', () => {
- 
+})
+btnpmSubs.forEach((eachbtnpmSubs)=> {
+  //add a new substance to a specific material
+ eachbtnpmSubs.addEventListener('click', () => {
+  let matId = eachbtnpmSubs.getAttribute("data-id");
+  console.log(matId)
 addmodalySubssSingle.classList.add('modaly-show');
 db.collection("substances")
     .get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
+            // console.log(doc.id, " => ", doc.data());
            const tm = `
       <option>${doc.data().subtanceName}</option>
   // `;
@@ -269,9 +291,8 @@ db.collection("substances")
         });
       })
       })
-
-  
 addSubs.addEventListener('click', (e)=> {
+
   e.preventDefault();
      let guid = () => {
     let s4 = () => {
@@ -282,24 +303,30 @@ addSubs.addEventListener('click', (e)=> {
     //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
     return s4() + s4() + s4() 
 }
- db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').doc(guid()).set({
+ db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${matId}`).collection('substances').doc(guid()).set({
     substanceName: getsubstancelist.value,
     casnumber: addcas.value,
     crm: addcrm.value,
     rohs: addrohs.value,
     substanceMassg: addsubstanceMassg.value,
     substanceMassPerc: addsubstanceMassPerc.value,
- }).then(()=> {
+ }, {merge:true})
+ .then(()=> {
   console.log('Substance added Successfully');
   addmodalySubssSingle.classList.remove('modaly-show');
  })
 }) 
-})
+  })
 
-  //  const btnpmviewSubs = document.querySelector(`[data-id='${doc.id}'] .viewbtn`);
- btnpmviewSubs[i].addEventListener('click', () => {
+    //Start work here
+
+btnpmviewSubs.forEach((eachbtnpmviewSubs)=>{
+   const subsmatId = eachbtnpmviewSubs.getAttribute("data-id");
+eachbtnpmviewSubs.addEventListener('click', () => {
 substancelisttable.innerHTML = "";
- const setupSubstanceUI = (data) => {
+ 
+  console.log(`${subsmatId}`)
+  const setupSubstanceUI = (data) => {
     let html = '';
     data.forEach(doc=> {
       const substance = doc.data();
@@ -324,20 +351,20 @@ substancelisttable.innerHTML = "";
 
     substancelisttable.insertAdjacentHTML('beforeend', html)
   }
- db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${editData}`).collection('substances').onSnapshot(snapshot => {
+ return (db.collection('recycledparts').doc(`${partId}`).collection('materials').doc(`${subsmatId}`).collection('substances').onSnapshot(snapshot => {
   setupSubstanceUI(snapshot.docs)
- })
+ }))
   })
+  
+})
 
-}
-
-//add material specific to a part
+//delete material specific to a part
    let btnpmdelete = document.querySelectorAll(".btnpmdelete");
      for (let i = 0; i < btnpmdelete.length; i++) {
       let deleteData = btnpmdelete[i].getAttribute("data-id");
  btnpmdelete[i].addEventListener('click', () => {
-
-   let tr = document.getElementById(deleteData);
+console.log(deleteData)
+   let tr = document.getElementById(`${deleteData}`);
  
     
       tr.remove(tr);
@@ -350,13 +377,15 @@ substancelisttable.innerHTML = "";
     });
   })
 }
+})
+
 
    }) 
 
   
    //view substances specific to a material
 
-  
+
   
   })
 
@@ -368,56 +397,23 @@ substancelisttable.innerHTML = "";
 //add materials 
  const btnpraddParts = document.querySelector(`[data-id='${doc.id}'] .btnpr-addParts`);
 btnpraddParts.addEventListener('click', (e) => {
-  
+  const getPMatRef = btnpraddParts.getAttribute('data-id')
+  console.log(getPMatRef)
+  e.preventDefault();
+  const addmatpartform = document.querySelector('.addmatpartform')
+  addmatpartform.reset()
      
      
   addModalyParts.addmaterialName.value = '';
-  e.preventDefault();
+  
   db.collection('recylcedparts').doc(`${doc.id}`).get().then(()=>{
     let partData = doc.data()
     addmodalyPartsSingle.classList.add('modaly-show');
     console.log(partData);
-
-
-   addModalyParts.addEventListener('submit', e => {
-  e.preventDefault();
-   let guid = () => {
-    let s4 = () => {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
-    return s4() + s4() + s4() 
-}
-
-
-  // console.log(doc.id, " => ", doc.data());
-  db.collection('recycledparts').doc(`${doc.id}`).collection('materials').doc(guid()).set({
-    partRef: partData.partName,
-    materialName: addModalyParts.addmaterialName.value,
-    materialGroup: addModalyParts.addmaterialGroup.value,
-    materialClassId: addModalyParts.addmaterialClassID.value,
-    materialRecycleContent: addModalyParts.addmaterialRecycleContent.value,
-    materialRecycleType: addModalyParts.addmaterialRecycleType.value,
-    materialMassg: addModalyParts.addmaterialMassg.value,
-    materialMassPerc: addModalyParts.addmaterialMassPerc.value,
-    recovMat: recovMat.value,
-    recycMat: recycMat.value,
-    reuseMat: reuseMat.value,
-    selecrecovMat: selecrecovMat.value,
-    selecrecycMat: selecrecycMat.value,
-    selecreuseMat: selecreuseMat.value,
-    matnameSelect: matnameSelect.value,
-    selectiveMat: selectiveMat.value,
     
-  })
-setTimeout(resetForm, 5000);
- function resetForm() {
-addModalyParts.reset();
-}
+     addModalyParts.addmatpartref.value = partData.partName
+     addModalyParts.addmatpartWeight.value = partData.partWeight
 
-})
   })
 const editmaterialGroup = document.querySelector('#editmaterialGroup')
 const PMmaterialGroup = document.querySelector('#PMmaterialGroup')
@@ -479,6 +475,12 @@ db.collection("selectivematerials")
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
+     const addPartmaterialMassg = document.querySelector('.addPartmaterialMassg')
+ addPartmaterialMassg.addEventListener('change', (e)=>{
+  e.preventDefault()
+  addModalyParts.addmaterialMassPerc.value = addModalyParts.addmaterialMassg.value / addModalyParts.addmatpartWeight.value * 100
+})
+
 
  matnameSelect.addEventListener('change', () => {
   console.log(matnameSelect.value);
@@ -518,8 +520,46 @@ selectiveMat.removeAttribute('disabled')
 });
  
 
-    
+  const addMatPartBtn = document.querySelector('#addMatPartBtn')
+  addMatPartBtn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + s4() 
+}
 
+
+  // console.log(doc.id, " => ", doc.data());
+  db.collection('recycledparts').doc(`${getPMatRef}`).collection('materials').doc(guid()).set({
+    partRef: addModalyParts.addmatpartref.value,
+    partRefWeight: addModalyParts.addmatpartWeight.value,
+    materialName: addModalyParts.addmaterialName.value,
+    materialGroup: addModalyParts.addmaterialGroup.value,
+    materialClassId: addModalyParts.addmaterialClassID.value,
+    materialRecycleContent: addModalyParts.addmaterialRecycleContent.value,
+    materialRecycleType: addModalyParts.addmaterialRecycleType.value,
+    materialMassg: addModalyParts.addmaterialMassg.value,
+    materialMassPerc: addModalyParts.addmaterialMassPerc.value,
+    recovMat: recovMat.value,
+    recycMat: recycMat.value,
+    reuseMat: reuseMat.value,
+    selecrecovMat: selecrecovMat.value,
+    selecrecycMat: selecrecycMat.value,
+    selecreuseMat: selecreuseMat.value,
+    matnameSelect: matnameSelect.value,
+    selectiveMat: selectiveMat.value,
+    
+  })
+  console.log('Material Added! ')
+setTimeout(resetForm, 5000);
+ function resetForm() {
+addModalyParts.reset();
+}
   })
 
 
@@ -529,6 +569,10 @@ selectiveMat.removeAttribute('disabled')
     addModalyParts.classList.remove('modaly-show');
     editMatmodaly.classList.remove('modaly-show');
    })
+
+    
+
+  })
 
 
 
@@ -551,7 +595,6 @@ selectiveMat.removeAttribute('disabled')
     editHeader.innerHTML = 'Edit ' + doc.data().partName
     editmodalyForm.editsupplierName.value = doc.data().supplierName;
     editmodalyForm.editpartName.value = doc.data().partName;
-    editmodalyForm.editpartMN.value = doc.data().partMN;
     editmodalyForm.editpartClass.value = doc.data().partCode;
     editmodalyForm.editpartWeight.value = doc.data().partWeight;
     editmodalyForm.editpartSize.value = doc.data().partSize;
@@ -567,7 +610,8 @@ selectiveMat.removeAttribute('disabled')
 
   // Click delete user
   const btnprDelete = document.querySelector(`[data-id='${doc.id}'] .btnpr-delete`);
-  btnprDelete.addEventListener('click', () => {
+  btnprDelete.addEventListener('click', (e) => {
+    e.preventDefault()
     db.collection('recycledparts').doc(`${doc.id}`).delete().then(() => {
       console.log('Document succesfully deleted!');
     }).catch(err => {
@@ -631,7 +675,6 @@ btnprAdd.addEventListener('click', () => {
   addmodaly.classList.add('modaly-show');
 
   addModalyForm.addpartName.value = '';
-  addModalyForm.addpartMN.value = '';
   addModalyForm.addpartClass.value = '';
   addModalyForm.addpartWeight.value = '';
   addModalyForm.addpartSize.value = '';
@@ -699,7 +742,17 @@ db.collection('recycledparts').onSnapshot(snapshot => {
   })
 })
 
+   auth.onAuthStateChanged(user => {
 
+    if(user) {
+      
+ const userRef = db.collection('users').where('userID', '==', user.uid).get()
+
+userRef.then((querySnapshot) => {
+   querySnapshot.forEach((doc) => {
+const supplierNameData = document.querySelector('#addsupplierName')
+supplierNameData.value = doc.data().userCompanyname
+   })})}})
 
 
 // Click submit in add modaly
@@ -708,7 +761,6 @@ addPartsForm.addEventListener('click', e => {
   db.collection('recycledparts').add({
      supplierName: addModalyForm.addsupplierName.value,
    partName: addModalyForm.addpartName.value,
-    partMN: addModalyForm.addpartMN.value,
     partCode: document.querySelector('#addClass').value,
     partWeight: addModalyForm.addpartWeight.value,
     partSize: addModalyForm.addpartSize.value,
@@ -716,6 +768,10 @@ addPartsForm.addEventListener('click', e => {
     partRegisteredDate: addModalyForm.addpartregisteredDate.value,
     partMemo: addModalyForm.addMemo.value
     
+  })
+  .then(()=>{
+  
+    alert("A new Part is added! ")
   });
 });
 

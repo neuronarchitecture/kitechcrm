@@ -37,6 +37,7 @@ app.all("*", (req, res, next) => {
 });
 
 app.get("/login", function (req, res) {
+ 
    const sessionCookie = req.cookies.session || "";
 
   admin

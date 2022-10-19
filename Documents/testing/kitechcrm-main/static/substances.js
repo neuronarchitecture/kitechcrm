@@ -60,6 +60,12 @@ const renderUser = doc => {
    
      
        <tr data-id='${doc.id}'>
+           <td>
+                                <div class="checkbox d-inline-block">
+                                    <input type="checkbox" class="checkbox-input" id="checkbox2">
+                                    <label for="checkbox2" class="mb-0"></label>
+                                </div>
+                            </td>
       <td>${doc.data().subtanceName}</td>
      <td>${doc.data().casnumber}</td>
       <td>${doc.data().crm}</td>

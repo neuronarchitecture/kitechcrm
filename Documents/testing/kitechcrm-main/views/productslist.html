@@ -287,20 +287,12 @@
                         <fieldset id="personal">
                            <div class="form-card text-left">
                               <div class="row">
-                                 <div class="col-7">
+                                 <div class="col-5">
                                     <h3 class="mb-4">Enter Product Identification:</h3>
                                  </div>
                                  <div class="col-5">
-                                       <button type="button" id="edit" class="buttony addProduct float-right" >
-                                    <ul>
-                                        <li>제품 추가하기</li>
-                                        <li>등록중...</li>
-                                        <li>등록 완료!</li>
-                                    </ul>
-                                    <div>
-                                        <svg viewBox="0 0 24 24"></svg>
-                                    </div>
-                                </button>
+                        
+                                      
                                  </div>
                               </div>
                                  <div class="col-md-12"> 
@@ -441,16 +433,15 @@
                                   
                                </div>
                            </div>
-                               <button type="button" id="edit" class="buttony addProduct float-right" >
-                                    <ul>
-                                        <li>제품 추가하기</li>
-                                        <li>등록중...</li>
-                                        <li>등록 완료!</li>
-                                    </ul>
-                                    <div>
-                                        <svg viewBox="0 0 24 24"></svg>
-                                    </div>
-                                </button>
+                         <div class="col-11">
+                                        <div class="buttonaddProducts addProduct" id="editForm">
+                                <div class="content">
+                                    <i class="bx bxs-edit"></i>
+                                    <span class="buttonaddProducts-text">Add New Product</span>
+                                </div>
+                            </div>
+                                      
+                                 </div>
                                
                     
                
@@ -665,9 +656,11 @@
       </div>
     </div>
 
-     <div class="addPPmodaly modaly-wrapper">
+     <div class="addPPmodaly modaly-wrapper" style="padding-top: 50px;">
       <div class="modaly">
-     
+     <div class="card-header d-flex justify-content-between">
+               
+                  </div>
         <div class="modaly-body">
           <div class="card-body">
                      <div class="container-fluid">
@@ -692,7 +685,7 @@
                               <fieldset>
                            
                             
-                            <div class="row">
+                            <div class="row" style="align-items: center;">
                            
                              
                                        <div class="col-md-4">
@@ -708,13 +701,15 @@
                                     </div>
                                 </div>
 
-                                   <div class="col-md-4">
+                                   <div class="col-md-2">
                                     <div class="form-group">
                                      <label>부품명</label>
                                
                                       <select  class="partname form-control" name="partname" id="partname"  data-style="py-0">
-                                      
-                                     
+                                     <option value="--" selected>Select a Part</option>
+                                     <div class="partname">
+                                         
+                                     </div>
                                     </select>
                                         
                                         <div class="help-block with-errors"></div>
@@ -723,7 +718,9 @@
                                  <div class="col-md-2">
                                     <div class="form-group">
                                         <label>부품코드</label>
-                                        <input type="text" class="form-control"  id='partCode' placeholder="부품 코드를 입력하세요"  data-errors="부품 코드를 입력하세요." name="addpartQuantity" required>
+                                        <select   class="form-control"  id='partCode' placeholder="부품 코드를 입력하세요"  data-errors="부품 코드를 입력하세요." name="addpartCode" required>
+
+                                        </select>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
@@ -735,6 +732,9 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary btn-light float-left  mr-3 getPPdata" style="  margin-top: 10%;  background-color: lightblue"> Get Part Information </button>
+                                </div>
                                      
                                 </div> 
                         <!-- <button  id="edit" class="btn btn-primary btn-light  previous action-button-previous float-right mr-3" value="Previous" >Add Part</button> -->
@@ -751,65 +751,47 @@
                                     </div>
                                 </div> 
                            <div class="row">
-                                <div class="col-md-2"> 
+                                
+                                   <div class="col-md-4"> 
                                     <div class="form-group">
-                                        <label>Model Name</label>
-                                        <input readonly type="text" class="form-control" id='partMN' placeholder="Enter part Specs" data-errors="Please part specs." name="addpartSpecs" required>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div> 
-                                   <div class="col-md-2"> 
-                                    <div class="form-group">
-                                        <label>Part Size</label>
+                                        <label>부품 크기</label>
                                         <input readonly type="text" class="form-control" id='partSize' placeholder="Please part mass" data-errors="Please part mass." name="addpartMassgEA" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                               <div class="col-md-2"> 
                                     <div class="form-group">
-                                        <label>Part Mass (g) *</label>
+                                        <label>부품중량 *</label>
                                         <input readonly type="number" class="form-control" id='partWeight'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassg" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                                  <div class="col-md-2"> 
                                     <div class="form-group">
-                                        <label>Registration Date</label>
+                                        <label>등록일자</label>
                                         <input readonly type="date" class="form-control" id='partRegisteredDate'placeholder="Please part mass" data-errors="Please part mass." name="addpartMassPerc" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div> 
                         
                            
-                                <div class="col-md-2">
+                            
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                     <label>Part Class</label>
-                                      <input readonly type="text" class="form-control" id='partClass'   name="addreusedPart" required>
-                                 
-                                        
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                     <label>Memo</label>
+                                     <label>메모</label>
                                         <input readonly type="text" class="form-control" id='companyName' placeholder="Enter Code" data-errors="Please Enter Code." name="addsupplierInfo" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                        </div>
 
-                         
-                          <button type="button"  id="edit" class="buttony inline-block-child addPart float-right" >
-                                    <ul>
-                                        <li>부품 추가하기</li>
-                                        <li>등록중...</li>
-                                        <li>등록 완료!</li>
-                                    </ul>
-                                    <div>
-                                        <svg viewBox="0 0 24 24"></svg>
-                                    </div>
-                                </button>
+              
+                                       <div class="buttonaddParts addPart" id="editForm">
+                                <div class="content">
+                                    <i class="bx bxs-edit"></i>
+                                    <span class="buttonaddParts-text">Add Part to Product</span>
+                                </div>
+                            </div>
                         </fieldset>
                         
                      </form>
@@ -832,16 +814,28 @@
                      </div>
     </form>
                      
-       
-                          <div  class="table-wrapper"> 
-
-                               <table class="table-parts">
+       <div class="row" style="align-items: center;">
+        <div class="col-md-2">
+     <div class="table-responsive" style="    height: 310px; overflow: auto;">
+                        <table id="tree-table-1" class="table table-hover table-bordered iq-bg-white tree" style="    overflow: auto;">
+                           <thead class="bg-white" style="position: sticky; top: 0;">
+                              <tr>
+                                 <th class="breadproductname"></th>
+                              </tr>
+                           </thead>
+                           <tbody class="breadbody">
+                       
                             
+                           </tbody>
+                        </table>
+                     </div>
+        </div>
+         <div class="col-md-10">
+              <div  class="table-wrapper"> 
+                               <table class="table-parts">
                                 <tr>
                                    <th>Part Name</th>
-                                      <th>Part Number</th>
-                                <th>Model Name</th>
-                                <th>Part Class</th>
+                                <th>Part Code</th>
                                    <th>Part Weight</th>
                                  <th>Part Size</th>
                                      <th>Registration Date</th>
@@ -856,6 +850,9 @@
                             </tbody>
                            </table>
                         </div>
+        </div>
+       </div>
+                        
                           <button type="button" class="btn btn-secondary action-button-close" data-dismiss="modaly">Close</button>
                   </div>
                </div>
@@ -1083,16 +1080,28 @@
                               <div class="modal-body">
                           
       <div class="container-fluid">
-
-                  
-        
-                          <div class="table-responsive">
+        <div class="row" style="align-items: center;">
+        <!-- <div class="col-md-2">
+     <div class="table-responsive">
+                        <table id="tree-table-4" class="table table-hover table-bordered iq-bg-success  tree">
+                           <thead class="bg-success">
+                              <tr>
+                                 <th class="breadpartname"></th>
+                              </tr>
+                           </thead>
+                           <tbody class="breadpartmat">
+                        
+                           
+                           </tbody>
+                        </table>
+                     </div>
+        </div> -->
+        <div class="col-md-12">
+   <div class="table-responsive">
                     <div  class="table-wrapper"> 
                                <table class="table-parts" id="myTable">
                             <thead>
-                                
                                 <tr>
-
                                 <th >  Material Category</th>
                                   <th>  Material Name</th>
                                     <th>  MaterialClass ID</th>
@@ -1100,10 +1109,8 @@
                                         <th>  Recycle Type</th>
                                           <th>  Mass (g)</th>
                                             <th>  Mass (%)</th>
-                                 
                                 <th>Action</th>
                                 </tr>
-                        
                             </thead>
                             <tbody class="materiallist">
 
@@ -1115,6 +1122,9 @@
                           
                               </div>
                      </div>
+        </div>
+        </div>
+                       
                   </div>
                </div>            
             </div>
@@ -1214,18 +1224,9 @@
                      </ul>
                      <div class="tab-content" id="myTabContent-2">
                         <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+                 
                               <div class="row downloadtitle">
-                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtn float-right" style="  position: -webkit-sticky;
-  position: sticky;"  >
-                                    <ul>
-                                        <li>다운로드</li>
-                                        <li>다운로드중...</li>
-                                        <li>완료!</li>
-                                    </ul>
-                                    <div>
-                                        <svg viewBox="0 0 24 24"></svg>
-                                    </div>
-                                </button>
+                                    <button type="button"  id="edit" class="btn btn-secondary reportbtn float-right" style="  position: -webkit-sticky; position: sticky;"  > Download Assessment Report [EN4555] </button>
                             </div>
                             <div class="report">
                                <div class="row" style="align-items: center;">
@@ -1306,7 +1307,7 @@
                            </tr>
                            <tr>
                               <th scope="row">Recovery Weight</th>
-                              <td class="sumRecovWeightg">0/td>
+                              <td class="sumRecovWeightg">
                               <td class="sumRecovWeightPerc"></td>
                            
                            </tr>
@@ -1363,20 +1364,10 @@
                         
                         <div  class="table-wrapper"> 
                           
-                                  
-                        <div class="row downloadtitle">
-                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtnEN4557 float-right" style="  position: -webkit-sticky;
-  position: sticky;"  >
-                                    <ul>
-                                        <li>다운로드</li>
-                                        <li>다운로드중...</li>
-                                        <li>완료!</li>
-                                    </ul>
-                                    <div>
-                                        <svg viewBox="0 0 24 24"></svg>
-                                    </div>
-                                </button>
+                                      <div class="row downloadtitle">
+                                    <button type="button"  id="edit" class="btn btn-secondary reportbtnEN4557 float-right" style="  position: -webkit-sticky; position: sticky;"  > Download Assessment Report [EN4557] </button>
                             </div>
+                
                                <div class="reportEN4557">
                                <div class="row" style="align-items: center;">
                           <div class="col-md-4">
@@ -1444,8 +1435,8 @@
                         <tbody>
                            <tr>
                               <th scope="row">Recycled Material</th>
-                              <td class="sumReuseWeight"></td>
-                              <td class="sumReuseWeightPerc"></td>
+                              <td class="sumRecycWeight"></td>
+                              <td class="sumRecycWeightPer"></td>
                            </tr>
                            </tr>
                              <tr>
@@ -1490,20 +1481,10 @@
                          <div class="tab-pane fade" id="Accessment" role="tabpanel" aria-labelledby="Accessment-tab">
                         
                         <div  class="table-wrapper"> 
-                                  
-                        <div class="row downloadtitle">
-                                    <button type="button"  id="edit" class="buttony inline-block-child reportbtnEN4558 float-right" style="  position: -webkit-sticky;
-  position: sticky;"  >
-                                    <ul>
-                                        <li>다운로드</li>
-                                        <li>다운로드중...</li>
-                                        <li>완료!</li>
-                                    </ul>
-                                    <div>
-                                        <svg viewBox="0 0 24 24"></svg>
-                                    </div>
-                                </button>
+                                      <div class="row downloadtitle">
+                                    <button type="button"  id="edit" class="btn btn-secondary reportbtnEN4558 float-right" style="  position: -webkit-sticky; position: sticky;"  > Download Assessment Report [EN4558] </button>
                             </div>
+                  
                                <div class="reportEN4558">
                                <div class="row" style="align-items: center;">
                           <div class="col-md-4">
@@ -1570,8 +1551,8 @@
                         <tbody>
                            <tr>
                               <th scope="row">CRM Weight(g)</th>
-                              <td class="sumReuseWeight"></td>
-                              <td class="sumReuseWeightPerc"></td>
+                              <td class="crmweightg"></td>
+                              <td class="crmweightPerc"></td>
                            
                            </tr>
                              <tr>

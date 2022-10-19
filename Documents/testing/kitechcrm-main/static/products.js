@@ -1,3 +1,5 @@
+"use strict"
+
 const firebaseConfig = {
   apiKey: "AIzaSyAq2QjImxRXEtRHN-N6u2YEod-wUJMtI1s",
   authDomain: "projectcrm-f4e5f.firebaseapp.com",
@@ -60,7 +62,6 @@ const partSpecs = document.querySelector('#partSpecs')
 const partSize = document.querySelector('#partSize')
 const partWeight = document.querySelector('#partWeight')
 const partRegisteredDate = document.querySelector('#partRegisteredDate')
-const partClass = document.querySelector('#partClass')
 const companyName = document.querySelector('#companyName')
 const partId = document.querySelector('#partId')
 const supplierName = document.querySelector('.supplierName')
@@ -87,7 +88,7 @@ document.querySelector('.loadingtitle').innerHTML = "Data is loading - Please wa
 const renderUser = doc => {
  
   const tr = `
-    <tr data-id='${doc.id}' style="  border-bottom: 1px solid grey;">
+    <tr data-id='${doc.id}' style="  border-bottom: 0.5px solid grey;">
         <td>
                                 <div class="checkbox d-inline-block">
                                     <input type="checkbox" class="checkbox-input" id="checkbox2">
@@ -368,6 +369,29 @@ buildTable(materialData)
 
 })
 .then(()=>{
+    
+     // CRM Weight (%)
+    var subsAssess = document.querySelector(".subsAssess"),
+  sumVal = 0;
+  let matVal = 0;
+for (var i = 1; i < subsAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(subsAssess.rows[i].cells[7].innerHTML);
+  matVal = matVal + parseFloat(subsAssess.rows[i].cells[3].innerHTML);
+}
+const crmweightPerc = document.querySelectorAll('.crmweightPerc')
+crmweightPerc.forEach((el)=> {
+  el.innerHTML = (sumVal / matVal * 100).toFixed(2)
+})
+   // CRM Weight (g)
+    var subsAssess = document.querySelector(".subsAssess"),
+  sumVal = 0;
+for (var i = 1; i < subsAssess.rows.length; i++) {
+  sumVal = sumVal + parseFloat(subsAssess.rows[i].cells[6].innerHTML);
+}
+const crmweightg = document.querySelectorAll('.crmweightg')
+crmweightg.forEach((el)=> {
+  el.innerHTML = sumVal
+})
   // Summary Reuse Weight (g)
   var sumAssess = document.querySelector(".sumAssess"),
   sumVal = 0;
@@ -491,6 +515,25 @@ charts.forEach((eachChart)=>{
 })
 
 const materialChart = document.querySelector('.materialChart');
+   // Recycled Material (%)
+  
+  sumVal = 0;
+for (var i = 1; i < materialChart.rows.length; i++) {
+  sumVal = sumVal + parseFloat(materialChart.rows[i].cells[4].innerHTML);
+}
+const sumRecycWeightPer = document.querySelectorAll('.sumRecycWeightPer')
+sumRecycWeightPer.forEach((el)=> {
+  el.innerHTML = sumVal
+})
+     // Recycled Material (g)
+  sumVal = 0;
+for (var i = 1; i < materialChart.rows.length; i++) {
+  sumVal = sumVal + parseFloat(materialChart.rows[i].cells[3].innerHTML);
+}
+const sumRecycWeight = document.querySelectorAll('.sumRecycWeight')
+sumRecycWeight.forEach((el)=> {
+  el.innerHTML = sumVal
+})
 let materialnum = materialChart.rows.length
    let optionstwo = {
   chart: {
@@ -553,6 +596,7 @@ btnpraddParts.addEventListener('click', () => {
 
 
 
+
         // Get the form and file field
 
 		/**
@@ -571,9 +615,8 @@ for(let i = 0; i < json.length; i++) {
     console.log('Part Number: ', obj.Identifier);
       console.log('Part Department: ', obj.Department);
        db.collection('recycledproducts').doc(btnpraddRef).collection('selectedParts').add({
-     partMN: obj.partMN,
+   
             partname: obj.partname,
-            partClass: obj.partClass,
             partWeight: obj.partWeight,
             partSize: obj.partSize,
             partRegisteredDate: obj.partRegisteredDate,
@@ -625,8 +668,9 @@ for(let i = 0; i < json.length; i++) {
 
 //click on add new parts
 const partname = document.querySelector('.partname');
-partname.addEventListener('change', () => {
- 
+const getPPdata = document.querySelector('.getPPdata')
+getPPdata.addEventListener('click', (e) => {
+ e.preventDefault()
   const partsRef = db.collection("recycledparts")
      partsRef.where("partName", "==", partname.value).where("supplierName", "==", supplierName.value)
     .get()
@@ -637,11 +681,9 @@ partname.addEventListener('change', () => {
             console.log(doc.id, " => ", doc.data());
             partId.value = doc.id
              partname.value = doc.data().partName
-          partMN.value = doc.data().partMN
           partSize.value = doc.data().partSize
           partWeight.value = doc.data().partWeight
           partRegisteredDate.value = doc.data().partRegisteredDate
-          partClass.value = doc.data().partClass
           companyName.value = doc.data().partMemo
           supplierName.value = doc.data().supplierName
 
@@ -653,20 +695,22 @@ partname.addEventListener('change', () => {
     });
 })
 
+// Add Parts/Materials/Substances to a product
+const buttonaddParts = document.querySelector('.buttonaddParts')
    addPart.addEventListener('click', e => {
   e.preventDefault();
+   buttonaddParts.classList.add("active");
   // console.log(doc.id, " => ", doc.data());
-     db.collection('recycledproducts').doc(btnpraddRef).get().then(()=>{
+  setTimeout(()=>{
+       db.collection('recycledproducts').doc(btnpraddRef).get().then(()=>{
       let productRef = doc.data()
       console.log(productRef);
        db.collection('recycledproducts').doc(btnpraddRef).collection('selectedParts').doc(partId.value).set({
    productRef: productRef.productName,
     partname: partname.value,
     supplierName: supplierName.value,
-    partMN: partMN.value,
     partSize: partSize.value,
     partWeight: parseFloat(partWeight.value),
-    partClass: partClass.value,
     partRegisteredDate: partRegisteredDate.value,
     partMemo: companyName.value,
     quantity: quantity.value,
@@ -762,6 +806,20 @@ partname.addEventListener('change', () => {
         console.log("Error getting documents: ", error);
     });
      })
+          
+
+   buttonaddParts.classList.remove("active");
+        buttonaddParts.querySelector("i").classList.replace( "bxs-edit", "bx-check-circle")
+        buttonaddParts.querySelector("span").innerText = "Completed";
+   setTimeout(()=>{
+     buttonaddParts.classList.remove("active");
+        buttonaddParts.querySelector("i").classList.replace( "bx-check-circle", "bxs-edit")
+        buttonaddParts.querySelector("span").innerText = "Add Part to Product";
+   }, 3500)
+   
+
+  }, 2000)
+ 
  
    
  
@@ -775,14 +833,14 @@ addPPForm.reset();
     let html = '';
     data.forEach(doc=> {
        const addedparts = doc.data();
+       const breadproductname = document.querySelector('.breadproductname')
+       breadproductname.innerHTML = doc.data().productRef
       console.log(addedparts)
       const pp = `
       <tr id='${doc.id}' data-id='${doc.id}'>
 
         <td>${doc.data().partname}</td>
-        <td>${doc.data().partNumber}</td>
-        <td>${doc.data().partMN}</td>
-        <td>${doc.data().partClass}</td>
+        <td>${doc.data().partCode}</td>
         <td>${doc.data().partWeight}</td>
         <td>${doc.data().partSize}</td>
         <td>${doc.data().partRegisteredDate}</td>
@@ -791,14 +849,8 @@ addPPForm.reset();
 
           <td>
     <div class="btngroup">
-     <span href="#" class="viewpartmat button btn-large" data-toggle="modal" data-target="#partproductmaterial" data-id='${doc.id}'>View Material</span>
-     <div class="button-dropdown">
-        <a class="button toggle"></a>
-        <ul class="dropdown">
-          <li><a href="#" class="dropdown-link btnpr-delete" id='${doc.id}'>Delete</a></li>
-      
-        </ul>
-      </div>
+     <span href="#" class="viewpartmat button btn-large" data-toggle="modal" data-target="#partproductmaterial" data-PN= '${doc.data().partname}' data-id='${doc.id}'>View Material</span>
+   
     </div>
    
       </td>
@@ -806,13 +858,18 @@ addPPForm.reset();
     </tr>
       `;
       html+=pp
-    }
+       const bpart = `
+       <tr data-id="1" data-parent="0" data-level="1">
+                                 <td data-column="name">${doc.data().partname}</td>
+                              </tr>
 
-)
+      `;
+          const breadbody = document.querySelector('.breadbody')
+       breadbody.insertAdjacentHTML('beforeend', bpart)
+    })
 
     addedpartslist.insertAdjacentHTML('beforeend', html)
   }
-
  db.collection('recycledproducts').doc(btnpraddRef).collection('selectedParts').onSnapshot(snapshot => {
   addedpartslist.innerHTML = " "
   setupPartsProducts(snapshot.docs)
@@ -821,11 +878,15 @@ addPPForm.reset();
     
  viewpartmat[i].addEventListener('click', ()=>{
    const partmatRef = viewpartmat[i].getAttribute('data-id');
+    const breadpartName = viewpartmat[i].getAttribute('data-PN');
    console.log(partmatRef)
+      const breadpartname = document.querySelector('.breadpartname')
+       breadpartname.innerHTML = breadpartName
     const setupMaterialUI = (data) => {
     let html = '';
     data.forEach(doc=> {
       const material = doc.data();
+     
       console.log(material)
       const li = `
      <tr id='${doc.id}' data-id='${doc.id}'>
@@ -841,24 +902,25 @@ addPPForm.reset();
   <td>
 <div class="btngroup">
      <span href="#" class="viewmatsub button btn-large" data-toggle="modal" data-target="#partproductmaterialsubs" data-id='${doc.id}'>View Substances</span>
-     <div class="button-dropdown" >
-        <a class="button toggle" style="padding: 1.5em 0.3em;"></a>
-        <ul class="dropdown">
-    <li><a href="#" class="dropdown-link btnpmdelete" data-id='${doc.id}'>Delete</a></li>
-          
-        </ul>
-      </div>
+  
     </div>
       </td>
     </tr>
       
       `;
-      html+=li
-    }
-
-
-    )
-
+           html+=li
+    //   const partmat = `
+    //      <tr data-id="1" data-parent="0" data-level="1">
+    //                              <td data-column="name">${doc.data().materialGroup}</td>
+    //                           </tr>
+    //                           <tr data-id="2" data-parent="2" data-level="2">
+    //                              <td data-column="name">${doc.data().materialName}</td>
+    //                           </tr>
+    //   `
+    //    const breadpartmat = document.querySelector('.breadpartmat')
+    // breadpartmat.insertAdjacentHTML('beforeend', partmat)
+    })
+  
     document.querySelector('.materiallist').insertAdjacentHTML('beforeend', html)
   }
   
@@ -870,6 +932,7 @@ addPPForm.reset();
     for (let i = 0; i < viewmatsub.length; i++) {
     
  viewmatsub[i].addEventListener('click', ()=>{
+  document.querySelector('.substancelist').innerHTML = ""
    const matsubRef = viewmatsub[i].getAttribute('data-id');
   
    console.log(matsubRef)
@@ -891,14 +954,8 @@ addPPForm.reset();
 
   <td>
 <div class="btngroup">
-     <span href="#" class="viewmatsub button btn-large" data-toggle="modal" data-target="#partproductmaterialsubs" data-id='${doc.id}'>Edit</span>
-     <div class="button-dropdown" >
-        <a class="button toggle" style="padding: 1.5em 0.3em;"></a>
-        <ul class="dropdown">
-    <li><a href="#" class="dropdown-link btnpmdelete" data-id='${doc.id}'>Delete</a></li>
-          
-        </ul>
-      </div>
+ 
+    
     </div>
       </td>
     </tr>
@@ -1065,11 +1122,12 @@ db.collection('recycledproducts').onSnapshot(snapshot => {
   
   
   // });
-
-const addProduct = document.querySelectorAll('.addProduct')
-addProduct.forEach((eachBtn)=>{
-  eachBtn.addEventListener('click', e => {
+const addProduct = document.querySelector('.addProduct')
+const buttonaddProducts = document.querySelector('.buttonaddProducts')    
+  addProduct.addEventListener('click', e => {
+    buttonaddProducts.classList.add("active");
   e.preventDefault();
+    setTimeout(()=>{
   db.collection('recycledproducts').add({
     productCategory: addModalyForm.productCategory.value,
     productName: addModalyForm.productName.value,
@@ -1079,19 +1137,25 @@ addProduct.forEach((eachBtn)=>{
     registeredDate: addModalyForm.registeredDate.value,
     productStatus: addModalyForm.productStatus.value,
     memo: addModalyForm.memo.value
+  })
+   buttonaddProducts.classList.remove("active");
+        buttonaddProducts.querySelector("i").classList.replace( "bxs-edit", "bx-check-circle")
+        buttonaddProducts.querySelector("span").innerText = "Completed";
+   setTimeout(()=>{
+     buttonaddProducts.classList.remove("active");
+        buttonaddProducts.querySelector("i").classList.replace( "bx-check-circle", "bxs-edit")
+        buttonaddProducts.querySelector("span").innerText = "Add Part to Product";
+   }, 3500)
 
-    
-
-  });
-
-  setTimeout(closeForm, 3500);
- function closeForm() {
- modalyWrapper.classList.remove('modaly-show');
-}
+//   setTimeout(closeForm, 3000);
+//  function closeForm() {
+//  modalyWrapper.classList.remove('modaly-show');
+// }
 
  
-});
+},3000);
 })
+
 // Click submit in add modaly
   const buttoni = document.querySelector(".buttoni");
  
@@ -1313,8 +1377,25 @@ partsRef
 // 		}
 // 	}
 
-supplierName.addEventListener('change', ()=>{
-  partname.innerHTML = "";
+      
+db.collection("recycledparts")
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+           const tm = `
+      <option value="${doc.data().supplierName}">${doc.data().supplierName}</option>
+  `;
+
+   supplierName.innerHTML += tm;
+ 
+        });
+    })
+
+
+ supplierName.addEventListener('change', ()=>{
+   partname.innerHTML = "";
 db.collection("recycledparts").where("supplierName", "==", supplierName.value)
     .get()
     .then((querySnapshot) => {
@@ -1325,133 +1406,48 @@ db.collection("recycledparts").where("supplierName", "==", supplierName.value)
       <option value="${doc.data().partName}">${doc.data().partName}</option>
   `;
 
-   partname.insertAdjacentHTML('beforeend', tm);
+   partname.innerHTML += tm;
  
         });
     })
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
-})
-  
-     
+ })
 
-       db.collection("recycledparts")
+  
+
+
+
+
+  
+    
+
+
+
+  partname.addEventListener('change', (e)=>{
+    e.preventDefault()
+  partCode.innerHTML = "";
+db.collection("recycledparts").where("partName", "==", partname.value)
     .get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
            const tm = `
-      <option value="${doc.data().supplierName}">${doc.data().supplierName}</option>
+      <option value="${doc.data().partCode}">${doc.data().partCode}</option>
   `;
 
-   supplierName.insertAdjacentHTML('beforeend', tm);
+   partCode.innerHTML += tm;
  
         });
     })
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
+  })
 
 
-      var substances = db.collection('recycledparts').doc('9A2nEjh8Bkxi1PeahOf6').collection('materials');
-substances
-.get()
- .then(query=>{
-    let data = query.docs.map(doc=>{
-        let x = doc.data()
-         
-            return x;
-    })
-     console.log(data)
-    console.log(data.length)
 
 
-})
-
-.catch((error) => {
-    console.log("Error getting document:", error);
-});
-
-
-// db.collectionGroup('selectedMaterials').get()
-//  .then(query=>{
-//     let data = query.docs.map(doc=>{
-//         let x = doc.data()
-         
-//             return x;
-//     })
-//     let filteredData = data.filter(el => el.productRef === "SAMSUNG" && el.partRef === "ACB" );
-//     console.log(filteredData)
-//     document.querySelector('.nummat').innerHTML = `Current Number of Materials: ${data.length}`
-// 	buildTable(filteredData)
-
-// 	function buildTable(filteredData){
-// 		var table = document.querySelector('.renderParts')
-
-// 		for (var i = 0; i < filteredData.length; i++){
-// 			var row = `<tr>
-// 							<td>${filteredData[i].materialName}</td>
-// 							<td>${filteredData[i].materialGroup}</td>
-// 							<td>${filteredData[i].materialClassId}</td>
-//               	<td>${filteredData[i].materialMassg}</td>
-// 							<td>${filteredData[i].materialRecycleContent}</td>
-// 							<td>${filteredData[i].materialRecycleType}</td>
-// 					  </tr>`
-// 			table.innerHTML += row
-
-
-// 		}
-// 	}
-
-
-// })
-
-// .catch((error) => {
-//     console.log("Error getting document:", error);
-// });
-
-
-// Refresh Data Function !!
-// document.querySelector('.refresh').addEventListener('click', (e)=> {
-//   e.preventDefault()
-  
-// db.collectionGroup('materials').get()
-//  .then(query=>{
-//     let data = query.docs.map(doc=>{
-//         let x = doc.data()
-         
-//             return x;
-//     })
-//     console.log(data)
-//     document.querySelector('.nummat').innerHTML = `Current Number of Materials: ${data.length}`
-// 	buildTable(data)
-
-// 	function buildTable(data){
-// 		var table = document.querySelector('.renderParts')
-// table.innerHTML = " "
-// 		for (var i = 0; i < data.length; i++){
-// 			var row = `<tr>
-// 							<td>${data[i].materialName}</td>
-// 							<td>${data[i].materialGroup}</td>
-// 							<td>${data[i].materialClassId}</td>
-//               	<td>${data[i].materialMassg}</td>
-// 							<td>${data[i].materialRecycleContent}</td>
-// 							<td>${data[i].materialRecycleType}</td>
-// 					  </tr>`
-// 			table.innerHTML += row
-
-
-// 		}
-// 	}
-
-
-// })
-
-// .catch((error) => {
-//     console.log("Error getting document:", error);
-// });
-
-// })
 

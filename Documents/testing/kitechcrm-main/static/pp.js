@@ -84,10 +84,16 @@ let id;
 const renderUser = doc => {
   const tr = `
      <tr data-id='${doc.id}'>
-      <td>${doc.data().partNumber}</td>
+         <td>
+                                <div class="checkbox d-inline-block">
+                                    <input type="checkbox" class="checkbox-input" id="checkbox2">
+                                    <label for="checkbox2" class="mb-0"></label>
+                                </div>
+                            </td>
+     
      <td>${doc.data().partName}</td>
+     <td>${doc.data().partMN}</td>
     
-      <td>${doc.data().partSpecs}</td>
         <td>${doc.data().partMassg}</td>
          <td>${doc.data().reusedPart}</td>
       <td>${doc.data().partMassgEA}</td>
@@ -119,7 +125,14 @@ const renderUser = doc => {
       console.log(material)
       const li = `
   
-    <td>${doc.data().materialGroup}</td>
+   
+        <td>
+                                <div class="checkbox d-inline-block">
+                                    <input type="checkbox" class="checkbox-input" id="checkbox2">
+                                    <label for="checkbox2" class="mb-0"></label>
+                                </div>
+                            </td>
+                             <td>${doc.data().materialGroup}</td>
        <td>${doc.data().materialName}</td>
       <td>${doc.data().materialClassId}</td>
       <td>${doc.data().materialRecycleContent}</td>
@@ -260,7 +273,12 @@ substancelisttable.innerHTML = "";
       console.log(substance)
       const sm = `
       <tr id='${doc.id}' data-id='${doc.id}'>
-   
+       <td>
+                                <div class="checkbox d-inline-block">
+                                    <input type="checkbox" class="checkbox-input" id="checkbox2">
+                                    <label for="checkbox2" class="mb-0"></label>
+                                </div>
+                            </td>
     <td>${doc.data().substanceName}</td>
        <td>${doc.data().casnumber}</td>
       <td>${doc.data().crm}</td>
